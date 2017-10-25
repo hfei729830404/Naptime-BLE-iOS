@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		5D91F204ABCAA580D1B7326D /* Pods_NaptimeBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F13DF3C1BECFA4B5BD0FFA67 /* Pods_NaptimeBLE.framework */; };
+		6C143B931FA06A32009F866D /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C143B921FA06A32009F866D /* BLEManager.swift */; };
+		6C143B961FA06C68009F866D /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C143B951FA06C68009F866D /* GCD.swift */; };
 		6C1642FF1FA03B09002C1438 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1642FE1FA03B09002C1438 /* AppDelegate.swift */; };
-		6C1643011FA03B09002C1438 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1643001FA03B09002C1438 /* ViewController.swift */; };
+		6C1643011FA03B09002C1438 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1643001FA03B09002C1438 /* MainViewController.swift */; };
 		6C1643041FA03B09002C1438 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1643021FA03B09002C1438 /* Main.storyboard */; };
 		6C1643061FA03B09002C1438 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C1643051FA03B09002C1438 /* Assets.xcassets */; };
 		6C1643091FA03B09002C1438 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1643071FA03B09002C1438 /* LaunchScreen.storyboard */; };
+		6C1643121FA06603002C1438 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1643111FA06603002C1438 /* ScanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5FE0C70E83F51085ACEF699A /* Pods-NaptimeBLE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaptimeBLE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NaptimeBLE/Pods-NaptimeBLE.debug.xcconfig"; sourceTree = "<group>"; };
+		6C143B921FA06A32009F866D /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		6C143B951FA06C68009F866D /* GCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		6C1642FB1FA03B09002C1438 /* NaptimeBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaptimeBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1642FE1FA03B09002C1438 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6C1643001FA03B09002C1438 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6C1643001FA03B09002C1438 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6C1643031FA03B09002C1438 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C1643051FA03B09002C1438 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C1643081FA03B09002C1438 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C16430A1FA03B09002C1438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C1643111FA06603002C1438 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		801514BAE5DE07EF432831B1 /* Pods-NaptimeBLE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaptimeBLE.release.xcconfig"; path = "Pods/Target Support Files/Pods-NaptimeBLE/Pods-NaptimeBLE.release.xcconfig"; sourceTree = "<group>"; };
 		F13DF3C1BECFA4B5BD0FFA67 /* Pods_NaptimeBLE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NaptimeBLE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -40,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C143B941FA06C51009F866D /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				6C143B951FA06C68009F866D /* GCD.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		6C1642F21FA03B09002C1438 = {
 			isa = PBXGroup;
 			children = (
@@ -61,14 +75,25 @@
 		6C1642FD1FA03B09002C1438 /* NaptimeBLE */ = {
 			isa = PBXGroup;
 			children = (
+				6C143B941FA06C51009F866D /* Global */,
+				6C1643101FA06098002C1438 /* UI */,
 				6C1642FE1FA03B09002C1438 /* AppDelegate.swift */,
-				6C1643001FA03B09002C1438 /* ViewController.swift */,
 				6C1643021FA03B09002C1438 /* Main.storyboard */,
 				6C1643051FA03B09002C1438 /* Assets.xcassets */,
 				6C1643071FA03B09002C1438 /* LaunchScreen.storyboard */,
 				6C16430A1FA03B09002C1438 /* Info.plist */,
 			);
 			path = NaptimeBLE;
+			sourceTree = "<group>";
+		};
+		6C1643101FA06098002C1438 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6C1643001FA03B09002C1438 /* MainViewController.swift */,
+				6C1643111FA06603002C1438 /* ScanViewController.swift */,
+				6C143B921FA06A32009F866D /* BLEManager.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		A9270B81DB032DBDF56008A7 /* Frameworks */ = {
@@ -199,10 +224,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NaptimeBLE/Pods-NaptimeBLE-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,8 +244,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C1643011FA03B09002C1438 /* ViewController.swift in Sources */,
+				6C143B961FA06C68009F866D /* GCD.swift in Sources */,
+				6C1643011FA03B09002C1438 /* MainViewController.swift in Sources */,
+				6C143B931FA06A32009F866D /* BLEManager.swift in Sources */,
 				6C1642FF1FA03B09002C1438 /* AppDelegate.swift in Sources */,
+				6C1643121FA06603002C1438 /* ScanViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				INFOPLIST_FILE = NaptimeBLE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.NaptimeBLE;
@@ -372,6 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				INFOPLIST_FILE = NaptimeBLE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.NaptimeBLE;
