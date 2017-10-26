@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(1.0)
         SVProgressHUD.setMaximumDismissTimeInterval(2.0)
         SVProgressHUD.setDefaultMaskType(.black)
+
         return true
     }
 

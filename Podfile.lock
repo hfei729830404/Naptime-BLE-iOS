@@ -1,15 +1,26 @@
 PODS:
+  - RxBluetoothKit (4.0.0):
+    - RxSwift (~> 4.0.0)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.2)
 
 DEPENDENCIES:
+  - RxBluetoothKit (~> 4.0)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - SnapKit (~> 4.0)
   - SVProgressHUD (~> 2.2)
 
 SPEC CHECKSUMS:
+  RxBluetoothKit: 65b56c51c023078bf5cdf56d07c6e16dcb60546d
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: a409369d5f10cde850573540e5336843e17e909f
+PODFILE CHECKSUM: 08beb98a47cf1db77042325f7e91f4c96418da01
 
 COCOAPODS: 1.3.1
