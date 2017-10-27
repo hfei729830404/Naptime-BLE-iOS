@@ -17,6 +17,8 @@
 		6CA2B1791FA1CCAA00A012BC /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA2B1781FA1CCAA00A012BC /* PeripheralViewController.swift */; };
 		6CA2B17B1FA1DCA000A012BC /* ServiceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA2B17A1FA1DCA000A012BC /* ServiceHeaderView.swift */; };
 		6CEAC49B1FA1DFE700E04358 /* ServiceHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CEAC49A1FA1DFE700E04358 /* ServiceHeaderView.xib */; };
+		6CFB760F1FA2D960006C03A5 /* Characteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFB760E1FA2D960006C03A5 /* Characteristic.swift */; };
+		6CFB76111FA30025006C03A5 /* CommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFB76101FA30025006C03A5 /* CommandViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		6CA2B1781FA1CCAA00A012BC /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 		6CA2B17A1FA1DCA000A012BC /* ServiceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHeaderView.swift; sourceTree = "<group>"; };
 		6CEAC49A1FA1DFE700E04358 /* ServiceHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceHeaderView.xib; sourceTree = "<group>"; };
+		6CFB760E1FA2D960006C03A5 /* Characteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
+		6CFB76101FA30025006C03A5 /* CommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewController.swift; sourceTree = "<group>"; };
 		801514BAE5DE07EF432831B1 /* Pods-NaptimeBLE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaptimeBLE.release.xcconfig"; path = "Pods/Target Support Files/Pods-NaptimeBLE/Pods-NaptimeBLE.release.xcconfig"; sourceTree = "<group>"; };
 		F13DF3C1BECFA4B5BD0FFA67 /* Pods_NaptimeBLE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NaptimeBLE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,6 +99,8 @@
 				6CA2B1781FA1CCAA00A012BC /* PeripheralViewController.swift */,
 				6CA2B17A1FA1DCA000A012BC /* ServiceHeaderView.swift */,
 				6CEAC49A1FA1DFE700E04358 /* ServiceHeaderView.xib */,
+				6CFB760E1FA2D960006C03A5 /* Characteristic.swift */,
+				6CFB76101FA30025006C03A5 /* CommandViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -254,9 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CFB760F1FA2D960006C03A5 /* Characteristic.swift in Sources */,
 				6C143B961FA06C68009F866D /* GCD.swift in Sources */,
 				6C1642FF1FA03B09002C1438 /* AppDelegate.swift in Sources */,
 				6CA2B1791FA1CCAA00A012BC /* PeripheralViewController.swift in Sources */,
+				6CFB76111FA30025006C03A5 /* CommandViewController.swift in Sources */,
 				6C1643121FA06603002C1438 /* ScanViewController.swift in Sources */,
 				6CA2B17B1FA1DCA000A012BC /* ServiceHeaderView.swift in Sources */,
 			);

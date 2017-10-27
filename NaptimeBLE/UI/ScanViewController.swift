@@ -97,14 +97,18 @@ class ScanViewController: UITableViewController {
     private func startScan() {
         clear()
         self.navigationItem.rightBarButtonItem?.title = "停止"
-        manager.scanForPeripherals(withServices: nil).subscribe { [weak self] (peripheral) in
+        manager.scanForPeripherals(withServices: nil).filter {
+            // 只显示有 name 的
+            $0.peripheral.name != nil
+        }.subscribe (onNext: { [weak self] (peripheral) in
             guard let `self` = self else { return }
+
             dispatch_to_main {
-                self.peripheralList.append(peripheral.element!)
+                self.peripheralList.append(peripheral)
                 let indexPath = IndexPath(row: self.peripheralList.count-1, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .bottom)
             }
-        }.disposed(by: disposeBag)
+        }).disposed(by: disposeBag)
     }
 
     private func stopScan() {

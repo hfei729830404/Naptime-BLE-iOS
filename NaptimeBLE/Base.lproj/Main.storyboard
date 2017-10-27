@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -106,6 +107,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOG-At-pbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1369" y="66"/>
+        </scene>
+        <!--指令传输-->
+        <scene sceneID="Lct-yf-dr6">
+            <objects>
+                <viewController storyboardIdentifier="CommandViewController" title="指令传输" id="E3T-uR-Igx" customClass="CommandViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FKL-s6-9lk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" editable="NO" text="收到数据如下：" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-48-kBN">
+                                <rect key="frame" x="0.0" y="84" width="375" height="523"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="scrollIndicatorInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tG-bX-n66">
+                                <rect key="frame" x="0.0" y="30" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="指令 A" id="YOe-7A-Xqp">
+                                        <connections>
+                                            <action selector="commandAButtonTouched:" destination="E3T-uR-Igx" id="ADQ-RN-Sy9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="指令 B" id="oL1-Xy-UPM">
+                                        <connections>
+                                            <action selector="commandBButtonTouched:" destination="E3T-uR-Igx" id="QhS-47-6TB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0s2-XQ-in9"/>
+                                    <barButtonItem title="随机数" id="qGJ-a2-MiQ">
+                                        <connections>
+                                            <action selector="commandRandomButtonTouched:" destination="E3T-uR-Igx" id="BOW-pB-D21"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rLL-48-kBN" firstAttribute="top" secondItem="hfq-3h-JyS" secondAttribute="top" constant="64" id="3tD-eB-jJI"/>
+                            <constraint firstItem="7tG-bX-n66" firstAttribute="trailing" secondItem="hfq-3h-JyS" secondAttribute="trailing" id="5j1-vR-g6h"/>
+                            <constraint firstItem="7tG-bX-n66" firstAttribute="leading" secondItem="hfq-3h-JyS" secondAttribute="leading" id="H43-yv-I3o"/>
+                            <constraint firstItem="rLL-48-kBN" firstAttribute="leading" secondItem="hfq-3h-JyS" secondAttribute="leading" id="KL4-ch-Esr"/>
+                            <constraint firstItem="7tG-bX-n66" firstAttribute="top" secondItem="hfq-3h-JyS" secondAttribute="top" constant="10" id="PZG-A9-1KF"/>
+                            <constraint firstItem="rLL-48-kBN" firstAttribute="trailing" secondItem="hfq-3h-JyS" secondAttribute="trailing" id="dGZ-3T-YPY"/>
+                            <constraint firstItem="rLL-48-kBN" firstAttribute="bottom" secondItem="hfq-3h-JyS" secondAttribute="bottom" constant="-60" id="shT-3y-oUh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hfq-3h-JyS"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="rLL-48-kBN" id="Gcx-h3-V6G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wa0-Xd-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2124" y="64.31784107946028"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wB2-rm-VRq">

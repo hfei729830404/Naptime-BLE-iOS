@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ServiceHeaderView: UITableViewHeaderFooterView {
+class ServiceHeaderView: UIView {
 
     var title: String = "" {
         didSet {
@@ -24,4 +24,13 @@ class ServiceHeaderView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 1.0
+    }
 }

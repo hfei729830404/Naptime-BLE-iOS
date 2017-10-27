@@ -22,6 +22,12 @@ class PeripheralViewController: UITableViewController {
 
     private let _serviceHeaderReuseIdentifier = "_serviceHeaderReuseIdentifier"
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "设备 " + peripheral.cbPeripheral.showName
@@ -48,8 +54,6 @@ class PeripheralViewController: UITableViewController {
                 }
             })
             .disposed(by: disposeBag)
-
-
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,19 +72,19 @@ class PeripheralViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "serviceCellIdentifier", for: indexPath)
         let service = self.services[indexPath.section]
         let characteristic = self.characteristics[service.uuid]?[indexPath.row]
-        cell.textLabel?.text = characteristic?.uuid.description
-        cell.detailTextLabel?.text = characteristic?.uuid.uuidString
+        cell.textLabel?.text = characteristic?.displayName
+        cell.detailTextLabel?.text = characteristic?.showValue
         return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 58
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: _serviceHeaderReuseIdentifier) as! ServiceHeaderView
+        let header = UINib(nibName: "ServiceHeaderView", bundle: nil).instantiate(withOwner: self, options: nil).first as! ServiceHeaderView
         let service = services[section]
-        header.title = service.showName
+        header.title = service.displayName
         header.detail = service.uuid.uuidString
         return header
     }
@@ -89,18 +93,9 @@ class PeripheralViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let service = self.services[indexPath.section]
-        let characteristic = self.characteristics[service.uuid]?[indexPath.row]
-
-        characteristic?.readValue().subscribe(onNext: {
-            if let data = $0.value {
-                dispatch_to_main {
-                    let cell = tableView.cellForRow(at: indexPath)
-                    var bytes = [UInt8](repeating: 0, count: data.count)
-                    data.copyBytes(to: &bytes, count: data.count)
-                    cell?.detailTextLabel?.text = String(format: "%d", bytes[0])
-                }
-            }
-        }).disposed(by: disposeBag)
+        if let characteristic = self.characteristics[service.uuid]?[indexPath.row] {
+            handle(characteristic: characteristic, at: indexPath)
+        }
     }
 
     private func scanCharacteristic() {
@@ -122,22 +117,70 @@ class PeripheralViewController: UITableViewController {
                 .disposed(by: disposeBag)
         }
     }
+
+    private func handle(characteristic: Characteristic, at indexPath: IndexPath) {
+        guard let characteristicType = characteristic.uuid.whichCharacteristic else { return }
+        let cell = tableView.cellForRow(at: indexPath)
+        switch characteristicType {
+        case .device_serial,
+             .device_firmware_revision,
+             .device_hardware_revision,
+             .device_manufacturer:
+            characteristic.readValue().subscribe(onNext: {
+                if let data = $0.value {
+                    dispatch_to_main {
+                        cell?.detailTextLabel?.text = String(data: data, encoding: .utf8)
+                    }
+                }
+            }).disposed(by: disposeBag)
+        case .cmd_upload, .cmd_download:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "CommandViewController") as? CommandViewController {
+                vc.service = services[indexPath.section]
+                navigationController?.show(vc, sender: self)
+            }
+        case .battery_level:
+            characteristic.readValue().subscribe(onNext: {
+                if let data = $0.value {
+                    dispatch_to_main {
+                        var bytes = [UInt8](repeating: 0, count: data.count)
+                        data.copyBytes(to: &bytes, count: data.count)
+                        cell?.detailTextLabel?.text = String(format: "%d%%", bytes[0])
+                    }
+                }
+            }).disposed(by: disposeBag)
+            break
+        case .eeg_data:
+            break
+        default:
+            break
+        }
+    }
 }
 
-extension Service {
-    var showName: String {
-        let map = [
-            "1800": "基础信息服务",
-            "1801": "Generic Attribute 服务",
-            "00000000-1212-EFDE-1523-785FEABCD123": "指令传输服务",
-            "180F": "电量服务",
-            "00000011-1212-EFDE-1523-785FEABCD123": "脑电服务",
-            "00001530-1212-EFDE-1523-785FEABCD123": "DFU 服务",
-            "180A": "设备信息服务",
-            ]
-        if let name = map[self.uuid.uuidString] {
-            return name
+extension Service: Displayable {
+    var displayName: String {
+        return (self.uuid.uuid as! ServiceType).displayName
+    }
+}
+
+extension Characteristic: Displayable {
+    var displayName: String {
+        return (self.uuid.uuid as! CharacteristicType).displayName
+    }
+}
+
+extension Characteristic {
+    var showValue: String {
+        if let value = self.value {
+            if self.uuid.whichCharacteristic == CharacteristicType.battery_level {
+                var bytes = [UInt8](repeating: 0, count: value.count)
+                value.copyBytes(to: &bytes, count: value.count)
+                return String(format: "%d%%", bytes[0])
+            }
+            if let str = String(data: value, encoding: .utf8) {
+                return str
+            }
         }
-        return self.uuid.description
+        return self.uuid.uuidString
     }
 }
