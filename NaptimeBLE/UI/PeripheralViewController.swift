@@ -150,6 +150,10 @@ class PeripheralViewController: UITableViewController {
             }).disposed(by: disposeBag)
             break
         case .eeg_data:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "EEGViewController") as? EEGViewController {
+                vc.service = services[indexPath.section]
+                navigationController?.show(vc, sender: self)
+            }
             break
         default:
             break

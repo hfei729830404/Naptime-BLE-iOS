@@ -10,6 +10,7 @@ import UIKit
 import CoreBluetooth
 import RxBluetoothKit
 import RxSwift
+import SVProgressHUD
 
 class CommandViewController: UIViewController {
 
@@ -37,6 +38,8 @@ class CommandViewController: UIViewController {
             } else if $0.uuid.whichCharacteristic == .cmd_upload {
                 self.uploadCharacteristic = $0
             }
+        }, onError: { _ in
+            SVProgressHUD.showError(withStatus: "发现特性失败")
         }, onCompleted: { [weak self] in
             self?.notifyIfNeeded()
         }).disposed(by: disposeBag)
@@ -73,11 +76,8 @@ class CommandViewController: UIViewController {
     }
 
     private func received(data: Data) {
-        let str = data.enumerated().map({ (offset, element) -> String in
-            String(format: "0x%02X ", element)
-        }).joined()
         dispatch_to_main {
-            self.textView.text.append(str)
+            self.textView.text.append(data.hexString)
             self.textView.scrollRangeToVisible(NSMakeRange(self.textView.text.count-1, 1))
         }
     }

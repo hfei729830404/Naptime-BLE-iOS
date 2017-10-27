@@ -163,7 +163,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wa0-Xd-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="64.31784107946028"/>
+            <point key="canvasLocation" x="1369" y="840"/>
+        </scene>
+        <!--脑波数据-->
+        <scene sceneID="dbB-18-abt">
+            <objects>
+                <viewController storyboardIdentifier="EEGViewController" title="脑波数据" id="sOZ-V1-mgV" customClass="EEGViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xiW-4t-sTR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KuA-ND-Gd2">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="top" secondItem="1ug-1X-1fD" secondAttribute="top" id="Qcb-8r-aw2"/>
+                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="leading" secondItem="1ug-1X-1fD" secondAttribute="leading" id="TLj-82-1NL"/>
+                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="bottom" secondItem="1ug-1X-1fD" secondAttribute="bottom" id="cfq-92-V8Y"/>
+                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="trailing" secondItem="1ug-1X-1fD" secondAttribute="trailing" id="hx6-4S-rhx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1ug-1X-1fD"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="KuA-ND-Gd2" id="hHw-K7-UPA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jAC-qw-JP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="320.80000000000001" y="839.73013493253382"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wB2-rm-VRq">
