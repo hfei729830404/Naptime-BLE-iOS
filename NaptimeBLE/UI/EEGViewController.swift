@@ -32,7 +32,7 @@ class EEGViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
 
-    private var _temp: Data = Data()
+    private var _temp: String = ""
 
     @objc
     private func sampleButtonTouched() {
@@ -47,8 +47,9 @@ class EEGViewController: UIViewController {
             self.characteristic?.setNotificationAndMonitorUpdates().subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 if let data = $0.value {
-                    self._temp.append(data)
-                    if self._temp.count >= 200 {
+                    self._temp.append(data.hexString)
+                    self._temp.append("\n\n")
+                    if self._temp.count >= 300 {
                         dispatch_to_main {
                             self.updateTempToTextView()
                         }
@@ -56,13 +57,20 @@ class EEGViewController: UIViewController {
                 }
             }, onError: { _ in
                 SVProgressHUD.showError(withStatus: "发现特性失败")
+            }, onCompleted: { [weak self] in
+                guard let `self` = self else { return }
+                if self._temp.count > 0 {
+                    dispatch_to_main {
+                        self.updateTempToTextView()
+                    }
+                }
             }).disposed(by: disposeBag)
         }
         isSampling = !isSampling
     }
 
     private func updateTempToTextView() {
-        self.textView.text.append(_temp.hexString)
+        self.textView.text.append(_temp)
         self.textView.scrollRangeToVisible(NSMakeRange(self.textView.text.count-1, 1))
         _temp.removeAll()
     }
