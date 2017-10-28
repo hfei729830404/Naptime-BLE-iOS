@@ -48,6 +48,13 @@ class ScanViewController: UITableViewController {
         isScanning = !isScanning
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pushToService" {
+            let vc = segue.destination as! PeripheralViewController
+            vc.peripheral = _selectedPeripheral
+        }
+    }
+
     // MARK: - Delegates
 
     // MARK: TableView Delegate
@@ -68,21 +75,13 @@ class ScanViewController: UITableViewController {
 
     private var _selectedPeripheral: Peripheral?
 
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        _selectedPeripheral = peripheralList[indexPath.row].peripheral
+        return indexPath
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        let peripheral = peripheralList[indexPath.row].peripheral
-
-        switch peripheral.state {
-        case .connected:
-            disconnect(peripheral: peripheral, at: indexPath)
-            break
-        case .disconnected:
-            connect(peripheral: peripheral, at: indexPath)
-            break
-        default:
-            break
-        }
     }
 
     private func updatePeripheralIfNeeded(_ peripheral: CBPeripheral) {
@@ -122,24 +121,6 @@ class ScanViewController: UITableViewController {
         self.tableView.reloadData()
     }
 
-    private func connect(peripheral: Peripheral, at indexPath: IndexPath) {
-        SVProgressHUD.show(withStatus: "正在连接:\n \(peripheral.cbPeripheral.showName)")
-
-        peripheral.connect().subscribe { [weak self] in
-            guard let `self` = self else { return }
-
-            dispatch_to_main {
-                SVProgressHUD.showSuccess(withStatus: "连接成功:\n \(peripheral.cbPeripheral.showName)")
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
-
-                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "PeripheralViewController") as? PeripheralViewController {
-                    vc.peripheral = peripheral
-                    self.navigationController?.show(vc, sender: nil)
-                }
-            }
-        }.disposed(by: disposeBag)
-    }
-
     private func disconnect(peripheral: Peripheral, at indexPath: IndexPath) {
         peripheral.cancelConnection().subscribe { [weak self] in
             guard let `self` = self else { return }
@@ -148,7 +129,7 @@ class ScanViewController: UITableViewController {
                 SVProgressHUD.showSuccess(withStatus: "连接断开:\n \(peripheral.cbPeripheral.showName)")
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-        }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
     }
 }
 

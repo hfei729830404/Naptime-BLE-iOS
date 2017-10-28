@@ -9,5 +9,7 @@ target 'NaptimeBLE' do
     pod 'RxBluetoothKit', '~> 4.0'
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
+    pod 'SwiftyTimer', '~> 2.0'
+    pod 'Files', '~> 1.12'
 
 end

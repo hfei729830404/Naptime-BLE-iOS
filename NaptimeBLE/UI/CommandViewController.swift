@@ -31,18 +31,15 @@ class CommandViewController: UIViewController {
 
         textView.text.append("\n")
 
-        service.discoverCharacteristics(nil).flatMap { Observable.from($0) }.subscribe(onNext: { [weak self] in
-            guard let `self` = self else { return }
+        service.characteristics?.forEach {
             if $0.uuid.whichCharacteristic == .cmd_download {
                 self.downloadCharacteristic = $0
             } else if $0.uuid.whichCharacteristic == .cmd_upload {
                 self.uploadCharacteristic = $0
             }
-        }, onError: { _ in
-            SVProgressHUD.showError(withStatus: "发现特性失败")
-        }, onCompleted: { [weak self] in
-            self?.notifyIfNeeded()
-        }).disposed(by: disposeBag)
+        }
+
+        notifyIfNeeded()
     }
 
     @IBAction func commandAButtonTouched(_ sender: UIBarButtonItem) {

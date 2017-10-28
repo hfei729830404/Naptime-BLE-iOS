@@ -11,6 +11,7 @@ import CoreBluetooth
 import RxBluetoothKit
 import RxSwift
 import SVProgressHUD
+import SwiftyTimer
 
 class EEGViewController: UIViewController {
     var service: Service!
@@ -32,46 +33,58 @@ class EEGViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
 
-    private var _temp: String = ""
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        if isSampling {
+            self.sampleButtonTouched()
+        }
+    }
 
     @objc
     private func sampleButtonTouched() {
         if isSampling {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
             self.characteristic?.setNotifyValue(false).subscribe().disposed(by: disposeBag)
-            if _temp.count > 0 {
-                updateTempToTextView()
-            }
+            _timer?.invalidate()
+            _timer = nil
+            let fileName = EEGFileManager.shared.fileName
+            EEGFileManager.shared.close()
+            SVProgressHUD.showSuccess(withStatus: "保存文件成功: \(fileName!)")
         } else {
+            EEGFileManager.shared.create()
+            self.textView.text.removeAll()
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "停止", style: .plain, target: self, action: #selector(sampleButtonTouched))
-            self.characteristic?.setNotificationAndMonitorUpdates().subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
+            let dataPool = DataPool()
+            self.characteristic?.setNotificationAndMonitorUpdates().subscribe(onNext: {
                 if let data = $0.value {
-                    self._temp.append(data.hexString)
-                    self._temp.append("\n\n")
-                    if self._temp.count >= 300 {
-                        dispatch_to_main {
-                            self.updateTempToTextView()
-                        }
-                    }
+                    dataPool.push(data: data)
                 }
             }, onError: { _ in
                 SVProgressHUD.showError(withStatus: "发现特性失败")
-            }, onCompleted: { [weak self] in
-                guard let `self` = self else { return }
-                if self._temp.count > 0 {
+            }).disposed(by: disposeBag)
+
+            _timer = Timer.every(0.5, {
+                if dataPool.isAvailable {
+                    let data = dataPool.pop(length: 1000)
+                    self.saveToFile(data: data)
                     dispatch_to_main {
-                        self.updateTempToTextView()
+                        self.updateTempToTextView(data: data)
                     }
                 }
-            }).disposed(by: disposeBag)
+            })
         }
         isSampling = !isSampling
     }
 
-    private func updateTempToTextView() {
-        self.textView.text.append(_temp)
+    var _timer: Timer?
+
+    private func updateTempToTextView(data: Data) {
+        self.textView.text.append(data.hexString)
         self.textView.scrollRangeToVisible(NSMakeRange(self.textView.text.count-1, 1))
-        _temp.removeAll()
+    }
+
+    private func saveToFile(data: Data) {
+        EEGFileManager.shared.save(data: data)
     }
 }

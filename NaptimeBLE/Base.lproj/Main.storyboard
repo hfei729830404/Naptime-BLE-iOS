@@ -45,6 +45,9 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="gLj-lI-Nxs" kind="show" identifier="pushToService" id="Kz8-hq-p79"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -61,6 +64,13 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoZ-0h-Mfc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="eAb-6C-h9f">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <gestureRecognizers/>
+                    <viewLayoutGuide key="safeArea" id="ucq-bH-7JH"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="322" y="66"/>
         </scene>
@@ -96,6 +106,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="fcV-mJ-zGl" kind="show" identifier="pushToCharacteristic" id="zSQ-Oi-fee"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -108,6 +121,54 @@
             </objects>
             <point key="canvasLocation" x="1369" y="66"/>
         </scene>
+        <!--特性-->
+        <scene sceneID="Gqi-Tx-de8">
+            <objects>
+                <tableViewController title="特性" id="fcV-mJ-zGl" customClass="CharacteristicViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ufr-nv-8wd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="characteristicCellIdentifier" textLabel="P8y-J6-aJb" detailTextLabel="Wl0-6m-JQO" style="IBUITableViewCellStyleSubtitle" id="PtZ-TU-cYV">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PtZ-TU-cYV" id="hrb-U4-Ykc">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P8y-J6-aJb">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wl0-6m-JQO">
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fcV-mJ-zGl" id="jIl-SC-ubj"/>
+                            <outlet property="delegate" destination="fcV-mJ-zGl" id="Weg-gN-nnm"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="E3T-uR-Igx" kind="show" identifier="pushToCommand" id="Xad-C6-7BX"/>
+                        <segue destination="sOZ-V1-mgV" kind="show" identifier="pushToEEG" id="LF4-jF-IW1"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kcf-Ua-Csz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2398" y="66"/>
+        </scene>
         <!--指令传输-->
         <scene sceneID="Lct-yf-dr6">
             <objects>
@@ -117,14 +178,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" editable="NO" text="收到数据如下：" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-48-kBN">
-                                <rect key="frame" x="0.0" y="84" width="375" height="523"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="427"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tG-bX-n66">
-                                <rect key="frame" x="0.0" y="30" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="126" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="指令 A" id="YOe-7A-Xqp">
                                         <connections>
@@ -163,7 +224,79 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wa0-Xd-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369" y="840"/>
+            <point key="canvasLocation" x="3666" y="-324"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jMM-pU-3Ae">
+            <objects>
+                <navigationController id="P8N-LK-IwF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="tjE-Ra-NSG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tCE-KE-7SG" kind="relationship" relationship="rootViewController" id="hrl-Jz-RRt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E9L-9l-HRU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-711" y="840"/>
+        </scene>
+        <!--文件列表-->
+        <scene sceneID="0UG-42-M3g">
+            <objects>
+                <tableViewController id="tCE-KE-7SG" customClass="FileListViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tp5-yN-Yf9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="fileCellIdentifier" textLabel="v7N-4P-uIl" detailTextLabel="jXv-dr-hDJ" style="IBUITableViewCellStyleSubtitle" id="783-ie-551">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="783-ie-551" id="TYn-EK-QBd">
+                                    <rect key="frame" x="0.0" y="0.0" width="328" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v7N-4P-uIl">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jXv-dr-hDJ">
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tCE-KE-7SG" id="wmH-36-Wh2"/>
+                            <outlet property="delegate" destination="tCE-KE-7SG" id="x3R-J5-2cU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="文件列表" id="CaQ-g5-1dn">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZFE-ab-xRW">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MpT-do-kGU">
+                                <rect key="frame" x="328" y="7" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="关闭"/>
+                                <connections>
+                                    <action selector="closeButtonTouched:" destination="tCE-KE-7SG" eventType="touchUpInside" id="iuu-zs-kOb"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xI9-CH-f9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="321" y="840"/>
         </scene>
         <!--脑波数据-->
         <scene sceneID="dbB-18-abt">
@@ -174,7 +307,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuA-ND-Gd2">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -195,21 +328,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAC-qw-JP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="320.80000000000001" y="839.73013493253382"/>
+            <point key="canvasLocation" x="3665" y="431"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wB2-rm-VRq">
             <objects>
-                <navigationController id="znI-Hy-2gT" sceneMemberID="viewController">
+                <navigationController id="znI-Hy-2gT" customClass="BLENavigationController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="DHn-p9-dWw">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="5xt-Vr-na9" appends="YES" id="nmX-0h-FDz"/>
+                        </connections>
                     </navigationBar>
                     <connections>
                         <segue destination="4iS-fN-7Tj" kind="relationship" relationship="rootViewController" id="OpL-X3-Z3T"/>
+                        <segue destination="P8N-LK-IwF" kind="presentation" identifier="presentFileList" id="Az2-hb-HCK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0f-nn-tJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="5xt-Vr-na9">
+                    <connections>
+                        <action selector="handleLongPressed:" destination="znI-Hy-2gT" id="lhN-RS-p2Y"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-710" y="67"/>
         </scene>

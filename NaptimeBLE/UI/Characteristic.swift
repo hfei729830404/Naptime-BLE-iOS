@@ -48,6 +48,7 @@ enum ServiceType: String, UUIDType {
     case command  = "00000000-1212-EFDE-1523-785FEABCD123"
     case battery  = "180F"
     case eeg  = "00000011-1212-EFDE-1523-785FEABCD123"
+    case eeg_1  = "0000FFE0-1212-EFDE-1523-785FEABCD123"
     case dfu = "00001530-1212-EFDE-1523-785FEABCD123"
     case deviceInfo = "180A"
 
@@ -67,7 +68,7 @@ extension ServiceType: Displayable {
             return "指令传输服务"
         case .battery:
             return "电量服务"
-        case .eeg:
+        case .eeg, .eeg_1:
             return "脑电服务"
         case .dfu:
             return "DFU 服务"
@@ -87,6 +88,7 @@ enum CharacteristicType: String, UUIDType {
     case cmd_download = "00000002-1212-EFDE-1523-785FEABCD123"
     case battery_level = "2A19"
     case eeg_data = "00000012-1212-EFDE-1523-785FEABCD123"
+    case eeg_data_1 = "0000FFE1-1212-EFDE-1523-785FEABCD123"
     case dfu_ctrl = "00001531-1212-EFDE-1523-785FEABCD123"
     case dfu_package = "00001532-1212-EFDE-1523-785FEABCD123"
     case device_serial = "2A25"
@@ -118,7 +120,7 @@ extension CharacteristicType: Displayable {
             return "指令下行"
         case .battery_level:
             return "电池电量"
-        case .eeg_data:
+        case .eeg_data, .eeg_data_1:
             return "脑电数据"
         case .dfu_ctrl:
             return "DFU 控制指令"
