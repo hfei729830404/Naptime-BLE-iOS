@@ -282,7 +282,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="文件列表" id="CaQ-g5-1dn">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZFE-ab-xRW">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="ZFE-ab-xRW">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MpT-do-kGU">
                                 <rect key="frame" x="328" y="7" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
