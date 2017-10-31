@@ -58,7 +58,7 @@
                     <navigationItem key="navigationItem" title="易休蓝牙调试器" id="7Wv-lf-krw">
                         <barButtonItem key="rightBarButtonItem" title="扫描" id="RPK-uz-0II">
                             <connections>
-                                <action selector="scanButtonTouched:" destination="4iS-fN-7Tj" id="cWF-Bg-qfB"/>
+                                <action selector="scanButtonTouched:" destination="4iS-fN-7Tj" id="Jb9-Gg-LL8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

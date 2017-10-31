@@ -28,18 +28,19 @@ class PeripheralViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "设备 " + peripheral.cbPeripheral.showName
+        self.title = "设备 " + peripheral.displayName
 
         tableView.tableFooterView = UIView()
 
-        SVProgressHUD.show(withStatus: "正在连接:\n \(peripheral.cbPeripheral.showName)")
+        SVProgressHUD.show(withStatus: "正在连接:\n \(peripheral.displayName)")
         peripheral.connect()
+            .timeout(10, scheduler: MainScheduler())
             .flatMap { $0.discoverServices(nil) }
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.services = $0
             }, onError: { _ in
-                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: "连接失败")
             }, onCompleted: {
                 SVProgressHUD.dismiss()
                 dispatch_to_main {

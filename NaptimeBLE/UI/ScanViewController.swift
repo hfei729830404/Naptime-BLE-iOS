@@ -39,13 +39,14 @@ class ScanViewController: UITableViewController {
         stopScan()
     }
 
-    @IBAction func scanButtonTouched(_ sender: UIBarButtonItem) {
+    @IBAction func scanButtonTouched(_ sender: UIButton) {
         if isScanning {
             stopScan()
         } else {
             startScan()
         }
         isScanning = !isScanning
+        self.navigationItem.rightBarButtonItem?.title =  isScanning ? "停止" : "扫描"
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +67,7 @@ class ScanViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCellIdentifier", for: indexPath)
         let item = peripheralList[indexPath.row]
-        cell.textLabel?.text = item.peripheral.cbPeripheral.showName
+        cell.textLabel?.text = item.peripheral.displayName
         cell.detailTextLabel?.text = item.rssi.stringValue
         cell.imageView?.image = (item.peripheral.state == .connected ? #imageLiteral(resourceName: "icon_bluetooth") : #imageLiteral(resourceName: "icon_bluetooth_disconnect"))
         cell.imageView?.highlightedImage = cell.imageView?.image
@@ -93,12 +94,14 @@ class ScanViewController: UITableViewController {
         }
     }
 
+    private var disposable: Disposable?
+
     private func startScan() {
         clear()
-        self.navigationItem.rightBarButtonItem?.title = "停止"
-        manager.scanForPeripherals(withServices: nil).filter {
+
+        disposable = manager.scanForPeripherals(withServices: nil).filter {
             // 只显示有 name 的
-            $0.peripheral.name != nil
+            $0.peripheral.hasName
         }.subscribe (onNext: { [weak self] (peripheral) in
             guard let `self` = self else { return }
 
@@ -107,13 +110,15 @@ class ScanViewController: UITableViewController {
                 let indexPath = IndexPath(row: self.peripheralList.count-1, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .bottom)
             }
-        }).disposed(by: disposeBag)
+        })
+
+        disposable?.disposed(by: disposeBag)
     }
 
     private func stopScan() {
-        let timerScheduler = MainScheduler()
-        _ = manager.scanForPeripherals(withServices: nil).timeout(0.5, scheduler: timerScheduler)
-        self.navigationItem.rightBarButtonItem?.title = "扫描"
+        disposable?.dispose()
+//        let timerScheduler = MainScheduler()
+//        _ = manager.scanForPeripherals(withServices: nil).timeout(0.5, scheduler: timerScheduler)
     }
 
     private func clear() {
@@ -126,15 +131,9 @@ class ScanViewController: UITableViewController {
             guard let `self` = self else { return }
 
             dispatch_to_main {
-                SVProgressHUD.showSuccess(withStatus: "连接断开:\n \(peripheral.cbPeripheral.showName)")
+                SVProgressHUD.showSuccess(withStatus: "连接断开:\n \(peripheral.displayName)")
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             }.disposed(by: disposeBag)
-    }
-}
-
-extension CBPeripheral {
-    var showName: String {
-        return self.name ?? "NULL"
     }
 }
