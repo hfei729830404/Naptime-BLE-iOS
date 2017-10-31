@@ -181,7 +181,7 @@
 				TargetAttributes = {
 					6C1642FA1FA03B09002C1438 = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -440,12 +440,15 @@
 			baseConfigurationReference = 5FE0C70E83F51085ACEF699A /* Pods-NaptimeBLE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = B73YJ689CU;
 				INFOPLIST_FILE = NaptimeBLE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.NaptimeBLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "28849ae4-a32f-479c-8462-f01d8c5faa4d";
+				PROVISIONING_PROFILE_SPECIFIER = "naptime-ble-dev";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,12 +459,15 @@
 			baseConfigurationReference = 801514BAE5DE07EF432831B1 /* Pods-NaptimeBLE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = B73YJ689CU;
 				INFOPLIST_FILE = NaptimeBLE/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.NaptimeBLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "110a147b-f064-4b35-81a4-ac0f386a544f";
+				PROVISIONING_PROFILE_SPECIFIER = "naptime-ble-enterprise";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
