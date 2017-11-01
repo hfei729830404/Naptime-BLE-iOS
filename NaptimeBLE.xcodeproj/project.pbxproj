@@ -29,6 +29,19 @@
 		6CFB76151FA32692006C03A5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFB76141FA32692006C03A5 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6C7113161FA96F860093099D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5FE0C70E83F51085ACEF699A /* Pods-NaptimeBLE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NaptimeBLE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NaptimeBLE/Pods-NaptimeBLE.debug.xcconfig"; sourceTree = "<group>"; };
 		6C0D22B01FA41D47005EAF33 /* FileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
@@ -38,7 +51,7 @@
 		6C0D22B81FA447C5005EAF33 /* CharacteristicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
 		6C0D22BA1FA46933005EAF33 /* BLENavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLENavigationController.swift; sourceTree = "<group>"; };
 		6C143B951FA06C68009F866D /* GCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
-		6C1642FB1FA03B09002C1438 /* NaptimeBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NaptimeBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C1642FB1FA03B09002C1438 /* BLETool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLETool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1642FE1FA03B09002C1438 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C1643031FA03B09002C1438 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C1643051FA03B09002C1438 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,7 +93,7 @@
 		6C1642F21FA03B09002C1438 = {
 			isa = PBXGroup;
 			children = (
-				6C1642FD1FA03B09002C1438 /* NaptimeBLE */,
+				6C1642FD1FA03B09002C1438 /* BLETool */,
 				6C1642FC1FA03B09002C1438 /* Products */,
 				BDF37AF999B672F982338A68 /* Pods */,
 				A9270B81DB032DBDF56008A7 /* Frameworks */,
@@ -90,12 +103,12 @@
 		6C1642FC1FA03B09002C1438 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C1642FB1FA03B09002C1438 /* NaptimeBLE.app */,
+				6C1642FB1FA03B09002C1438 /* BLETool.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6C1642FD1FA03B09002C1438 /* NaptimeBLE */ = {
+		6C1642FD1FA03B09002C1438 /* BLETool */ = {
 			isa = PBXGroup;
 			children = (
 				6C143B941FA06C51009F866D /* Global */,
@@ -106,7 +119,7 @@
 				6C1643071FA03B09002C1438 /* LaunchScreen.storyboard */,
 				6C16430A1FA03B09002C1438 /* Info.plist */,
 			);
-			path = NaptimeBLE;
+			path = BLETool;
 			sourceTree = "<group>";
 		};
 		6C1643101FA06098002C1438 /* UI */ = {
@@ -149,9 +162,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6C1642FA1FA03B09002C1438 /* NaptimeBLE */ = {
+		6C1642FA1FA03B09002C1438 /* BLETool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6C16430D1FA03B09002C1438 /* Build configuration list for PBXNativeTarget "NaptimeBLE" */;
+			buildConfigurationList = 6C16430D1FA03B09002C1438 /* Build configuration list for PBXNativeTarget "BLETool" */;
 			buildPhases = (
 				6CC20487783033654E2F806C /* [CP] Check Pods Manifest.lock */,
 				6C1642F71FA03B09002C1438 /* Sources */,
@@ -159,14 +172,15 @@
 				6C1642F91FA03B09002C1438 /* Resources */,
 				D7495F85416DAEB819F50028 /* [CP] Embed Pods Frameworks */,
 				B549F24A6D86F5139B1ABE1A /* [CP] Copy Pods Resources */,
+				6C7113161FA96F860093099D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = NaptimeBLE;
+			name = BLETool;
 			productName = NaptimeBLE;
-			productReference = 6C1642FB1FA03B09002C1438 /* NaptimeBLE.app */;
+			productReference = 6C1642FB1FA03B09002C1438 /* BLETool.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -198,7 +212,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6C1642FA1FA03B09002C1438 /* NaptimeBLE */,
+				6C1642FA1FA03B09002C1438 /* BLETool */,
 			);
 		};
 /* End PBXProject section */
@@ -448,7 +462,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B73YJ689CU;
-				INFOPLIST_FILE = NaptimeBLE/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/BLETool/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.NaptimeBLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -469,7 +483,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = B73YJ689CU;
-				INFOPLIST_FILE = NaptimeBLE/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/BLETool/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.NaptimeBLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -493,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6C16430D1FA03B09002C1438 /* Build configuration list for PBXNativeTarget "NaptimeBLE" */ = {
+		6C16430D1FA03B09002C1438 /* Build configuration list for PBXNativeTarget "BLETool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C16430E1FA03B09002C1438 /* Debug */,

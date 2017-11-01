@@ -117,8 +117,6 @@ class ScanViewController: UITableViewController {
 
     private func stopScan() {
         disposable?.dispose()
-//        let timerScheduler = MainScheduler()
-//        _ = manager.scanForPeripherals(withServices: nil).timeout(0.5, scheduler: timerScheduler)
     }
 
     private func clear() {
