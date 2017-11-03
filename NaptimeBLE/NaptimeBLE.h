@@ -2,7 +2,7 @@
 //  NaptimeBLE.h
 //  NaptimeBLE
 //
-//  Created by NyanCat on 01/11/2017.
+//  Created by HyanCat on 01/11/2017.
 //  Copyright © 2017 EnterTech. All rights reserved.
 //
 

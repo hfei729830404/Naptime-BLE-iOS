@@ -17,6 +17,10 @@ extension Data {
     }
 }
 
+protocol Displayable {
+    var displayName: String { get }
+}
+
 extension Peripheral: Displayable {
     var displayName: String {
         return self.name ?? "NULL"
@@ -31,12 +35,14 @@ extension Peripheral {
 
 extension Service: Displayable {
     var displayName: String {
-        return (self.uuid.uuid as? ServiceType)?.displayName ?? "Unknown"
+//        return (self.uuid.uuid as? ServiceType)?.displayName ?? "Unknown"
+        return self.uuid.uuidString
     }
 }
 
 extension Characteristic: Displayable {
     var displayName: String {
-        return (self.uuid.uuid as? CharacteristicType)?.displayName ?? "Unknown"
+        return self.uuid.uuidString
+//        return (self.uuid.uuid as? CharacteristicType)?.displayName ?? "Unknown"
     }
 }

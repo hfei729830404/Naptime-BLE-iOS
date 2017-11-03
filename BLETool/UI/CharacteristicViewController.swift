@@ -61,39 +61,39 @@ class CharacteristicViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let cell = tableView.cellForRow(at: indexPath)
-        let characteristic = _characteristics[indexPath.row]
+//        let cell = tableView.cellForRow(at: indexPath)
+//        let characteristic = _characteristics[indexPath.row]
 
-        guard let type = characteristic.uuid.whichCharacteristic else { return }
-        switch type {
-        case .device_serial,
-             .device_firmware_revision,
-             .device_hardware_revision,
-             .device_manufacturer:
-            characteristic.readValue().subscribe(onNext: {
-                if let data = $0.value {
-                    dispatch_to_main {
-                        cell?.detailTextLabel?.text = String(data: data, encoding: .utf8)
-                    }
-                }
-            }).disposed(by: disposeBag)
-        case .battery_level:
-            characteristic.readValue().subscribe(onNext: {
-                if let data = $0.value {
-                    dispatch_to_main {
-                        var bytes = [UInt8](repeating: 0, count: data.count)
-                        data.copyBytes(to: &bytes, count: data.count)
-                        cell?.detailTextLabel?.text = String(format: "%d%%", bytes[0])
-                    }
-                }
-            }).disposed(by: disposeBag)
-        case .cmd_upload, .cmd_download:
-            self.performSegue(withIdentifier: "pushToCommand", sender: self)
-        case .eeg_data, .eeg_data_1:
-            self.performSegue(withIdentifier: "pushToEEG", sender: self)
-        default:
-            break
-        }
+//        guard let type = characteristic.uuid.whichCharacteristic else { return }
+//        switch type {
+//        case .device_serial,
+//             .device_firmware_revision,
+//             .device_hardware_revision,
+//             .device_manufacturer:
+//            characteristic.readValue().subscribe(onNext: {
+//                if let data = $0.value {
+//                    dispatch_to_main {
+//                        cell?.detailTextLabel?.text = String(data: data, encoding: .utf8)
+//                    }
+//                }
+//            }).disposed(by: disposeBag)
+//        case .battery_level:
+//            characteristic.readValue().subscribe(onNext: {
+//                if let data = $0.value {
+//                    dispatch_to_main {
+//                        var bytes = [UInt8](repeating: 0, count: data.count)
+//                        data.copyBytes(to: &bytes, count: data.count)
+//                        cell?.detailTextLabel?.text = String(format: "%d%%", bytes[0])
+//                    }
+//                }
+//            }).disposed(by: disposeBag)
+//        case .cmd_upload, .cmd_download:
+//            self.performSegue(withIdentifier: "pushToCommand", sender: self)
+//        case .eeg_data, .eeg_data_1:
+//            self.performSegue(withIdentifier: "pushToEEG", sender: self)
+//        default:
+//            break
+//        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,16 +110,16 @@ class CharacteristicViewController: UITableViewController {
 
 extension Characteristic {
     var showValue: String {
-        if let value = self.value {
-            if self.uuid.whichCharacteristic == CharacteristicType.battery_level {
-                var bytes = [UInt8](repeating: 0, count: value.count)
-                value.copyBytes(to: &bytes, count: value.count)
-                return String(format: "%d%%", bytes[0])
-            }
-            if let str = String(data: value, encoding: .utf8) {
-                return str
-            }
-        }
+//        if let value = self.value {
+//            if self.uuid.whichCharacteristic == CharacteristicType.battery_level {
+//                var bytes = [UInt8](repeating: 0, count: value.count)
+//                value.copyBytes(to: &bytes, count: value.count)
+//                return String(format: "%d%%", bytes[0])
+//            }
+//            if let str = String(data: value, encoding: .utf8) {
+//                return str
+//            }
+//        }
         return self.uuid.uuidString
     }
 }

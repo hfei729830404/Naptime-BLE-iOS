@@ -31,12 +31,12 @@ class CommandViewController: UIViewController {
 
         textView.text.append("\n")
 
-        service.characteristics?.forEach {
-            if $0.uuid.whichCharacteristic == .cmd_download {
-                self.downloadCharacteristic = $0
-            } else if $0.uuid.whichCharacteristic == .cmd_upload {
-                self.uploadCharacteristic = $0
-            }
+        service.characteristics?.forEach { _ in
+//            if $0.uuid.whichCharacteristic == .cmd_download {
+//                self.downloadCharacteristic = $0
+//            } else if $0.uuid.whichCharacteristic == .cmd_upload {
+//                self.uploadCharacteristic = $0
+//            }
         }
 
         notifyIfNeeded()

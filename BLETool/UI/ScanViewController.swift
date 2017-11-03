@@ -11,19 +11,15 @@ import CoreBluetooth
 import SVProgressHUD
 import RxBluetoothKit
 import RxSwift
-
-extension DispatchQueue {
-    static let ble: DispatchQueue = DispatchQueue(label: "cn.entertech.naptimeBLE.BLE")
-}
+import NaptimeBLE
 
 class ScanViewController: UITableViewController {
 
     let disposeBag: DisposeBag = DisposeBag()
 
-    let manager: BluetoothManager = BluetoothManager(queue: .ble)
     var isScanning: Bool = false
 
-    var peripheralList: [ScannedPeripheral] = []
+    var peripheralList: [Peripheral] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +63,9 @@ class ScanViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCellIdentifier", for: indexPath)
         let item = peripheralList[indexPath.row]
-        cell.textLabel?.text = item.peripheral.displayName
-        cell.detailTextLabel?.text = item.rssi.stringValue
-        cell.imageView?.image = (item.peripheral.state == .connected ? #imageLiteral(resourceName: "icon_bluetooth") : #imageLiteral(resourceName: "icon_bluetooth_disconnect"))
+        cell.textLabel?.text = item.displayName
+//        cell.detailTextLabel?.text = item.rssi.stringValue
+        cell.imageView?.image = (item.state == .connected ? #imageLiteral(resourceName: "icon_bluetooth") : #imageLiteral(resourceName: "icon_bluetooth_disconnect"))
         cell.imageView?.highlightedImage = cell.imageView?.image
         return cell
     }
@@ -77,7 +73,7 @@ class ScanViewController: UITableViewController {
     private var _selectedPeripheral: Peripheral?
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        _selectedPeripheral = peripheralList[indexPath.row].peripheral
+        _selectedPeripheral = peripheralList[indexPath.row]
         return indexPath
     }
 
@@ -86,7 +82,7 @@ class ScanViewController: UITableViewController {
     }
 
     private func updatePeripheralIfNeeded(_ peripheral: CBPeripheral) {
-        if let index = self.peripheralList.index(where: {$0.peripheral.identifier == peripheral.identifier }) {
+        if let index = self.peripheralList.index(where: {$0.identifier == peripheral.identifier }) {
             let indexPath = IndexPath(row: index, section: 0)
             dispatch_to_main {
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -99,10 +95,7 @@ class ScanViewController: UITableViewController {
     private func startScan() {
         clear()
 
-        disposable = manager.scanForPeripherals(withServices: nil).filter {
-            // 只显示有 name 的
-            $0.peripheral.hasName
-        }.subscribe (onNext: { [weak self] (peripheral) in
+        disposable = BLEScanner.shared.scan().subscribe(onNext: { [weak self] (peripheral) in
             guard let `self` = self else { return }
 
             dispatch_to_main {
@@ -111,11 +104,18 @@ class ScanViewController: UITableViewController {
                 self.tableView.insertRows(at: [indexPath], with: .bottom)
             }
         })
+//        disposable = manager.scanForPeripherals(withServices: nil).filter {
+//            // 只显示有 name 的
+//            $0.peripheral.hasName
+//        }.subscribe (onNext: { [weak self] (peripheral) in
+//
+//        })
 
         disposable?.disposed(by: disposeBag)
     }
 
     private func stopScan() {
+        BLEScanner.shared.stop()
         disposable?.dispose()
     }
 
