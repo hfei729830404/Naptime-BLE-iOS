@@ -104,12 +104,6 @@ class ScanViewController: UITableViewController {
                 self.tableView.insertRows(at: [indexPath], with: .bottom)
             }
         })
-//        disposable = manager.scanForPeripherals(withServices: nil).filter {
-//            // 只显示有 name 的
-//            $0.peripheral.hasName
-//        }.subscribe (onNext: { [weak self] (peripheral) in
-//
-//        })
 
         disposable?.disposed(by: disposeBag)
     }

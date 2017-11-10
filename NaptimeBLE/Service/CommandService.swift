@@ -7,19 +7,33 @@
 //
 
 import Foundation
+import CoreBluetooth
+import RxSwift
+import PromiseKit
 
-public class CommandService: Service {
-    public typealias ST = CommandService
+public class CommandService: BLEService {
+    
 }
 
-extension CommandService: Writable, Notifiable {
+extension CommandService: Writable {
 
     public typealias WriteType = Characteristic.Command.Write
 
-    public typealias NotifyType = Characteristic.Command.Notify
 }
 
-func aa() {
-    let device = CommandService()
-    device.notify(characteristic: .receive)
+extension CommandService: Notifiable {
+
+    public typealias NotifyType = Characteristic.Command.Notify
+
+}
+
+func __example() {
+//    let device = BLEService<CommandService>.service(type: .command)
+//    device.notify(characteristic: .state).subscribe(onNext: { _ in
+//
+//    }, onError: { _ in
+//        //
+//    }, onCompleted: {
+//
+//    }, onDisposed: nil).disposed(by: DisposeBag())
 }

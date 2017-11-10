@@ -11,12 +11,14 @@ import CoreBluetooth
 import RxBluetoothKit
 import RxSwift
 import SVProgressHUD
+import NaptimeBLE
+import PromiseKit
 
 class PeripheralViewController: UITableViewController {
 
     var peripheral: Peripheral!
-    var services: [Service] = []
-    var characteristics: [CBUUID: [Characteristic]] = [:]
+    var services: [RxBluetoothKit.Service] = []
+    var characteristics: [CBUUID: [RxBluetoothKit.Characteristic]] = [:]
 
     let disposeBag: DisposeBag = DisposeBag()
 
@@ -26,6 +28,8 @@ class PeripheralViewController: UITableViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
+    var connector: Connector!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "设备 " + peripheral.displayName
@@ -33,20 +37,21 @@ class PeripheralViewController: UITableViewController {
         tableView.tableFooterView = UIView()
 
         SVProgressHUD.show(withStatus: "正在连接:\n \(peripheral.displayName)")
-        peripheral.connect()
-            .timeout(10, scheduler: MainScheduler())
-            .flatMap { $0.discoverServices(nil) }
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self.services = $0
-            }, onError: { _ in
-                SVProgressHUD.showError(withStatus: "连接失败")
-            }, onCompleted: {
-                SVProgressHUD.dismiss()
-                dispatch_to_main {
-                    self.tableView.reloadData()
+
+        connector = Connector(peripheral: peripheral)
+        connector.tryConnect { (succeeded) in
+            if succeeded {
+                SVProgressHUD.show(withStatus: "连接成功\n开始握手")
+
+                self.connector.handshake().then {
+                    SVProgressHUD.showSuccess(withStatus: "握手成功")
+                }.catch { error in
+                    SVProgressHUD.showError(withStatus: "握手失败")
                 }
-            }, onDisposed: nil).disposed(by: disposeBag)
+            } else {
+                SVProgressHUD.showError(withStatus: "连接失败")
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,7 +66,7 @@ class PeripheralViewController: UITableViewController {
         return cell
     }
 
-    private var _selectedService: Service?
+    private var _selectedService: RxBluetoothKit.Service?
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         _selectedService = self.services[indexPath.row]

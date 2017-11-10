@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import PromiseKit
 
-public class DeviceInfoService: Service {
-    public typealias ST = DeviceInfoService
+public class DeviceInfoService: BLEService {
 }
 
 extension DeviceInfoService: Readable {

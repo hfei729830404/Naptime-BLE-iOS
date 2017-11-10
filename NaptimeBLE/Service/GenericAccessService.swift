@@ -8,6 +8,5 @@
 
 import Foundation
 
-public class GenericAccessService: Service {
-    public typealias ST = GenericAccessService
+public class GenericAccessService: BLEService {
 }

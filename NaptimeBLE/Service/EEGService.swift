@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import RxSwift
 
-public class EEGService: Service {
-    public typealias ST = EEGService
+public class EEGService: BLEService {
 }
 
 extension EEGService: Notifiable {
+
     public typealias NotifyType = Characteristic.EEG
+
 }

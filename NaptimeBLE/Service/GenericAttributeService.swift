@@ -8,6 +8,5 @@
 
 import Foundation
 
-public class GenericAttributeService: Service {
-    public typealias ST = GenericAttributeService
+public class GenericAttributeService: BLEService {
 }

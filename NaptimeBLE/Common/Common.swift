@@ -7,7 +7,18 @@
 //
 
 import Foundation
+import CoreBluetooth
 
 public protocol UUIDType {
     var uuid: String { get }
+}
+
+let UUID_BLE_DEVICE = "0000F000-1212-EFDE-1523-785FEABCD123"
+
+enum ServiceUUID: String, UUIDType {
+    case generic = ""
+
+    var uuid: String {
+        return self.rawValue
+    }
 }

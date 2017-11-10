@@ -7,14 +7,16 @@
 //
 
 import Foundation
+import PromiseKit
+import RxSwift
 
-public class BatteryService: Service {
-    public typealias ST = BatteryService
+public class BatteryService: BLEService {
 }
 
-extension BatteryService: Readable, Notifiable {
-
+extension BatteryService: Readable {
     public typealias ReadType = Characteristic.Battery
+}
 
+extension BatteryService: Notifiable {
     public typealias NotifyType = Characteristic.Battery
 }

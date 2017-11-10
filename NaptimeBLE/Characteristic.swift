@@ -10,6 +10,13 @@ import Foundation
 import CoreBluetooth
 
 public protocol CharacteristicType {
+    var uuid: CBUUID { get }
+}
+
+extension CharacteristicType where Self : RawRepresentable {
+    public var uuid: CBUUID {
+        return CBUUID(string: self.rawValue as! String)
+    }
 }
 
 public protocol CharacteristicReadType: CharacteristicType {}
@@ -20,6 +27,7 @@ public protocol CharacteristicNotifyType: CharacteristicType {}
 
 public enum Characteristic {
     public enum DeviceInfo: String, CharacteristicReadType {
+        case mac = "2A24"
         case serial = "2A25"
         case firmwareRevision = "2A26"
         case hardwareRevision = "2A27"
@@ -30,12 +38,14 @@ public enum Characteristic {
         case battery = "2A19"
     }
 
-    public enum Command: CharacteristicType {
+    public enum Command {
         public enum Notify: String, CharacteristicNotifyType {
-            case receive = "00000001-1212-EFDE-1523-785FEABCD123"
+            case handshake = "00000002-1212-EFDE-1523-785FEABCD123"
+            case state = "00000003-1212-EFDE-1523-785FEABCD123"
         }
         public enum Write: String, CharacteristicWriteType {
-            case send = "00000002-1212-EFDE-1523-785FEABCD123"
+            case userID = "00000001-1212-EFDE-1523-785FEABCD123"
+            case handshake = "00000002-1212-EFDE-1523-785FEABCD123"
         }
     }
 

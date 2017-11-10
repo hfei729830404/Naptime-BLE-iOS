@@ -8,6 +8,5 @@
 
 import Foundation
 
-public class DFUService: Service {
-    public typealias ST = DFUService
+public class DFUService: BLEService {
 }

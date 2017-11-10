@@ -10,7 +10,7 @@ target 'BLETool' do
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
     pod 'SwiftyTimer', '~> 2.0'
-    pod 'Files', '~> 1.12'
-    pod 'PromiseKit', '~> 4.4'
+    pod 'Files', '~> 2.0.0'
+    pod 'PromiseKit', '~> 4.5'
 
 end

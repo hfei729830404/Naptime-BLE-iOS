@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreBluetooth
 import RxBluetoothKit
 import RxSwift
 import PromiseKit
@@ -33,10 +34,7 @@ public final class BLEScanner {
 
     public func scan() -> Observable<Peripheral> {
         let observable: Observable<Peripheral> = Observable.create { [unowned self] (observer) -> Disposable in
-            let disposable = self.manager.scanForPeripherals(withServices: nil)
-                .filter {
-                    $0.peripheral.identifier.uuidString == "573EB8DB-A110-BF40-826D-CD128549EE95"
-                }
+            let disposable = self.manager.scanForPeripherals(withServices: [CBUUID(string: UUID_BLE_DEVICE)])
                 .flatMap {
                     Observable.just($0.peripheral)
                 }
