@@ -99,11 +99,11 @@ extension Data {
 }
 
 enum ServiceType: String {
-    case command = "00000000-1212-EFDE-1523-785FEABCD123"
+    case connect = "0000FF10-1212-ABCD-1523-785FEABCD123"
+    case command = "0000FF20-1212-ABCD-1523-785FEABCD123"
     case battery = "180F"
-//    case eeg = "00000011-1212-EFDE-1523-785FEABCD123"
-    case eeg = "0000FFE0-1212-EFDE-1523-785FEABCD123"
-    case dfu = "00001530-1212-EFDE-1523-785FEABCD123"
+    case eeg = "0000FF30-1212-ABCD-1523-785FEABCD123"
+    case dfu = "0000FF40-1212-ABCD-1523-785FEABCD123"
     case deviceInfo = "180A"
 }
 

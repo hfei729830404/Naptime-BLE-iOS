@@ -37,25 +37,34 @@ public enum Characteristic {
     public enum Battery: String, CharacteristicReadType, CharacteristicNotifyType {
         case battery = "2A19"
     }
-
     public enum Command {
-        public enum Notify: String, CharacteristicNotifyType {
-            case handshake = "00000002-1212-EFDE-1523-785FEABCD123"
-            case state = "00000003-1212-EFDE-1523-785FEABCD123"
-        }
         public enum Write: String, CharacteristicWriteType {
-            case userID = "00000001-1212-EFDE-1523-785FEABCD123"
-            case handshake = "00000002-1212-EFDE-1523-785FEABCD123"
+            case send = "0000FF21-1212-ABCD-1523-785FEABCD123"
+        }
+        public enum Notify: String, CharacteristicNotifyType {
+            case receive = "0000FF22-1212-ABCD-1523-785FEABCD123"
+        }
+    }
+
+    public enum Connect {
+        public enum Write: String, CharacteristicWriteType {
+            case userID = "0000FF11-1212-ABCD-1523-785FEABCD123"
+            case handshake = "0000FF12-1212-ABCD-1523-785FEABCD123"
+        }
+        public enum Notify: String, CharacteristicNotifyType {
+            case handshake = "0000FF12-1212-ABCD-1523-785FEABCD123"
+            case state = "0000FF13-1212-ABCD-1523-785FEABCD123"
         }
     }
 
     public enum EEG: String, CharacteristicNotifyType {
-        case data = "00000012-1212-EFDE-1523-785FEABCD123"
+        case data = "0000FF31-1212-ABCD-1523-785FEABCD123"
+        case contact = "0000FF32-1212-ABCD-1523-785FEABCD123"
     }
 
     public enum DFU: String, CharacteristicWriteType {
-        case control = "00001531-1212-EFDE-1523-785FEABCD123"
-        case package = "00001532-1212-EFDE-1523-785FEABCD123"
+        case control = "0000FF41-1212-ABCD-1523-785FEABCD123"
+        case package = "0000FF42-1212-ABCD-1523-785FEABCD123"
     }
 }
 

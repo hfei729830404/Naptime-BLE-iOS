@@ -27,6 +27,7 @@ public final class Connector: DisposeHolder {
     public typealias ConnectResultBlock = ((Bool) -> Void)
     public let peripheral: Peripheral
 
+    private(set) var connectService: ConnectService?
     private(set) var commandService: CommandService?
     private(set) var eegService: EEGService?
     private(set) var batteryService:  BatteryService?
@@ -53,6 +54,8 @@ public final class Connector: DisposeHolder {
                 guard let `self` = self else { return }
                 if let `type` = NaptimeBLE.ServiceType(rawValue: $0.uuid.uuidString) {
                     switch `type` {
+                    case .connect:
+                        self.connectService = ConnectService(rxService: $0)
                     case .command:
                         self.commandService = CommandService(rxService: $0)
                     case .battery:
@@ -99,7 +102,7 @@ public final class Connector: DisposeHolder {
                 self?._handshakeListener?.dispose()
             }
             // 监听状态
-            _stateListener = self.commandService!.notify(characteristic: .state).subscribe(onNext: { bytes in
+            _stateListener = self.connectService!.notify(characteristic: .state).subscribe(onNext: { bytes in
                 print("state: \(bytes)")
                 guard let state = HandshakeState(rawValue: bytes) else { return }
 
@@ -119,10 +122,10 @@ public final class Connector: DisposeHolder {
 
             Thread.sleep(forTimeInterval: 0.1)
             // 监听 第二步握手
-            _handshakeListener = self.commandService!.notify(characteristic: .handshake).subscribe(onNext: { data in
+            _handshakeListener = self.connectService!.notify(characteristic: .handshake).subscribe(onNext: { data in
                 print("握手返回: \(data)")
                 // 发送 第三步握手
-                self.commandService?.write(data: Data(bytes: [0x03, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
+                self.connectService?.write(data: Data(bytes: [0x03, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
                     .catch { error in
                     reject(error)
                 }
@@ -141,11 +144,11 @@ public final class Connector: DisposeHolder {
                     self.mac = data
                     print("mac: \(data)")
                     // 发送 user id
-                    return self.commandService!.write(data: Data(bytes: [0x00,0x11,0x22,0x33,0x44]), to: .userID)
+                    return self.connectService!.write(data: Data(bytes: [0x00,0x12,0x34,0x56,0x78]), to: .userID)
                 }
                 .then {
                     // 发送 第一步握手
-                    return self.commandService!.write(data: Data(bytes: [0x01, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
+                    return self.connectService!.write(data: Data(bytes: [0x01, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
             }
         }
 
