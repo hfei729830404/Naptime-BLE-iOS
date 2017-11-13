@@ -44,8 +44,6 @@ public protocol Writable: Service {
 public protocol Notifiable: Service {
     associatedtype NotifyType: CharacteristicNotifyType
     func notify(characteristic: NotifyType) -> Observable<Bytes>
-
-    func stopNotify(characteristic: NotifyType)
 }
 
 // MARK: - 性状
@@ -89,13 +87,6 @@ public extension Notifiable where Self: BLEService {
             }
         }
         return Observable.error(BluetoothError.characteristicsDiscoveryFailed(self.rxService, nil))
-    }
-
-    public func stopNotify(characteristic: NotifyType) {
-        if let char =
-            self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid }) {
-            _ = char.setNotifyValue(false)
-        }
     }
 }
 

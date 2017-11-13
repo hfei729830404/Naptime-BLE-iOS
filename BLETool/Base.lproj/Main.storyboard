@@ -116,7 +116,7 @@
                     <connections>
                         <segue destination="fcV-mJ-zGl" kind="show" identifier="pushToCharacteristic" id="Sib-Dn-wIU"/>
                         <segue destination="E3T-uR-Igx" kind="show" identifier="pushToCommand" id="8FZ-3j-Ycr"/>
-                        <segue destination="sOZ-V1-mgV" kind="show" identifier="pushToEEG" id="i9u-mu-0R3"/>
+                        <segue destination="CKa-wr-Ich" kind="show" identifier="pushToEEG" id="yhG-DP-ubW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOG-At-pbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,14 +176,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" editable="NO" text="收到数据如下：" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-48-kBN">
-                                <rect key="frame" x="0.0" y="128" width="375" height="479"/>
+                                <rect key="frame" x="0.0" y="180" width="375" height="427"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tG-bX-n66">
-                                <rect key="frame" x="0.0" y="74" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="126" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="指令 A" id="YOe-7A-Xqp">
                                         <connections>
@@ -297,34 +297,47 @@
             <point key="canvasLocation" x="321" y="840"/>
         </scene>
         <!--脑波数据-->
-        <scene sceneID="dbB-18-abt">
+        <scene sceneID="DDz-ZZ-8Gi">
             <objects>
-                <viewController storyboardIdentifier="EEGViewController" title="脑波数据" id="sOZ-V1-mgV" customClass="EEGViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xiW-4t-sTR">
+                <tableViewController title="脑波数据" id="CKa-wr-Ich" customClass="EEGViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mWd-vd-8fe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuA-ND-Gd2">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="top" secondItem="1ug-1X-1fD" secondAttribute="top" id="Qcb-8r-aw2"/>
-                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="leading" secondItem="1ug-1X-1fD" secondAttribute="leading" id="TLj-82-1NL"/>
-                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="bottom" secondItem="1ug-1X-1fD" secondAttribute="bottom" id="cfq-92-V8Y"/>
-                            <constraint firstItem="KuA-ND-Gd2" firstAttribute="trailing" secondItem="1ug-1X-1fD" secondAttribute="trailing" id="hx6-4S-rhx"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="1ug-1X-1fD"/>
-                    </view>
-                    <connections>
-                        <outlet property="textView" destination="KuA-ND-Gd2" id="hHw-K7-UPA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jAC-qw-JP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eegCellReuseIdentifier" id="Dzg-SC-WBG" customClass="EEGCell" customModule="BLETool" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dzg-SC-WBG" id="nPs-pt-k6u">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAO-11-j2N">
+                                            <rect key="frame" x="0.0" y="0.0" width="8" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="kAO-11-j2N" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="nPs-pt-k6u" secondAttribute="trailing" id="RVE-tY-ho0"/>
+                                        <constraint firstItem="kAO-11-j2N" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="nPs-pt-k6u" secondAttribute="bottom" id="ZSU-QP-cmP"/>
+                                        <constraint firstItem="kAO-11-j2N" firstAttribute="top" secondItem="nPs-pt-k6u" secondAttribute="top" id="m9t-5Q-VFE"/>
+                                        <constraint firstItem="kAO-11-j2N" firstAttribute="leading" secondItem="nPs-pt-k6u" secondAttribute="leading" id="yga-EA-LVS"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dataLabel" destination="kAO-11-j2N" id="8bo-bB-pAr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CKa-wr-Ich" id="NKn-Z0-x8d"/>
+                            <outlet property="delegate" destination="CKa-wr-Ich" id="x6z-Ik-hbM"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o85-rg-8Cq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2148" y="840"/>
         </scene>
