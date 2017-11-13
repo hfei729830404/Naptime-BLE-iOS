@@ -27,13 +27,8 @@ extension CommandService: Notifiable {
 
 }
 
-func __example() {
-//    let device = BLEService<CommandService>.service(type: .command)
-//    device.notify(characteristic: .state).subscribe(onNext: { _ in
-//
-//    }, onError: { _ in
-//        //
-//    }, onCompleted: {
-//
-//    }, onDisposed: nil).disposed(by: DisposeBag())
+extension CommandService: ServiceTypable {
+    public var serviceType: ServiceType {
+        return .command
+    }
 }

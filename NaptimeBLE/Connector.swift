@@ -27,12 +27,16 @@ public final class Connector: DisposeHolder {
     public typealias ConnectResultBlock = ((Bool) -> Void)
     public let peripheral: Peripheral
 
-    private(set) var connectService: ConnectService?
-    private(set) var commandService: CommandService?
-    private(set) var eegService: EEGService?
-    private(set) var batteryService:  BatteryService?
-    private(set) var dfuService: DFUService?
-    private(set) var deviceInfoService: DeviceInfoService?
+    public private(set) var connectService: ConnectService?
+    public private(set) var commandService: CommandService?
+    public private(set) var eegService: EEGService?
+    public private(set) var batteryService:  BatteryService?
+    public private(set) var dfuService: DFUService?
+    public private(set) var deviceInfoService: DeviceInfoService?
+
+    public var allServices: [BLEService] {
+        return [connectService, commandService, eegService, batteryService, dfuService, deviceInfoService].filter { $0 != nil } as! [BLEService]
+    }
 
     private(set) var mac: Data?
 
@@ -149,6 +153,8 @@ public final class Connector: DisposeHolder {
                 .then {
                     // 发送 第一步握手
                     return self.connectService!.write(data: Data(bytes: [0x01, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
+                }.catch { error in
+                    print("握手 error: \(error)")
             }
         }
 

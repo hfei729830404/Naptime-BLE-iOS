@@ -19,7 +19,7 @@ class ScanViewController: UITableViewController {
 
     var isScanning: Bool = false
 
-    var peripheralList: [Peripheral] = []
+    var peripheralList: [ScannedPeripheral] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,9 +63,9 @@ class ScanViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCellIdentifier", for: indexPath)
         let item = peripheralList[indexPath.row]
-        cell.textLabel?.text = item.displayName
-//        cell.detailTextLabel?.text = item.rssi.stringValue
-        cell.imageView?.image = (item.state == .connected ? #imageLiteral(resourceName: "icon_bluetooth") : #imageLiteral(resourceName: "icon_bluetooth_disconnect"))
+        cell.textLabel?.text = item.peripheral.displayName
+        cell.detailTextLabel?.text = item.rssi.stringValue
+        cell.imageView?.image = (item.peripheral.state == .connected ? #imageLiteral(resourceName: "icon_bluetooth") : #imageLiteral(resourceName: "icon_bluetooth_disconnect"))
         cell.imageView?.highlightedImage = cell.imageView?.image
         return cell
     }
@@ -73,7 +73,7 @@ class ScanViewController: UITableViewController {
     private var _selectedPeripheral: Peripheral?
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        _selectedPeripheral = peripheralList[indexPath.row]
+        _selectedPeripheral = peripheralList[indexPath.row].peripheral
         return indexPath
     }
 
@@ -82,7 +82,7 @@ class ScanViewController: UITableViewController {
     }
 
     private func updatePeripheralIfNeeded(_ peripheral: CBPeripheral) {
-        if let index = self.peripheralList.index(where: {$0.identifier == peripheral.identifier }) {
+        if let index = self.peripheralList.index(where: { $0.peripheral.identifier == peripheral.identifier }) {
             let indexPath = IndexPath(row: index, section: 0)
             dispatch_to_main {
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -90,27 +90,22 @@ class ScanViewController: UITableViewController {
         }
     }
 
-    private var disposable: Disposable?
-
     private func startScan() {
         clear()
 
-        disposable = BLEScanner.shared.scan().subscribe(onNext: { [weak self] (peripheral) in
-            guard let `self` = self else { return }
-
-            dispatch_to_main {
+        BLEScanner.shared.scan()
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] (peripheral) in
+                guard let `self` = self else { return }
                 self.peripheralList.append(peripheral)
                 let indexPath = IndexPath(row: self.peripheralList.count-1, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .bottom)
-            }
-        })
-
-        disposable?.disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     private func stopScan() {
         BLEScanner.shared.stop()
-        disposable?.dispose()
     }
 
     private func clear() {
@@ -119,13 +114,13 @@ class ScanViewController: UITableViewController {
     }
 
     private func disconnect(peripheral: Peripheral, at indexPath: IndexPath) {
-        peripheral.cancelConnection().subscribe { [weak self] in
-            guard let `self` = self else { return }
-
-            dispatch_to_main {
+        peripheral.cancelConnection()
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe { [weak self] in
+                guard let `self` = self else { return }
                 SVProgressHUD.showSuccess(withStatus: "连接断开:\n \(peripheral.displayName)")
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            }.disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
 }

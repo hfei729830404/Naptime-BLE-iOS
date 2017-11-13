@@ -20,3 +20,9 @@ extension BatteryService: Readable {
 extension BatteryService: Notifiable {
     public typealias NotifyType = Characteristic.Battery
 }
+
+extension BatteryService: ServiceTypable {
+    public var serviceType: ServiceType {
+        return .battery
+    }
+}

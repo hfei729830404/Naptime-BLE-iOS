@@ -17,3 +17,9 @@ extension EEGService: Notifiable {
     public typealias NotifyType = Characteristic.EEG
 
 }
+
+extension EEGService: ServiceTypable {
+    public var serviceType: ServiceType {
+        return .eeg
+    }
+}

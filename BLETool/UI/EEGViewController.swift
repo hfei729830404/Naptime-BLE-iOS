@@ -12,10 +12,10 @@ import RxBluetoothKit
 import RxSwift
 import SVProgressHUD
 import SwiftyTimer
+import NaptimeBLE
 
 class EEGViewController: UIViewController {
-    var service: Service!
-    var characteristic: Characteristic?
+    var service: EEGService!
 
     var isSampling: Bool = false
     private let disposeBag = DisposeBag()
@@ -26,20 +26,13 @@ class EEGViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
-
-//        service.discoverCharacteristics(nil).flatMap { Observable.from($0) }.filter {
-//            $0.uuid.whichCharacteristic == .eeg_data
-//            }.take(1).subscribe(onNext: { [weak self] in
-//            guard let `self` = self else { return }
-//            self.characteristic = $0
-//        }).disposed(by: disposeBag)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         if isSampling {
-            self.sampleButtonTouched()
+            stopSample()
         }
     }
 
@@ -47,39 +40,58 @@ class EEGViewController: UIViewController {
     private func sampleButtonTouched() {
         if isSampling {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
-            self.characteristic?.setNotifyValue(false).subscribe().disposed(by: disposeBag)
-            _timer?.invalidate()
-            _timer = nil
-            let fileName = EEGFileManager.shared.fileName
-            EEGFileManager.shared.close()
-            SVProgressHUD.showSuccess(withStatus: "保存文件成功: \(fileName!)")
+            stopSample()
         } else {
-            EEGFileManager.shared.create()
             self.textView.text.removeAll()
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "停止", style: .plain, target: self, action: #selector(sampleButtonTouched))
-            let dataPool = DataPool()
-            self.characteristic?.setNotificationAndMonitorUpdates().subscribe(onNext: {
-                if let data = $0.value {
-                    dataPool.push(data: data)
-                }
-            }, onError: { _ in
-                SVProgressHUD.showError(withStatus: "发现特性失败")
-            }).disposed(by: disposeBag)
 
-            _timer = Timer.every(0.5, {
-                if dataPool.isAvailable {
-                    let data = dataPool.pop(length: 1000)
-                    self.saveToFile(data: data)
-                    dispatch_to_main {
-                        self.updateTempToTextView(data: data)
-                    }
-                }
-            })
+            startSample()
+                .observeOn(MainScheduler())
+                .subscribe(onNext: {
+                    self.updateTempToTextView(data: $0)
+                })
+                .disposed(by: disposeBag)
         }
         isSampling = !isSampling
     }
 
     var _timer: Timer?
+
+    private func startSample() -> Observable<Data> {
+        EEGFileManager.shared.create()
+        let dataPool = DataPool()
+        self.service.notify(characteristic: .data)
+            .subscribe(onNext: {
+                let data = Data(bytes: $0)
+                dataPool.push(data: data)
+            }, onError: { _ in
+                SVProgressHUD.showError(withStatus: "监听脑波数据失败")
+            })
+            .disposed(by: disposeBag)
+
+        return Observable<Data>.create { observer -> Disposable in
+            let timer = Timer.every(0.5, {
+                if dataPool.isAvailable {
+                    let data = dataPool.pop(length: 1000)
+                    self.saveToFile(data: data)
+                    observer.onNext(data)
+                }
+            })
+            return Disposables.create {
+                timer.invalidate()
+            }
+        }
+    }
+
+    private func stopSample() {
+        self.service.stopNotify(characteristic: .data)
+        _timer?.invalidate()
+        _timer = nil
+        let fileName = EEGFileManager.shared.fileName
+        EEGFileManager.shared.close()
+        SVProgressHUD.showSuccess(withStatus: "保存文件成功: \(fileName!)")
+    }
+
 
     private func updateTempToTextView(data: Data) {
         self.textView.text.append(data.hexString)

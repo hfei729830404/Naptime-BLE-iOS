@@ -11,12 +11,13 @@ import CoreBluetooth
 import RxBluetoothKit
 import RxSwift
 import SVProgressHUD
+import NaptimeBLE
 
 class CharacteristicViewController: UITableViewController {
 
-    var service: Service!
+    var service: BLEService!
 
-    private var _characteristics: [Characteristic] = []
+    private var _characteristics: [RxBluetoothKit.Characteristic] = []
 
     let disposeBag: DisposeBag = DisposeBag()
 
@@ -25,18 +26,7 @@ class CharacteristicViewController: UITableViewController {
 
         tableView.tableFooterView = UIView()
 
-        service.discoverCharacteristics(nil)
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self._characteristics = $0
-            }, onError: { _ in
-                SVProgressHUD.dismiss()
-            }, onCompleted: {
-                SVProgressHUD.dismiss()
-                dispatch_to_main {
-                    self.tableView.reloadData()
-                }
-            }, onDisposed: nil).disposed(by: disposeBag)
+        _characteristics = service.rxService.characteristics ?? []
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,7 +41,7 @@ class CharacteristicViewController: UITableViewController {
         return cell
     }
 
-    var _selectedCharacteristic: Characteristic?
+    var _selectedCharacteristic: RxBluetoothKit.Characteristic?
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         _selectedCharacteristic = _characteristics[indexPath.row]
@@ -95,20 +85,9 @@ class CharacteristicViewController: UITableViewController {
 //            break
 //        }
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? CommandViewController {
-            vc.service = self.service
-            return
-        }
-        if let vc = segue.destination as? EEGViewController {
-            vc.service = self.service
-            return
-        }
-    }
 }
 
-extension Characteristic {
+extension RxBluetoothKit.Characteristic {
     var showValue: String {
 //        if let value = self.value {
 //            if self.uuid.whichCharacteristic == CharacteristicType.battery_level {

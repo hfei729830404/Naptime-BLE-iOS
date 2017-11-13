@@ -22,7 +22,7 @@ public protocol Service {
 
 public class BLEService: Service {
 
-    let rxService: RxBluetoothKit.Service
+    public let rxService: RxBluetoothKit.Service
 
     public required init(rxService: RxBluetoothKit.Service) {
         self.rxService = rxService
@@ -44,6 +44,8 @@ public protocol Writable: Service {
 public protocol Notifiable: Service {
     associatedtype NotifyType: CharacteristicNotifyType
     func notify(characteristic: NotifyType) -> Observable<Bytes>
+
+    func stopNotify(characteristic: NotifyType)
 }
 
 // MARK: - 性状
@@ -88,6 +90,13 @@ public extension Notifiable where Self: BLEService {
         }
         return Observable.error(BluetoothError.characteristicsDiscoveryFailed(self.rxService, nil))
     }
+
+    public func stopNotify(characteristic: NotifyType) {
+        if let char =
+            self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid }) {
+            _ = char.setNotifyValue(false)
+        }
+    }
 }
 
 extension Data {
@@ -97,13 +106,3 @@ extension Data {
         return bytes
     }
 }
-
-enum ServiceType: String {
-    case connect = "0000FF10-1212-ABCD-1523-785FEABCD123"
-    case command = "0000FF20-1212-ABCD-1523-785FEABCD123"
-    case battery = "180F"
-    case eeg = "0000FF30-1212-ABCD-1523-785FEABCD123"
-    case dfu = "0000FF40-1212-ABCD-1523-785FEABCD123"
-    case deviceInfo = "180A"
-}
-

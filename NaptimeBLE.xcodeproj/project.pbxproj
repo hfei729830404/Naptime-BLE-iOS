@@ -33,6 +33,7 @@
 		6C3FC7951FAB000600605D8A /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3FC7941FAB000600605D8A /* PromiseKit.framework */; };
 		6C3FC7991FAC405D00605D8A /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7981FAC405D00605D8A /* Connector.swift */; };
 		6C3FC79B1FAC418700605D8A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC79A1FAC418700605D8A /* Errors.swift */; };
+		6C4A38661FB9409A00B09EC3 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A38651FB9409A00B09EC3 /* ServiceType.swift */; };
 		6C595D631FB6A0150097C170 /* ConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C595D621FB6A0150097C170 /* ConnectService.swift */; };
 		6C7113201FA9755B0093099D /* NaptimeBLE.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C71131E1FA9755B0093099D /* NaptimeBLE.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C71132B1FA975C60093099D /* BLEScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71132A1FA975C60093099D /* BLEScanner.swift */; };
@@ -102,6 +103,7 @@
 		6C3FC7941FAB000600605D8A /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		6C3FC7981FAC405D00605D8A /* Connector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		6C3FC79A1FAC418700605D8A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		6C4A38651FB9409A00B09EC3 /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		6C595D621FB6A0150097C170 /* ConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectService.swift; sourceTree = "<group>"; };
 		6C71131C1FA9755B0093099D /* NaptimeBLE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NaptimeBLE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C71131E1FA9755B0093099D /* NaptimeBLE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NaptimeBLE.h; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				6C3FC7801FAABD9600605D8A /* CommandService.swift */,
 				6C3FC7841FAABDBC00605D8A /* DFUService.swift */,
 				6C3FC7821FAABDB200605D8A /* DeviceInfoService.swift */,
+				6C4A38651FB9409A00B09EC3 /* ServiceType.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				6CED9CE31FB5965800226793 /* HandshakeState.swift in Sources */,
 				6C3FC7831FAABDB200605D8A /* DeviceInfoService.swift in Sources */,
 				6C3FC7811FAABD9600605D8A /* CommandService.swift in Sources */,
+				6C4A38661FB9409A00B09EC3 /* ServiceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

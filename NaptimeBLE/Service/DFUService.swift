@@ -10,3 +10,9 @@ import Foundation
 
 public class DFUService: BLEService {
 }
+
+extension DFUService: ServiceTypable {
+    public var serviceType: ServiceType {
+        return .dfu
+    }
+}

@@ -17,3 +17,9 @@ extension DeviceInfoService: Readable {
     public typealias ReadType = Characteristic.DeviceInfo
 
 }
+
+extension DeviceInfoService: ServiceTypable {
+    public var serviceType: ServiceType {
+        return .deviceInfo
+    }
+}

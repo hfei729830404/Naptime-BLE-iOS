@@ -11,14 +11,13 @@ import CoreBluetooth
 import RxBluetoothKit
 import RxSwift
 import SVProgressHUD
+import NaptimeBLE
 
 class CommandViewController: UIViewController {
 
     let disposeBag = DisposeBag()
 
-    var service: Service!
-    var uploadCharacteristic: Characteristic?
-    var downloadCharacteristic: Characteristic?
+    var service: CommandService!
 
     @IBOutlet weak var textView: UITextView!
 
@@ -30,14 +29,6 @@ class CommandViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = false
 
         textView.text.append("\n")
-
-        service.characteristics?.forEach { _ in
-//            if $0.uuid.whichCharacteristic == .cmd_download {
-//                self.downloadCharacteristic = $0
-//            } else if $0.uuid.whichCharacteristic == .cmd_upload {
-//                self.uploadCharacteristic = $0
-//            }
-        }
 
         notifyIfNeeded()
     }
@@ -57,18 +48,18 @@ class CommandViewController: UIViewController {
 
     private func notifyIfNeeded() {
         if isNotifing { return }
-        self.downloadCharacteristic?.setNotificationAndMonitorUpdates().subscribe { [weak self] in
+
+        self.service.notify(characteristic: .receive).subscribe(onNext: { [weak self] in
             guard let `self` = self else { return }
-            if let data = $0.element!.value {
-                self.received(data: data)
-            }
-        }.disposed(by: disposeBag)
+            let data = Data(bytes: $0)
+            self.received(data: data)
+        }).disposed(by: disposeBag)
         isNotifing = true
     }
 
     private func send(data: Data) {
-        if let uploadChar = self.uploadCharacteristic {
-            uploadChar.writeValue(data, type: .withResponse).subscribe().disposed(by: disposeBag)
+        self.service.write(data: data, to: .send).catch { _ in 
+            SVProgressHUD.showError(withStatus: "发送失败")
         }
     }
 

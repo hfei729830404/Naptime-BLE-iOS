@@ -32,12 +32,11 @@ public final class BLEScanner {
         manager = BluetoothManager(queue: .ble, options: nil)
     }
 
-    public func scan() -> Observable<Peripheral> {
-        let observable: Observable<Peripheral> = Observable.create { [unowned self] (observer) -> Disposable in
+    public func scan() -> Observable<ScannedPeripheral> {
+
+        return Observable<ScannedPeripheral>.create { [unowned self] (observer) -> Disposable in
+
             let disposable = self.manager.scanForPeripherals(withServices: [CBUUID(string: UUID_BLE_DEVICE)])
-                .flatMap {
-                    Observable.just($0.peripheral)
-                }
                 .subscribe(onNext: {
                     observer.onNext($0)
                 }, onError: {
@@ -45,11 +44,12 @@ public final class BLEScanner {
                 }, onCompleted: {
                     observer.onCompleted()
                 })
-            self._disposable = disposable
             disposable.disposed(by: self._disposeBag)
-            return disposable
+            self._disposable = Disposables.create {
+                disposable.dispose()
+            }
+            return self._disposable!
         }
-        return observable
     }
 
     public func stop() {

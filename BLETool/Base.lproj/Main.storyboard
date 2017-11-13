@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="znI-Hy-2gT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="znI-Hy-2gT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--易休蓝牙调试器-->
+        <!--易休蓝牙-->
         <scene sceneID="Djf-hQ-v5Z">
             <objects>
-                <tableViewController id="4iS-fN-7Tj" customClass="ScanViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="易休蓝牙" id="4iS-fN-7Tj" customClass="ScanViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hRg-yP-fbl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,7 +33,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OFP-9a-vaR">
-                                            <rect key="frame" x="310" y="14" width="50" height="17"/>
+                                            <rect key="frame" x="309" y="14" width="50" height="17"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -55,7 +55,7 @@
                             <outlet property="delegate" destination="4iS-fN-7Tj" id="Ctu-nv-naO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="易休蓝牙调试器" id="7Wv-lf-krw">
+                    <navigationItem key="navigationItem" title="易休蓝牙" id="7Wv-lf-krw">
                         <barButtonItem key="rightBarButtonItem" title="扫描" id="RPK-uz-0II">
                             <connections>
                                 <action selector="scanButtonTouched:" destination="4iS-fN-7Tj" id="Jb9-Gg-LL8"/>
@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="322" y="66"/>
         </scene>
-        <!--设备-->
+        <!--设备服务-->
         <scene sceneID="H4m-eB-XvS">
             <objects>
-                <tableViewController storyboardIdentifier="PeripheralViewController" title="设备" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gLj-lI-Nxs" customClass="PeripheralViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PeripheralViewController" title="设备服务" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gLj-lI-Nxs" customClass="PeripheralViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hVy-IH-yWN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,9 +106,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="fcV-mJ-zGl" kind="show" identifier="pushToCharacteristic" id="zSQ-Oi-fee"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -116,15 +113,20 @@
                             <outlet property="delegate" destination="gLj-lI-Nxs" id="UHl-De-hX7"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="fcV-mJ-zGl" kind="show" identifier="pushToCharacteristic" id="Sib-Dn-wIU"/>
+                        <segue destination="E3T-uR-Igx" kind="show" identifier="pushToCommand" id="8FZ-3j-Ycr"/>
+                        <segue destination="sOZ-V1-mgV" kind="show" identifier="pushToEEG" id="i9u-mu-0R3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOG-At-pbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369" y="66"/>
+            <point key="canvasLocation" x="2148" y="65"/>
         </scene>
         <!--特性-->
         <scene sceneID="Gqi-Tx-de8">
             <objects>
-                <tableViewController title="特性" id="fcV-mJ-zGl" customClass="CharacteristicViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="特性" id="fcV-mJ-zGl" customClass="CharacteristicViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ufr-nv-8wd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,32 +162,28 @@
                             <outlet property="delegate" destination="fcV-mJ-zGl" id="Weg-gN-nnm"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <segue destination="E3T-uR-Igx" kind="show" identifier="pushToCommand" id="Xad-C6-7BX"/>
-                        <segue destination="sOZ-V1-mgV" kind="show" identifier="pushToEEG" id="LF4-jF-IW1"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kcf-Ua-Csz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2398" y="66"/>
+            <point key="canvasLocation" x="1364" y="840"/>
         </scene>
         <!--指令传输-->
         <scene sceneID="Lct-yf-dr6">
             <objects>
-                <viewController storyboardIdentifier="CommandViewController" title="指令传输" id="E3T-uR-Igx" customClass="CommandViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommandViewController" title="指令传输" id="E3T-uR-Igx" customClass="CommandViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FKL-s6-9lk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" editable="NO" text="收到数据如下：" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-48-kBN">
-                                <rect key="frame" x="0.0" y="180" width="375" height="427"/>
+                                <rect key="frame" x="0.0" y="128" width="375" height="479"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tG-bX-n66">
-                                <rect key="frame" x="0.0" y="126" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="44"/>
                                 <items>
                                     <barButtonItem title="指令 A" id="YOe-7A-Xqp">
                                         <connections>
@@ -224,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wa0-Xd-Z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3666" y="-324"/>
+            <point key="canvasLocation" x="2898" y="840"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jMM-pU-3Ae">
@@ -245,7 +243,7 @@
         <!--文件列表-->
         <scene sceneID="0UG-42-M3g">
             <objects>
-                <tableViewController id="tCE-KE-7SG" customClass="FileListViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="tCE-KE-7SG" customClass="FileListViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tp5-yN-Yf9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,7 +253,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="783-ie-551" id="TYn-EK-QBd">
-                                    <rect key="frame" x="0.0" y="0.0" width="328" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="327" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v7N-4P-uIl">
@@ -301,7 +299,7 @@
         <!--脑波数据-->
         <scene sceneID="dbB-18-abt">
             <objects>
-                <viewController storyboardIdentifier="EEGViewController" title="脑波数据" id="sOZ-V1-mgV" customClass="EEGViewController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EEGViewController" title="脑波数据" id="sOZ-V1-mgV" customClass="EEGViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xiW-4t-sTR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,12 +326,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAC-qw-JP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3665" y="431"/>
+            <point key="canvasLocation" x="2148" y="840"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wB2-rm-VRq">
             <objects>
-                <navigationController id="znI-Hy-2gT" customClass="BLENavigationController" customModule="NaptimeBLE" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="znI-Hy-2gT" customClass="BLENavigationController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="DHn-p9-dWw">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>

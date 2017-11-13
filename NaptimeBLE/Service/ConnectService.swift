@@ -18,3 +18,9 @@ extension ConnectService: Writable {
 extension ConnectService: Notifiable {
     public typealias NotifyType = Characteristic.Connect.Notify
 }
+
+extension ConnectService: ServiceTypable {
+    public var serviceType: ServiceType {
+        return .connect
+    }
+}
