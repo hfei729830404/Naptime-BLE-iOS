@@ -13,12 +13,19 @@ import RxSwift
 import SVProgressHUD
 import SwiftyTimer
 import NaptimeBLE
+import AVFoundation
 
 class EEGViewController: UITableViewController {
     var service: EEGService!
 
-    var isSampling: Bool = false
-    private let disposeBag = DisposeBag()
+    private let _player: AVAudioPlayer = {
+        let url = Bundle.main.url(forResource: "1-minute-of-silence", withExtension: "mp3")!
+        let player = try! AVAudioPlayer(contentsOf: url)
+        player.numberOfLoops = 10000
+        return player
+    }()
+
+    private var _isSampling: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +33,25 @@ class EEGViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
+
+        _player.play()
+    }
+
+    deinit {
+        _player.stop()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        if isSampling {
+        if _isSampling {
             stopSample()
         }
     }
 
     @objc
     private func sampleButtonTouched() {
-        if isSampling {
+        if _isSampling {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
             stopSample()
         } else {
@@ -52,7 +65,7 @@ class EEGViewController: UITableViewController {
                     self.render(data: $0)
                 })
         }
-        isSampling = !isSampling
+        _isSampling = !_isSampling
     }
 
     private var _notifyDisposable: Disposable?
