@@ -26,7 +26,9 @@ class CommandViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        }
 
         textView.text.append("\n")
 

@@ -90,7 +90,7 @@ public extension Notifiable where Self: BLEService {
     }
 }
 
-extension Data {
+public extension Data {
     var copiedBytes: [UInt8] {
         var bytes = [UInt8](repeating: 0, count: self.count)
         self.copyBytes(to: &bytes, count: self.count)

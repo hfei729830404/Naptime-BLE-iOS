@@ -35,7 +35,7 @@ public final class Connector: DisposeHolder {
     public private(set) var deviceInfoService: DeviceInfoService?
 
     public var allServices: [BLEService] {
-        return [connectService, commandService, eegService, batteryService, dfuService, deviceInfoService].filter { $0 != nil } as! [BLEService]
+        return ([connectService, commandService, eegService, batteryService, dfuService, deviceInfoService] as [BLEService?]).filter { $0 != nil } as! [BLEService]
     }
 
     private(set) var mac: Data?

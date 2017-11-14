@@ -25,7 +25,9 @@ class PeripheralViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
     }
 
     var connector: Connector!

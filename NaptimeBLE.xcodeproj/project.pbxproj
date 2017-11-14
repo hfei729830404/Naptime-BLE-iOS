@@ -662,6 +662,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = B73YJ689CU;
 				INFOPLIST_FILE = "$(SRCROOT)/BLETool/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.BLETool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -684,6 +685,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = B73YJ689CU;
 				INFOPLIST_FILE = "$(SRCROOT)/BLETool/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.BLETool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
