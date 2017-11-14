@@ -14,7 +14,7 @@ extension DispatchQueue {
 
 class DataPool {
 
-    private var _data = Data()
+    private var _data = [UInt8]()
 
     var isEmpty: Bool {
         return _data.count == 0
@@ -26,18 +26,18 @@ class DataPool {
 
     func push(data: Data) {
         DispatchQueue.pool.sync {
-            _data.append(data)
+            _data.append(contentsOf: data.copiedBytes)
         }
     }
 
     func pop(length: Int) -> Data {
-        var data: Data = Data()
+        var subdata: Data = Data()
         DispatchQueue.pool.sync {
             let count = min(length, _data.count)
-            data = _data.subdata(in: 0..<count)
-            _ = _data.dropFirst(count)
+            subdata = Data(bytes: _data[0..<count])
+            _data.removeFirst(count)
         }
-        return data
+        return subdata
     }
 
     func dry() {
