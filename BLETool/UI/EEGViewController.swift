@@ -77,7 +77,9 @@ class EEGViewController: UITableViewController {
         let dataPool = DataPool()
         _notifyDisposable = self.service.notify(characteristic: .data)
             .subscribe(onNext: {
-                let data = Data(bytes: $0)
+                var received = $0
+                received.removeFirst(2)
+                let data = Data(bytes: received)
                 dataPool.push(data: data)
             }, onError: { _ in
                 SVProgressHUD.showError(withStatus: "监听脑波数据失败")
@@ -86,8 +88,8 @@ class EEGViewController: UITableViewController {
         return Observable<Data>.create { observer -> Disposable in
             let timer = Timer.every(1.0, {
                 if dataPool.isAvailable {
-                    // 每次取 850 个字节，即 1s 的数据量
-                    let data = dataPool.pop(length: 850)
+                    // 每次取 750 个字节，即 1s 的数据量
+                    let data = dataPool.pop(length: 750)
                     self.saveToFile(data: data)
                     observer.onNext(data)
                 }

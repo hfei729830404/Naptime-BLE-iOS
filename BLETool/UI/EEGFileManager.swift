@@ -8,6 +8,7 @@
 
 import Foundation
 import Files
+import NaptimeFileProtocol
 
 extension Date {
     var toFileName: String {
@@ -39,38 +40,48 @@ class EEGFileManager {
 
     private init() {}
 
-    private var _fileHandle: FileHandle?
+    private var _writer:  BrainwaveFileWriter<BrainwaveValue24>?
 
     private (set) var fileName: String?
 
     func create() {
-        self.close()
 
-        DispatchQueue.file.async {
-            do {
-                let fileName = Date().toFileName
-                let fileURL = FileManager.default.fileURL(fileName: fileName)
-                if !FileManager.default.fileExists(atPath: fileURL.path) {
-                    FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: [FileAttributeKey.protectionKey: FileProtectionType.none])
-                }
-                self._fileHandle = try FileHandle(forWritingTo: fileURL)
-                self.fileName = fileName
-            } catch {
-                //
-            }
+        DispatchQueue.file.async { [unowned self] in
+
+            let fileName = Date().toFileName
+            let fileURL = FileManager.default.fileURL(fileName: fileName)
+            self.fileName = fileName
+
+            self._writer = BrainwaveFileWriter<BrainwaveValue24>()
+            self._writer?.dataVersion = "2.0.0.0"
+            try? self._writer?.createFile(fileURL)
         }
     }
 
     func save(data: Data) {
-        DispatchQueue.file.async {
-            self._fileHandle?.write(data)
+        DispatchQueue.file.async { [unowned self] in
+            let allBytes = data.copiedBytes
+            allBytes.splitBy(3).forEach({ bytes in
+                let brainwaveData = BrainwaveData(value: BrainwaveValue24(bytes: bytes))
+                try? self._writer?.writeBrainwave(brainwaveData)
+            })
         }
     }
 
     func close() {
-        DispatchQueue.file.async {
-            self._fileHandle?.closeFile()
+        DispatchQueue.file.async { [unowned self] in
+            try? self._writer?.close()
+            self._writer = nil
             self.fileName = nil
+        }
+    }
+}
+
+extension Array {
+    func splitBy(_ subSize: Int) -> [[Element]] {
+        return stride(from: 0, to: self.count, by: subSize).map { startIndex in
+            let endIndex = Swift.min(startIndex.advanced(by: subSize), self.count)
+            return Array(self[startIndex ..< endIndex])
         }
     }
 }

@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'git@github.com:EnterTech/PodSpecs.git'
 
 platform :ios, '9.0'
 use_frameworks!
@@ -12,5 +14,6 @@ target 'BLETool' do
     pod 'SwiftyTimer', '~> 2.0'
     pod 'Files', '~> 2.0.0'
     pod 'PromiseKit', '~> 4.5'
+    pod 'NaptimeFileProtocol', :git => "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git", :branch => "develop"
 
 end

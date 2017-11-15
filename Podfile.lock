@@ -1,5 +1,6 @@
 PODS:
   - Files (2.0.0)
+  - NaptimeFileProtocol (0.3.0)
   - PromiseKit (4.5.0):
     - PromiseKit/Foundation (= 4.5.0)
     - PromiseKit/QuartzCore (= 4.5.0)
@@ -22,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - Files (~> 2.0.0)
+  - NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)
   - PromiseKit (~> 4.5)
   - RxBluetoothKit (~> 4.0)
   - RxCocoa (~> 4.0)
@@ -30,8 +32,19 @@ DEPENDENCIES:
   - SVProgressHUD (~> 2.2)
   - SwiftyTimer (~> 2.0)
 
+EXTERNAL SOURCES:
+  NaptimeFileProtocol:
+    :branch: develop
+    :git: git@github.com:EnterTech/Naptime-FileProtocol-iOS.git
+
+CHECKOUT OPTIONS:
+  NaptimeFileProtocol:
+    :commit: 198fe1c677e598ed58ae9190e79833f76d3a312c
+    :git: git@github.com:EnterTech/Naptime-FileProtocol-iOS.git
+
 SPEC CHECKSUMS:
   Files: d81e13e2dde21bd4f275d69062e4790bf86ac26d
+  NaptimeFileProtocol: 9259aaaeb0fc8dc7a213de57a89039bcdb606cf0
   PromiseKit: 9c1d9f6d7b65e3951a90bea7f407c56972be5d8e
   RxBluetoothKit: 65b56c51c023078bf5cdf56d07c6e16dcb60546d
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
@@ -40,6 +53,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: 77b7bd5d6d1336bae24c282f9559c0571a7168f9
+PODFILE CHECKSUM: 79acce284d49874d89cef1add181636aac45e974
 
 COCOAPODS: 1.3.1
