@@ -229,13 +229,6 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		6C3FC78C1FAABE5700605D8A /* Ext */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Ext;
-			sourceTree = "<group>";
-		};
 		6C3FC78D1FAABE7500605D8A /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				6C3FC78D1FAABE7500605D8A /* Common */,
-				6C3FC78C1FAABE5700605D8A /* Ext */,
 				6C3FC77D1FAABD5D00605D8A /* Service */,
 				6CFB760E1FA2D960006C03A5 /* Characteristic.swift */,
 				6C71132A1FA975C60093099D /* BLEScanner.swift */,
