@@ -16,7 +16,8 @@ import NaptimeBLE
 import AVFoundation
 
 class EEGViewController: UITableViewController {
-    var service: EEGService!
+    var eegService: EEGService!
+    var commandService: CommandService!
 
     private let _player: AVAudioPlayer = {
         let url = Bundle.main.url(forResource: "1-minute-of-silence", withExtension: "mp3")!
@@ -26,6 +27,7 @@ class EEGViewController: UITableViewController {
     }()
 
     private var _isSampling: Bool = false
+    private var _disposeBag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,14 @@ class EEGViewController: UITableViewController {
         tableView.separatorStyle = .none
 
         _player.play()
+
+        self.eegService.notify(characteristic: .contact)
+            .observeOn(MainScheduler())
+            .subscribe(onNext: {
+                SVProgressHUD.showInfo(withStatus: "佩戴状态: \($0)")
+            }, onError: { _ in
+                SVProgressHUD.showInfo(withStatus: "监测佩戴状态失败")
+            }).disposed(by: _disposeBag)
     }
 
     deinit {
@@ -52,30 +62,44 @@ class EEGViewController: UITableViewController {
     @objc
     private func sampleButtonTouched() {
         if _isSampling {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
-            stopSample()
+            commandService.write(data: Data(bytes: [0x02]), to: .send).then {
+                dispatch_to_main { [unowned self] in
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
+                    self.stopSample()
+                    self._isSampling = !self._isSampling
+                }
+                }.catch { _ in
+                    SVProgressHUD.showError(withStatus: "发送停止指令失败")
+            }
         } else {
             dataList.removeAll()
             tableView.reloadData()
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "停止", style: .plain, target: self, action: #selector(sampleButtonTouched))
+            commandService.write(data: Data(bytes: [0x01]), to: .send).then {
+                dispatch_to_main { [unowned self] in
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "停止", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
 
-            _timerDisposable = startSample()
-                .observeOn(MainScheduler())
-                .subscribe(onNext: {
-                    self.render(data: $0)
-                })
+                    self._timerDisposable = self.startSample()
+                        .observeOn(MainScheduler())
+                        .subscribe(onNext: {
+                            self.render(data: $0)
+                        })
+                    self._isSampling = !self._isSampling
+                }
+                }.catch { _ in
+                    SVProgressHUD.showError(withStatus: "发送开始指令失败")
+            }
         }
-        _isSampling = !_isSampling
     }
 
-    private var _notifyDisposable: Disposable?
+    private var _eegDisposable: Disposable?
     private var _timerDisposable: Disposable?
 
     private func startSample() -> Observable<Data> {
         SVProgressHUD.showInfo(withStatus: "UI 只循环显示 10s 的数据\n不然内存要炸了💥💥")
         EEGFileManager.shared.create()
+
         let dataPool = DataPool()
-        _notifyDisposable = self.service.notify(characteristic: .data)
+        _eegDisposable = self.eegService.notify(characteristic: .data)
             .subscribe(onNext: {
                 var received = $0
                 received.removeFirst(2)
@@ -102,7 +126,7 @@ class EEGViewController: UITableViewController {
     }
 
     private func stopSample() {
-        _notifyDisposable?.dispose()
+        _eegDisposable?.dispose()
         _timerDisposable?.dispose()
         let fileName = EEGFileManager.shared.fileName
         EEGFileManager.shared.close()

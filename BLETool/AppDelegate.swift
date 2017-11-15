@@ -17,9 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.setMinimumDismissTimeInterval(1.0)
         SVProgressHUD.setMaximumDismissTimeInterval(2.0)
-        SVProgressHUD.setDefaultMaskType(.black)
+        SVProgressHUD.setDefaultMaskType(.none)
 
         do {
             try AVAudioSession.sharedInstance().setActive(true)
