@@ -37,7 +37,7 @@
 		6C4A38661FB9409A00B09EC3 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A38651FB9409A00B09EC3 /* ServiceType.swift */; };
 		6C595D631FB6A0150097C170 /* ConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C595D621FB6A0150097C170 /* ConnectService.swift */; };
 		6C7113201FA9755B0093099D /* NaptimeBLE.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C71131E1FA9755B0093099D /* NaptimeBLE.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6C71132B1FA975C60093099D /* BLEScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71132A1FA975C60093099D /* BLEScanner.swift */; };
+		6C71132B1FA975C60093099D /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71132A1FA975C60093099D /* Scanner.swift */; };
 		6C71132F1FA97CB30093099D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71132E1FA97CB30093099D /* Service.swift */; };
 		6C9D37321FB3FA4B001A3032 /* NaptimeBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71131C1FA9755B0093099D /* NaptimeBLE.framework */; };
 		6C9D37331FB3FA4B001A3032 /* NaptimeBLE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71131C1FA9755B0093099D /* NaptimeBLE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -110,7 +110,7 @@
 		6C71131C1FA9755B0093099D /* NaptimeBLE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NaptimeBLE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C71131E1FA9755B0093099D /* NaptimeBLE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NaptimeBLE.h; sourceTree = "<group>"; };
 		6C71131F1FA9755B0093099D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6C71132A1FA975C60093099D /* BLEScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScanner.swift; sourceTree = "<group>"; };
+		6C71132A1FA975C60093099D /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		6C71132E1FA97CB30093099D /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		6CA2B1781FA1CCAA00A012BC /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 		6CED9CE21FB5965800226793 /* HandshakeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandshakeState.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 				6C3FC78D1FAABE7500605D8A /* Common */,
 				6C3FC77D1FAABD5D00605D8A /* Service */,
 				6CFB760E1FA2D960006C03A5 /* Characteristic.swift */,
-				6C71132A1FA975C60093099D /* BLEScanner.swift */,
+				6C71132A1FA975C60093099D /* Scanner.swift */,
 				6C3FC7981FAC405D00605D8A /* Connector.swift */,
 				6CED9CE21FB5965800226793 /* HandshakeState.swift */,
 				6C71131E1FA9755B0093099D /* NaptimeBLE.h */,
@@ -491,7 +491,7 @@
 				6C3FC78F1FAABE8B00605D8A /* Common.swift in Sources */,
 				6C3FC7991FAC405D00605D8A /* Connector.swift in Sources */,
 				6C3FC7851FAABDBC00605D8A /* DFUService.swift in Sources */,
-				6C71132B1FA975C60093099D /* BLEScanner.swift in Sources */,
+				6C71132B1FA975C60093099D /* Scanner.swift in Sources */,
 				6C3FC78B1FAABDF700605D8A /* GenericAttributeService.swift in Sources */,
 				6C71132F1FA97CB30093099D /* Service.swift in Sources */,
 				6C595D631FB6A0150097C170 /* ConnectService.swift in Sources */,

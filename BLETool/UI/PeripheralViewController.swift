@@ -41,22 +41,17 @@ class PeripheralViewController: UITableViewController {
         SVProgressHUD.show(withStatus: "正在连接:\n \(peripheral.displayName)")
 
         connector = Connector(peripheral: peripheral)
-        connector.tryConnect { (succeeded) in
-            if succeeded {
+        connector.tryConnect().then { () -> Promise<Void> in
                 SVProgressHUD.show(withStatus: "连接成功\n开始握手")
-
-                self.connector.handshake().then { _ -> Void in
-                    SVProgressHUD.showSuccess(withStatus: "握手成功")
-                    dispatch_to_main {
-                        self.services = self.connector.allServices
-                        self.tableView.reloadData()
-                    }
-                }.catch { error in
-                    SVProgressHUD.showError(withStatus: "握手失败")
+                return self.connector.handshake()
+            }.then { () -> Void in
+                SVProgressHUD.showSuccess(withStatus: "握手成功")
+                dispatch_to_main {
+                    self.services = self.connector.allServices
+                    self.tableView.reloadData()
                 }
-            } else {
+            }.catch { _ in
                 SVProgressHUD.showError(withStatus: "连接失败")
-            }
         }
     }
 

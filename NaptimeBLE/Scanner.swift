@@ -16,9 +16,9 @@ extension DispatchQueue {
     static let ble: DispatchQueue = DispatchQueue(label: "cn.entertech.naptimeBLE.BLE")
 }
 
-public final class BLEScanner {
+public final class Scanner {
 
-    public static let shared = BLEScanner()
+    public static let shared = Scanner()
 
     var manager: BluetoothManager
     private let _disposeBag = DisposeBag()

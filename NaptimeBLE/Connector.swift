@@ -47,16 +47,17 @@ public final class Connector: DisposeHolder {
         self.peripheral = peripheral
     }
 
-    public func tryConnect(result: @escaping ConnectResultBlock) {
-        _disposable = peripheral.connect()
-            .flatMap {
-                $0.discoverServices(nil)
-            }.flatMap {
-                Observable.from($0)
-            }.`do`(onNext: { [weak self] in
-                print("uuid: \($0.uuid.uuidString)")
-                guard let `self` = self else { return }
-                if let `type` = NaptimeBLE.ServiceType(rawValue: $0.uuid.uuidString) {
+    public func tryConnect() -> Promise<Void> {
+        let promise = Promise<Void> { (fulfill, reject) in
+            _disposable = peripheral.connect()
+                .flatMap {
+                    $0.discoverServices(nil)
+                }.flatMap {
+                    Observable.from($0)
+                }.`do`(onNext: { [weak self] in
+                    print("uuid: \($0.uuid.uuidString)")
+                    guard let `self` = self else { return }
+                    guard let `type` = NaptimeBLE.ServiceType(rawValue: $0.uuid.uuidString) else { return }
                     switch `type` {
                     case .connect:
                         self.connectService = ConnectService(rxService: $0)
@@ -71,23 +72,24 @@ public final class Connector: DisposeHolder {
                     case .deviceInfo:
                         self.deviceInfoService = DeviceInfoService(rxService: $0)
                     }
-                }
-            }).flatMap {
-                $0.discoverCharacteristics(nil)
-            }.flatMap {
-                Observable.from($0)
-            }.subscribe(onNext: { _ in
-                //
-            }, onError: { error in
-                print("\(error)")
-                result(false)
-            }, onCompleted: {
-                guard self.commandService != nil && self.batteryService != nil && self.eegService != nil && self.dfuService != nil && self.deviceInfoService != nil else {
-                    result(false)
-                    return
-                }
-                result(true)
-            })
+                }).flatMap {
+                    $0.discoverCharacteristics(nil)
+                }.flatMap {
+                    Observable.from($0)
+                }.subscribe(onNext: { _ in
+                    //
+                }, onError: { error in
+                    print("\(error)")
+                    reject(error)
+                }, onCompleted: {
+                    guard self.commandService != nil && self.batteryService != nil && self.eegService != nil && self.dfuService != nil && self.deviceInfoService != nil else {
+                        reject(BLEError.connectFail)
+                        return
+                    }
+                    fulfill(())
+                })
+        }
+        return promise
     }
 
     public func cancel() {

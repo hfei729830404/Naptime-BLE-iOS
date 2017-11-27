@@ -93,7 +93,7 @@ class ScanViewController: UITableViewController {
     private func startScan() {
         clear()
 
-        BLEScanner.shared.scan()
+        Scanner.shared.scan()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] (peripheral) in
                 guard let `self` = self else { return }
@@ -105,7 +105,7 @@ class ScanViewController: UITableViewController {
     }
 
     private func stopScan() {
-        BLEScanner.shared.stop()
+        Scanner.shared.stop()
     }
 
     private func clear() {
