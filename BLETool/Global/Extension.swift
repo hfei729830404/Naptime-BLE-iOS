@@ -33,17 +33,17 @@ extension BLEService: Displayable {
         if let type = (self as? ServiceTypable)?.serviceType {
             switch type {
             case .connect:
-                return "连接服务"
+                return "Connection Service"
             case .command:
-                return "指令服务"
+                return "Command Service"
             case .battery:
-                return "电量服务"
+                return "Battery Service"
             case .eeg:
-                return "脑电服务"
+                return "EEG Service"
             case .dfu:
-                return "DFU服务"
+                return "DFU Service"
             case .deviceInfo:
-                return "设备信息服务"
+                return "Device Service"
             }
         }
         return "Unknown"
@@ -89,17 +89,17 @@ extension RxBluetoothKit.Characteristic: Displayable {
     var displayName: String {
         switch self.uuid.uuidString {
         case NaptimeBLE.Characteristic.DeviceInfo.mac.rawValue:
-            return "MAC 地址"
+            return "MAC Address"
         case NaptimeBLE.Characteristic.DeviceInfo.serial.rawValue:
-            return "序列号"
+            return "Serial No."
         case NaptimeBLE.Characteristic.DeviceInfo.firmwareRevision.rawValue:
-            return "固件版本"
+            return "Firmware Version"
         case NaptimeBLE.Characteristic.DeviceInfo.hardwareRevision.rawValue:
-            return "硬件版本"
+            return "Hardware Version"
         case NaptimeBLE.Characteristic.DeviceInfo.manufacturer.rawValue:
-            return "制造商"
+            return "Manufacturer"
         case NaptimeBLE.Characteristic.Battery.battery.rawValue:
-            return "电池电量"
+            return "Battery"
         default:
             return "Any"
         }

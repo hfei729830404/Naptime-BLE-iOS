@@ -22,7 +22,7 @@ class FileListViewController: UITableViewController {
         do {
             _files = try Folder(path: FileManager.default.dataDirectory.path).files.map { URL(fileURLWithPath: $0.path) }
         } catch {
-            SVProgressHUD.showError(withStatus: "扫描文件失败")
+            SVProgressHUD.showError(withStatus: "Failed to scan files!")
         }
     }
 
@@ -55,13 +55,13 @@ class FileListViewController: UITableViewController {
             _files.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         } catch {
-            SVProgressHUD.showError(withStatus: "删除失败")
+            SVProgressHUD.showError(withStatus: "Failed to remove file!")
         }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        SVProgressHUD.showInfo(withStatus: "选择【拷贝到微信】")
+        SVProgressHUD.showInfo(withStatus: "Select【Mail】or【Copy to WeChat】")
 
         let file = _files[indexPath.row]
         // 只能分享到微信

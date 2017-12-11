@@ -57,7 +57,7 @@ class CharacteristicViewController: UITableViewController {
             service.read(characteristic: .battery).then {
                 cell?.detailTextLabel?.text = String(format: "%d%%", $0.copiedBytes[0])
             }.catch { _ in
-                SVProgressHUD.showError(withStatus: "读取失败")
+                SVProgressHUD.showError(withStatus: "Failed to read value!")
             }
         }
         if let service = self.service as? DeviceInfoService, let characteristic = Characteristic.DeviceInfo(rawValue: characteristic.uuid.uuidString) {
@@ -68,7 +68,7 @@ class CharacteristicViewController: UITableViewController {
                     cell?.detailTextLabel?.text = String(data: data, encoding: .utf8)
                 }
             }.catch { _ in
-                SVProgressHUD.showError(withStatus: "读取失败")
+                SVProgressHUD.showError(withStatus: "Failed to read value!")
             }
         }
     }

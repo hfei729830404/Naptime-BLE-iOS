@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="znI-Hy-2gT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="znI-Hy-2gT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,8 +56,8 @@
                             <outlet property="delegate" destination="4iS-fN-7Tj" id="Ctu-nv-naO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="易休蓝牙" id="7Wv-lf-krw">
-                        <barButtonItem key="rightBarButtonItem" title="扫描" id="RPK-uz-0II">
+                    <navigationItem key="navigationItem" title="Naptime Bluetooth" id="7Wv-lf-krw">
+                        <barButtonItem key="rightBarButtonItem" title="Scan" id="RPK-uz-0II">
                             <connections>
                                 <action selector="scanButtonTouched:" destination="4iS-fN-7Tj" id="Jb9-Gg-LL8"/>
                             </connections>
@@ -74,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="322" y="66"/>
         </scene>
-        <!--设备服务-->
+        <!--Services-->
         <scene sceneID="H4m-eB-XvS">
             <objects>
-                <tableViewController storyboardIdentifier="PeripheralViewController" title="设备服务" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gLj-lI-Nxs" customClass="PeripheralViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PeripheralViewController" title="Services" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gLj-lI-Nxs" customClass="PeripheralViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hVy-IH-yWN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="2148" y="65"/>
         </scene>
-        <!--特性-->
+        <!--Characteristics-->
         <scene sceneID="Gqi-Tx-de8">
             <objects>
-                <tableViewController title="特性" id="fcV-mJ-zGl" customClass="CharacteristicViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Characteristics" id="fcV-mJ-zGl" customClass="CharacteristicViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ufr-nv-8wd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,15 +168,15 @@
             </objects>
             <point key="canvasLocation" x="1364" y="840"/>
         </scene>
-        <!--指令传输-->
+        <!--Commands-->
         <scene sceneID="Lct-yf-dr6">
             <objects>
-                <viewController storyboardIdentifier="CommandViewController" title="指令传输" id="E3T-uR-Igx" customClass="CommandViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommandViewController" title="Commands" id="E3T-uR-Igx" customClass="CommandViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FKL-s6-9lk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" editable="NO" text="收到数据如下：" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-48-kBN">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="always" editable="NO" text="Data received：" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-48-kBN">
                                 <rect key="frame" x="0.0" y="180" width="375" height="427"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
@@ -185,18 +186,18 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tG-bX-n66">
                                 <rect key="frame" x="0.0" y="126" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="指令 A" id="YOe-7A-Xqp">
+                                    <barButtonItem title="CMD-A" id="YOe-7A-Xqp">
                                         <connections>
                                             <action selector="commandAButtonTouched:" destination="E3T-uR-Igx" id="ADQ-RN-Sy9"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="指令 B" id="oL1-Xy-UPM">
+                                    <barButtonItem title="CMD-B" id="oL1-Xy-UPM">
                                         <connections>
                                             <action selector="commandBButtonTouched:" destination="E3T-uR-Igx" id="QhS-47-6TB"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="0s2-XQ-in9"/>
-                                    <barButtonItem title="随机数" id="qGJ-a2-MiQ">
+                                    <barButtonItem title="Random" id="qGJ-a2-MiQ">
                                         <connections>
                                             <action selector="commandRandomButtonTouched:" destination="E3T-uR-Igx" id="BOW-pB-D21"/>
                                         </connections>
@@ -240,7 +241,7 @@
             </objects>
             <point key="canvasLocation" x="-711" y="840"/>
         </scene>
-        <!--文件列表-->
+        <!--File list-->
         <scene sceneID="0UG-42-M3g">
             <objects>
                 <tableViewController id="tCE-KE-7SG" customClass="FileListViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
@@ -279,12 +280,12 @@
                             <outlet property="delegate" destination="tCE-KE-7SG" id="x3R-J5-2cU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="文件列表" id="CaQ-g5-1dn">
+                    <navigationItem key="navigationItem" title="File list" id="CaQ-g5-1dn">
                         <barButtonItem key="rightBarButtonItem" style="done" id="ZFE-ab-xRW">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MpT-do-kGU">
-                                <rect key="frame" x="328" y="7" width="31" height="30"/>
+                                <rect key="frame" x="320" y="7" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="关闭"/>
+                                <state key="normal" title="Close"/>
                                 <connections>
                                     <action selector="closeButtonTouched:" destination="tCE-KE-7SG" eventType="touchUpInside" id="iuu-zs-kOb"/>
                                 </connections>
@@ -296,10 +297,10 @@
             </objects>
             <point key="canvasLocation" x="321" y="840"/>
         </scene>
-        <!--脑波数据-->
+        <!--Brainwave Data-->
         <scene sceneID="DDz-ZZ-8Gi">
             <objects>
-                <tableViewController title="脑波数据" id="CKa-wr-Ich" customClass="EEGViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Brainwave Data" id="CKa-wr-Ich" customClass="EEGViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mWd-vd-8fe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

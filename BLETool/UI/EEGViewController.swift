@@ -32,7 +32,7 @@ class EEGViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(sampleButtonTouched))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Acquire", style: .plain, target: self, action: #selector(sampleButtonTouched))
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
 
@@ -41,9 +41,9 @@ class EEGViewController: UITableViewController {
         self.eegService.notify(characteristic: .contact)
             .observeOn(MainScheduler())
             .subscribe(onNext: {
-                SVProgressHUD.showInfo(withStatus: "佩戴状态: \($0)")
+                SVProgressHUD.showInfo(withStatus: "Connection: \($0)")
             }, onError: { _ in
-                SVProgressHUD.showInfo(withStatus: "监测佩戴状态失败")
+                SVProgressHUD.showInfo(withStatus: "Failed to listen wearing state.")
             }).disposed(by: _disposeBag)
     }
 
@@ -64,19 +64,19 @@ class EEGViewController: UITableViewController {
         if _isSampling {
             commandService.write(data: Data(bytes: [0x02]), to: .send).then {
                 dispatch_to_main { [unowned self] in
-                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采集", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Acquire", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
                     self.stopSample()
                     self._isSampling = !self._isSampling
                 }
                 }.catch { _ in
-                    SVProgressHUD.showError(withStatus: "发送停止指令失败")
+                    SVProgressHUD.showError(withStatus: "Failed to send 'stop' command!")
             }
         } else {
             dataList.removeAll()
             tableView.reloadData()
             commandService.write(data: Data(bytes: [0x01]), to: .send).then {
                 dispatch_to_main { [unowned self] in
-                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "停止", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Stop", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
 
                     self._timerDisposable = self.startSample()
                         .observeOn(MainScheduler())
@@ -86,7 +86,7 @@ class EEGViewController: UITableViewController {
                     self._isSampling = !self._isSampling
                 }
                 }.catch { _ in
-                    SVProgressHUD.showError(withStatus: "发送开始指令失败")
+                    SVProgressHUD.showError(withStatus: "Failed to send 'start' command!")
             }
         }
     }
@@ -95,7 +95,7 @@ class EEGViewController: UITableViewController {
     private var _timerDisposable: Disposable?
 
     private func startSample() -> Observable<Data> {
-        SVProgressHUD.showInfo(withStatus: "UI 只循环显示 10s 的数据\n不然内存要炸了💥💥")
+        SVProgressHUD.showInfo(withStatus: "Showing only 10s of data on screen,\n otherwise the memory will bomb💥💥")
         EEGFileManager.shared.create()
 
         let dataPool = DataPool()
@@ -106,7 +106,7 @@ class EEGViewController: UITableViewController {
                 let data = Data(bytes: received)
                 dataPool.push(data: data)
             }, onError: { _ in
-                SVProgressHUD.showError(withStatus: "监听脑波数据失败")
+                SVProgressHUD.showError(withStatus: "Failed to listen brainwave data.")
             })
 
         return Observable<Data>.create { observer -> Disposable in
@@ -130,7 +130,7 @@ class EEGViewController: UITableViewController {
         _timerDisposable?.dispose()
         let fileName = EEGFileManager.shared.fileName
         EEGFileManager.shared.close()
-        SVProgressHUD.showSuccess(withStatus: "保存文件成功: \(fileName!)")
+        SVProgressHUD.showSuccess(withStatus: "File saved: \(fileName!)")
     }
 
     var dataList: [Data] = []

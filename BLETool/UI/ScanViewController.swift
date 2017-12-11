@@ -42,7 +42,7 @@ class ScanViewController: UITableViewController {
             startScan()
         }
         isScanning = !isScanning
-        self.navigationItem.rightBarButtonItem?.title =  isScanning ? "停止" : "扫描"
+        self.navigationItem.rightBarButtonItem?.title =  isScanning ? "Stop" : "Scan"
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -118,7 +118,7 @@ class ScanViewController: UITableViewController {
             .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] in
                 guard let `self` = self else { return }
-                SVProgressHUD.showSuccess(withStatus: "连接断开:\n \(peripheral.displayName)")
+                SVProgressHUD.showSuccess(withStatus: "Disconnected:\n \(peripheral.displayName)")
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             .disposed(by: disposeBag)
