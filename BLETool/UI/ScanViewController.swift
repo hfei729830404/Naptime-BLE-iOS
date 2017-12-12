@@ -89,11 +89,12 @@ class ScanViewController: UITableViewController {
             }
         }
     }
+    private let sanner: NaptimeBLE.Scanner = Scanner()
 
     private func startScan() {
         clear()
 
-        Scanner.shared.scan()
+        sanner.scan()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(onNext: { [weak self] (peripheral) in
                 guard let `self` = self else { return }
@@ -105,7 +106,7 @@ class ScanViewController: UITableViewController {
     }
 
     private func stopScan() {
-        Scanner.shared.stop()
+        sanner.stop()
     }
 
     private func clear() {
