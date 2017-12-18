@@ -18,8 +18,6 @@ extension DispatchQueue {
 
 public final class Scanner {
 
-    public static let shared = Scanner()
-
     var manager: BluetoothManager
     private let _disposeBag = DisposeBag()
 
@@ -28,7 +26,7 @@ public final class Scanner {
 
     private var _usingPeripheral: Peripheral?
 
-    private init() {
+    public init() {
         manager = BluetoothManager(queue: .ble, options: nil)
     }
 

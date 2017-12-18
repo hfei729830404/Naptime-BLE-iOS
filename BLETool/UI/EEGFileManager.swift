@@ -53,7 +53,7 @@ class EEGFileManager {
             self.fileName = fileName
 
             self._writer = BrainwaveFileWriter<BrainwaveValue24>()
-            self._writer?.dataVersion = "2.0.0.0"
+            self._writer?.dataVersion = "3.0.0.0"
             try? self._writer?.createFile(fileURL)
         }
     }

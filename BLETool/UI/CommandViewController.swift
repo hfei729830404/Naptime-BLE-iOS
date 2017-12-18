@@ -61,7 +61,7 @@ class CommandViewController: UIViewController {
 
     private func send(data: Data) {
         self.service.write(data: data, to: .send).catch { _ in 
-            SVProgressHUD.showError(withStatus: "发送失败")
+            SVProgressHUD.showError(withStatus: "Failed to send command!")
         }
     }
 

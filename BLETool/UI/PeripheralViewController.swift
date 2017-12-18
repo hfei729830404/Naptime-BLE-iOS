@@ -38,20 +38,20 @@ class PeripheralViewController: UITableViewController {
 
         tableView.tableFooterView = UIView()
 
-        SVProgressHUD.show(withStatus: "正在连接:\n \(peripheral.displayName)")
+        SVProgressHUD.show(withStatus: "Connecting:\n \(peripheral.displayName)")
 
         connector = Connector(peripheral: peripheral)
         connector.tryConnect().then { () -> Promise<Void> in
-                SVProgressHUD.show(withStatus: "连接成功\n开始握手")
+                SVProgressHUD.show(withStatus: "Handshake...")
                 return self.connector.handshake()
             }.then { () -> Void in
-                SVProgressHUD.showSuccess(withStatus: "握手成功")
+                SVProgressHUD.showSuccess(withStatus: "Handshake succeeded")
                 dispatch_to_main {
                     self.services = self.connector.allServices
                     self.tableView.reloadData()
                 }
             }.catch { _ in
-                SVProgressHUD.showError(withStatus: "连接失败")
+                SVProgressHUD.showError(withStatus: "Connect failed!")
         }
     }
 
