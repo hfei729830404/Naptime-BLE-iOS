@@ -48,8 +48,6 @@
 		6CFB76151FA32692006C03A5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFB76141FA32692006C03A5 /* Extension.swift */; };
 		7AB57DFAAE31A8CEC7B2E421 /* Pods_BLETool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D2137B8C5F9F5DC91E61D1 /* Pods_BLETool.framework */; };
 		B75901891FE0FF2A00F0890E /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75901881FE0FF2A00F0890E /* DFUViewController.swift */; };
-		B759018B1FE1018E00F0890E /* DFUScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B759018A1FE1018E00F0890E /* DFUScannerViewController.swift */; };
-		B75901911FE1180700F0890E /* SelectFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75901901FE1180700F0890E /* SelectFileViewController.swift */; };
 		B7A47DCE1FE220880048EB03 /* abcd.zip in Resources */ = {isa = PBXBuildFile; fileRef = B7A47DCC1FE220880048EB03 /* abcd.zip */; };
 		B7A47DCF1FE220880048EB03 /* 1234.zip in Resources */ = {isa = PBXBuildFile; fileRef = B7A47DCD1FE220880048EB03 /* 1234.zip */; };
 /* End PBXBuildFile section */
@@ -124,8 +122,6 @@
 		6CFB76121FA323AE006C03A5 /* EEGViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEGViewController.swift; sourceTree = "<group>"; };
 		6CFB76141FA32692006C03A5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B75901881FE0FF2A00F0890E /* DFUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUViewController.swift; sourceTree = "<group>"; };
-		B759018A1FE1018E00F0890E /* DFUScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUScannerViewController.swift; sourceTree = "<group>"; };
-		B75901901FE1180700F0890E /* SelectFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFileViewController.swift; sourceTree = "<group>"; };
 		B7A47DCC1FE220880048EB03 /* abcd.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = abcd.zip; sourceTree = "<group>"; };
 		B7A47DCD1FE220880048EB03 /* 1234.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = 1234.zip; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,8 +207,6 @@
 				6C0D22B61FA42C15005EAF33 /* EEGFileManager.swift */,
 				6C0D22BA1FA46933005EAF33 /* BLENavigationController.swift */,
 				B75901881FE0FF2A00F0890E /* DFUViewController.swift */,
-				B759018A1FE1018E00F0890E /* DFUScannerViewController.swift */,
-				B75901901FE1180700F0890E /* SelectFileViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -490,9 +484,7 @@
 				6C0D22B31FA41D73005EAF33 /* FileShowViewController.swift in Sources */,
 				B75901891FE0FF2A00F0890E /* DFUViewController.swift in Sources */,
 				6C0D22B71FA42C15005EAF33 /* EEGFileManager.swift in Sources */,
-				B759018B1FE1018E00F0890E /* DFUScannerViewController.swift in Sources */,
 				6C143B961FA06C68009F866D /* GCD.swift in Sources */,
-				B75901911FE1180700F0890E /* SelectFileViewController.swift in Sources */,
 				6CFB76131FA323AE006C03A5 /* EEGViewController.swift in Sources */,
 				6C1642FF1FA03B09002C1438 /* AppDelegate.swift in Sources */,
 				6CA2B1791FA1CCAA00A012BC /* PeripheralViewController.swift in Sources */,
