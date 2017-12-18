@@ -6,6 +6,7 @@ use_frameworks!
 
 target 'BLETool' do
 
+    pod 'iOSDFULibrary', '~> 4.0'
     pod 'SnapKit', '~> 4.0'
     pod 'SVProgressHUD', '~> 2.2'
     pod 'RxBluetoothKit', '~> 4.0'

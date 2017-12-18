@@ -75,7 +75,7 @@ class PeripheralViewController: UITableViewController {
         _selectedService = self.services[indexPath.row]
 
         switch type(of: _selectedService!)  {
-        case is ConnectService.Type, is BatteryService.Type, is DFUService.Type, is DeviceInfoService.Type, is CommandService.Type:
+        case is ConnectService.Type, is BatteryService.Type, is DeviceInfoService.Type, is CommandService.Type:
             self.performSegue(withIdentifier: "pushToCharacteristic", sender: self)
             break
 //        case is CommandService.Type:
@@ -84,6 +84,9 @@ class PeripheralViewController: UITableViewController {
         case is EEGService.Type:
             self.performSegue(withIdentifier: "pushToEEG", sender: self)
             break
+        case is DFUService.Type:
+            self.performSegue(withIdentifier: "DFUIdentifier", sender: self)
+            break;
         default:
             break
         }
@@ -102,6 +105,11 @@ class PeripheralViewController: UITableViewController {
             let commandService = connector.commandService {
             vc.eegService = eegService
             vc.commandService = commandService
+        }
+
+        if let vc = segue.destination as? DFUViewController {
+            vc.peripheral = self.peripheral.cbPeripheral
+            vc.cManager = self.peripheral.manager.manager
         }
     }
 }
