@@ -129,9 +129,20 @@ public final class Connector: DisposeHolder {
             Thread.sleep(forTimeInterval: 0.1)
             // 监听 第二步握手
             _handshakeListener = self.connectService!.notify(characteristic: .handshake).subscribe(onNext: { data in
-                print("握手返回: \(data)")
+                print("2------------ \(data)")
+                var secondCommand = data
+                let random = secondCommand.last!
+                secondCommand.removeFirst()
+                secondCommand.removeLast()
+                let newRandom = UInt8(arc4random_uniform(255))
+                secondCommand[0] = secondCommand[0] ^ random ^ newRandom
+                secondCommand[1] = secondCommand[1] ^ random ^ newRandom
+                secondCommand[2] = secondCommand[2] ^ random ^ newRandom
+                secondCommand.insert(0x03, at: 0)
+                secondCommand.append(newRandom)
+                print("3------------ \(secondCommand)")
                 // 发送 第三步握手
-                self.connectService?.write(data: Data(bytes: [0x03, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
+                self.connectService?.write(data: Data(bytes: secondCommand), to: .handshake)
                     .catch { error in
                     reject(error)
                 }
@@ -150,16 +161,30 @@ public final class Connector: DisposeHolder {
                     self.mac = data
                     print("mac: \(data)")
                     // 发送 user id
-                    return self.connectService!.write(data: Data(bytes: [0x00,0x12,0x34,0x56,0x78]), to: .userID)
+                    let userId: [UInt8] = [0x00, 0x12, 0x23, 0x34, 0x45]
+                    return self.connectService!.write(data: Data(bytes: userId), to: .userID)
                 }
-                .then {
+                .then { () -> (Promise<Void>) in
                     // 发送 第一步握手
-                    return self.connectService!.write(data: Data(bytes: [0x01, 0x00, 0x00, 0x00, 0x00]), to: .handshake)
+                    let date = Date()
+                    let hour = UInt8(date.stringWith(formateString: "hh"))
+                    let minute = UInt8(date.stringWith(formateString: "MM"))
+                    let second = UInt8(date.stringWith(formateString: "ss"))
+                    let random = UInt8(arc4random_uniform(255))
+                    print("1------------ \([0x01 ,hour! ,minute! ,second! ,random])")
+                    return self.connectService!.write(data: Data(bytes: [0x01 ,hour! ,minute! ,second! ,random]), to: .handshake)
                 }.catch { error in
                     print("握手 error: \(error)")
             }
         }
-
         return promise
+    }
+}
+
+extension Date {
+    public func stringWith(formateString: String)-> String {
+        let dateFormate = DateFormatter()
+        dateFormate.dateFormat = formateString
+        return dateFormate.string(from: self)
     }
 }

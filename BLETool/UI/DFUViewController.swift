@@ -38,9 +38,9 @@ class DFUViewController: UIViewController, DFUServiceDelegate, DFUProgressDelega
     }
 
     private func setupFileMessage() {
-        self.fileName.text = "abcd.zip"
+        self.fileName.text = "DFU1.0.0.zip"
         self.fileType.text = "zip"
-        self.fileSize.text = String(fileSizeWith(name: "abcd", type: "zip"))
+        self.fileSize.text = String(fileSizeWith(name: "DFU1.0.0", type: "zip"))
     }
 
     private func fileSizeWith(name: String, type: String) -> Int {
@@ -71,7 +71,6 @@ class DFUViewController: UIViewController, DFUServiceDelegate, DFUProgressDelega
         super.viewDidLoad()
     }
 
-
     // dfu service delegate Method
     func dfuStateDidChange(to state: DFUState) {
         switch state {
@@ -88,6 +87,7 @@ class DFUViewController: UIViewController, DFUServiceDelegate, DFUProgressDelega
         case .disconnecting:
             SVProgressHUD.showInfo(withStatus: "disconnecting dfu...")
         case .completed:
+            self.updatingPercentage.text = String("完成")
             SVProgressHUD.showInfo(withStatus: "completed dfu...")
         case .aborted:
             SVProgressHUD.showInfo(withStatus: "aborted dfu...")
