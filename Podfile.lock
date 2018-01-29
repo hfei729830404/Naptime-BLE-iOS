@@ -1,6 +1,6 @@
 PODS:
   - Files (2.0.0)
-  - iOSDFULibrary (4.0.3):
+  - iOSDFULibrary (4.1.1):
     - Zip (~> 1.0)
   - NaptimeFileProtocol (0.3.0)
   - PromiseKit (4.5.0):
@@ -26,7 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - Files (~> 2.0.0)
-  - iOSDFULibrary (~> 4.0)
+  - iOSDFULibrary (from `git@github.com:qiubei/IOS-Pods-DFU-Library.git`, branch `master`)
   - NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)
   - PromiseKit (~> 4.5)
   - RxBluetoothKit (~> 4.0)
@@ -37,18 +37,24 @@ DEPENDENCIES:
   - SwiftyTimer (~> 2.0)
 
 EXTERNAL SOURCES:
+  iOSDFULibrary:
+    :branch: master
+    :git: git@github.com:qiubei/IOS-Pods-DFU-Library.git
   NaptimeFileProtocol:
     :branch: develop
     :git: git@github.com:EnterTech/Naptime-FileProtocol-iOS.git
 
 CHECKOUT OPTIONS:
+  iOSDFULibrary:
+    :commit: 09b46a22e014e997a3bc66aafaa25adcf7b2ea24
+    :git: git@github.com:qiubei/IOS-Pods-DFU-Library.git
   NaptimeFileProtocol:
     :commit: 198fe1c677e598ed58ae9190e79833f76d3a312c
     :git: git@github.com:EnterTech/Naptime-FileProtocol-iOS.git
 
 SPEC CHECKSUMS:
   Files: d81e13e2dde21bd4f275d69062e4790bf86ac26d
-  iOSDFULibrary: 7a8fd23fb6a673ba311cd3821f8f5b4bd1eb1dce
+  iOSDFULibrary: 35e8a9e23d67759d57af9924d7a808e48c04583a
   NaptimeFileProtocol: 9259aaaeb0fc8dc7a213de57a89039bcdb606cf0
   PromiseKit: 9c1d9f6d7b65e3951a90bea7f407c56972be5d8e
   RxBluetoothKit: 65b56c51c023078bf5cdf56d07c6e16dcb60546d
@@ -59,6 +65,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 7413ebcb7d71175661e0b0b6ccf4c20833ccd630
+PODFILE CHECKSUM: 0e3b23a8a23d6dc41b013657a204e97af2659919
 
 COCOAPODS: 1.4.0

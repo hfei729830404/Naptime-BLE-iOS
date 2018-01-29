@@ -6,7 +6,7 @@ use_frameworks!
 
 target 'BLETool' do
 
-    pod 'iOSDFULibrary', '~> 4.0'
+    pod 'iOSDFULibrary', :git => "git@github.com:qiubei/IOS-Pods-DFU-Library.git" , :branch => "master"
     pod 'SnapKit', '~> 4.0'
     pod 'SVProgressHUD', '~> 2.2'
     pod 'RxBluetoothKit', '~> 4.0'
