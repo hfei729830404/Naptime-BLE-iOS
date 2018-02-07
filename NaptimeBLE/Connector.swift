@@ -167,8 +167,8 @@ public final class Connector: DisposeHolder {
                 .then { () -> (Promise<Void>) in
                     // 发送 第一步握手
                     let date = Date()
-                    let hour = UInt8(date.stringWith(formateString: "hh"))
-                    let minute = UInt8(date.stringWith(formateString: "MM"))
+                    let hour = UInt8(date.stringWith(formateString: "HH"))
+                    let minute = UInt8(date.stringWith(formateString: "mm"))
                     let second = UInt8(date.stringWith(formateString: "ss"))
                     let random = UInt8(arc4random_uniform(255))
                     print("1------------ \([0x01 ,hour! ,minute! ,second! ,random])")
