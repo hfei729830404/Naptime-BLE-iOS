@@ -184,6 +184,7 @@ public final class Connector: DisposeHolder {
 extension Date {
     public func stringWith(formateString: String)-> String {
         let dateFormate = DateFormatter()
+        dateFormate.locale = Locale(identifier: "zh_CN")
         dateFormate.dateFormat = formateString
         return dateFormate.string(from: self)
     }

@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+
+class Persistence {
+    static let shared = Persistence()
+
+    private init() {}
+
+    var dfuPacketName: String?
+    var dfuPacketURL: URL?
+}

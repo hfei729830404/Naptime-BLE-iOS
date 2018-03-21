@@ -301,6 +301,7 @@
                                         <state key="normal" title="SELECT FILE"/>
                                         <connections>
                                             <action selector="selectFileAction:" destination="6EU-wE-4kK" eventType="touchUpInside" id="yt9-vo-Idq"/>
+                                            <segue destination="CRg-RL-kCq" kind="push" id="Deh-zA-UqI"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg5-TO-b3h">
@@ -443,6 +444,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pmq-dj-MGA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3188" y="65.217391304347828"/>
+        </scene>
+        <!--iTunes 导入文件-->
+        <scene sceneID="aFx-at-QdK">
+            <objects>
+                <viewController id="CRg-RL-kCq" customClass="DFUPacketFilesViewController" customModule="BLETool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bb0-az-lkV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="cDv-GN-rIX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cDv-GN-rIX" firstAttribute="bottom" secondItem="LJn-sJ-GXT" secondAttribute="bottom" id="OLS-5N-o7d"/>
+                            <constraint firstItem="cDv-GN-rIX" firstAttribute="leading" secondItem="LJn-sJ-GXT" secondAttribute="leading" id="ZVf-GR-FO0"/>
+                            <constraint firstItem="cDv-GN-rIX" firstAttribute="top" secondItem="Bb0-az-lkV" secondAttribute="top" id="dog-lJ-t2T"/>
+                            <constraint firstItem="cDv-GN-rIX" firstAttribute="trailing" secondItem="LJn-sJ-GXT" secondAttribute="trailing" id="eic-wi-cXS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LJn-sJ-GXT"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="iTunes 导入文件" id="B02-3A-mlt"/>
+                    <connections>
+                        <outlet property="tableView" destination="cDv-GN-rIX" id="4WU-qV-3Fq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rms-ut-DvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4081" y="64"/>
+        </scene>
+        <!--iTunes 导入-->
+        <scene sceneID="rLQ-tX-peg">
+            <objects>
+                <viewController id="7No-qX-o5J" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FwW-dl-Bhp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Twt-F7-wv1"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="iTunes 导入" id="CZ0-9u-4JE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VPd-21-e9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5838" y="579"/>
+        </scene>
+        <!--本地文件-->
+        <scene sceneID="2Kt-89-Euq">
+            <objects>
+                <viewController id="tCL-b5-Zpc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CCe-ZH-rTa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qbV-82-xAB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="本地文件" id="ak2-SI-jtt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tCw-6v-c7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5838" y="-143"/>
+        </scene>
+        <!--选择文件-->
+        <scene sceneID="yQc-wy-Fvx">
+            <objects>
+                <tabBarController id="mzs-5n-JW7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="选择文件" id="HSR-3U-vlz"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bVO-KR-D0K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="tCL-b5-Zpc" kind="relationship" relationship="viewControllers" id="BXj-uk-5Op"/>
+                        <segue destination="7No-qX-o5J" kind="relationship" relationship="viewControllers" id="H7b-cy-d62"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cmr-xE-c1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4868" y="56"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jMM-pU-3Ae">

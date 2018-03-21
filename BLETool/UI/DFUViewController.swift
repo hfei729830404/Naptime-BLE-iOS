@@ -37,20 +37,21 @@ class DFUViewController: UIViewController, DFUServiceDelegate, DFUProgressDelega
         self.peripheralName.text = peripheral.name
     }
 
+    private var files: [URL]!
+
     private func setupFileMessage() {
-        self.fileName.text = "DFU1.0.0.zip"
-        self.fileType.text = "zip"
-        self.fileSize.text = String(fileSizeWith(name: "DFU1.0.0", type: "zip"))
+        if let filename = Persistence.shared.dfuPacketName {
+            self.fileName.text = filename
+            self.fileType.text = "zip"
+            self.fileSize.text = String(fileSizeWith(name: filename, type: "zip"))
+            self.firmwareFileURL = Persistence.shared.dfuPacketURL
+            
+        }
     }
 
     private func fileSizeWith(name: String, type: String) -> Int {
         let fManager = FileManager.default
-        let path = Bundle.main.path(forResource: name, ofType: type)
-        guard let _ = path else {
-            return 0
-        }
-        let contentDatas = fManager.contents(atPath: path!)
-        self.firmwareFileURL = URL(fileURLWithPath: path!)
+        let contentDatas = fManager.contents(atPath: Persistence.shared.dfuPacketURL!.path)
         return contentDatas?.count == nil ? 0 : contentDatas!.count
     }
 
@@ -65,6 +66,11 @@ class DFUViewController: UIViewController, DFUServiceDelegate, DFUProgressDelega
         } else {
             SVProgressHUD.showInfo(withStatus: "no available files")
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.setupFileMessage()
     }
 
     override func viewDidLoad() {
