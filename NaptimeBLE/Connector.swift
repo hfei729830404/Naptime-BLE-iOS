@@ -99,7 +99,7 @@ public final class Connector: DisposeHolder {
     private var _stateListener: Disposable?
     private var _handshakeListener: Disposable?
 
-    public func handshake() -> Promise<Void> {
+    public func handshake(userID: UInt32 = 0) -> Promise<Void> {
 
         let promise = Promise<Void> { (fulfill, reject) in
 
@@ -161,14 +161,14 @@ public final class Connector: DisposeHolder {
                     self.mac = data
                     print("mac: \(data)")
                     // 发送 user id
-                    let userId: [UInt8] = [0x00, 0x12, 0x23, 0x34, 0x45]
-                    return self.connectService!.write(data: Data(bytes: userId), to: .userID)
+                    let bytes = [0x00, userID >> 24, userID >> 16, userID >> 8, userID].map { $0 & 0xFF }.map { UInt8($0) }
+                    return self.connectService!.write(data: Data(bytes: bytes), to: .userID)
                 }
                 .then { () -> (Promise<Void>) in
                     // 发送 第一步握手
                     let date = Date()
-                    let hour = UInt8(date.stringWith(formateString: "hh"))
-                    let minute = UInt8(date.stringWith(formateString: "MM"))
+                    let hour = UInt8(date.stringWith(formateString: "HH"))
+                    let minute = UInt8(date.stringWith(formateString: "mm"))
                     let second = UInt8(date.stringWith(formateString: "ss"))
                     let random = UInt8(arc4random_uniform(255))
                     print("1------------ \([0x01 ,hour! ,minute! ,second! ,random])")
@@ -184,6 +184,7 @@ public final class Connector: DisposeHolder {
 extension Date {
     public func stringWith(formateString: String)-> String {
         let dateFormate = DateFormatter()
+        dateFormate.locale = Locale(identifier: "zh_CN")
         dateFormate.dateFormat = formateString
         return dateFormate.string(from: self)
     }
