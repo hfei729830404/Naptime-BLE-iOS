@@ -18,7 +18,7 @@ extension DispatchQueue {
 
 public final class Scanner {
 
-    var manager: BluetoothManager
+    var manager: CentralManager
     private let _disposeBag = DisposeBag()
 
     private var _observer: Observable<Peripheral>?
@@ -27,7 +27,7 @@ public final class Scanner {
     private var _usingPeripheral: Peripheral?
 
     public init() {
-        manager = BluetoothManager(queue: .ble, options: nil)
+        manager = CentralManager(queue: .ble, options: nil)
     }
 
     public func scan() -> Observable<ScannedPeripheral> {

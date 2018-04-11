@@ -27,6 +27,18 @@ class CharacteristicViewController: UITableViewController {
         tableView.tableFooterView = UIView()
 
         _characteristics = service.rxService.characteristics ?? []
+
+        if let service = self.service as? BatteryService {
+            service.notify(characteristic: .battery)
+                .observeOn(MainScheduler.asyncInstance)
+                .subscribe(onNext: { bytes in
+                    SVProgressHUD.showInfo(withStatus: "battery: \(bytes[0])")
+                    print("notify battery: \(bytes[0])")
+                }, onError: { _ in
+                    SVProgressHUD.showError(withStatus: "监听电量失败")
+                })
+                .disposed(by: disposeBag)
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

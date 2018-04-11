@@ -113,15 +113,4 @@ class ScanViewController: UITableViewController {
         self.peripheralList = []
         self.tableView.reloadData()
     }
-
-    private func disconnect(peripheral: Peripheral, at indexPath: IndexPath) {
-        peripheral.cancelConnection()
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] in
-                guard let `self` = self else { return }
-                SVProgressHUD.showSuccess(withStatus: "Disconnected:\n \(peripheral.displayName)")
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-            .disposed(by: disposeBag)
-    }
 }

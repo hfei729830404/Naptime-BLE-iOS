@@ -51,7 +51,7 @@ public protocol Notifiable: Service {
 public extension Readable where Self: BLEService {
     public func read(characteristic: ReadType) -> Promise<Data> {
         let promise = Promise<Data> { (fulfill, reject) in
-            _ = self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid })?.readValue().subscribe(onNext: {
+            _ = self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid })?.readValue().subscribe(onSuccess: {
                 if let data = $0.value {
                     fulfill(data)
                 }
@@ -68,11 +68,11 @@ public extension Writable where Self: BLEService {
         let promise = Promise<Void> { (fulfill, reject) in
             _ = self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid })?
                 .writeValue(data, type: .withResponse)
-                .subscribe(onNext: nil, onError: { error in
-                    reject(error)
-                }, onCompleted: {
+                .subscribe(onSuccess: { _ in
                     fulfill(())
-                }, onDisposed: nil)
+                }, onError: { error in
+                    reject(error)
+                })
         }
         return promise
     }
@@ -82,7 +82,7 @@ public extension Notifiable where Self: BLEService {
     public func notify(characteristic: NotifyType) -> Observable<Bytes> {
         if let char =
             self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid }) {
-            return char.setNotificationAndMonitorUpdates().map {
+            return char.observeValueUpdateAndSetNotification().map {
                 $0.value!.copiedBytes
             }
         }

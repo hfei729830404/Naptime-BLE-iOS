@@ -108,8 +108,8 @@ class PeripheralViewController: UITableViewController {
         }
 
         if let vc = segue.destination as? DFUViewController {
-            vc.peripheral = self.peripheral.cbPeripheral
-            vc.cManager = self.peripheral.manager.manager
+            vc.peripheral = self.peripheral.peripheral
+            vc.cManager = self.peripheral.manager.centralManager
         }
     }
 }

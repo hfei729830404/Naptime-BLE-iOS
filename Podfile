@@ -9,7 +9,7 @@ target 'BLETool' do
     pod 'iOSDFULibrary', :git => "git@github.com:qiubei/IOS-Pods-DFU-Library.git" , :branch => "master"
     pod 'SnapKit', '~> 4.0'
     pod 'SVProgressHUD', '~> 2.2'
-    pod 'RxBluetoothKit', '~> 4.0'
+    pod 'RxBluetoothKit', '~> 5.0'
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
     pod 'SwiftyTimer', '~> 2.0'

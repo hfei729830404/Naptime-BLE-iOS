@@ -49,7 +49,7 @@ public final class Connector: DisposeHolder {
 
     public func tryConnect() -> Promise<Void> {
         let promise = Promise<Void> { (fulfill, reject) in
-            _disposable = peripheral.connect()
+            _disposable = peripheral.establishConnection()
                 .flatMap {
                     $0.discoverServices(nil)
                 }.flatMap {
