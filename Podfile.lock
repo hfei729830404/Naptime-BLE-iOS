@@ -46,7 +46,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   iOSDFULibrary:
-    :commit: 09b46a22e014e997a3bc66aafaa25adcf7b2ea24
+    :commit: 0de0104755b1c21e4366f50957cea13b84bd32e0
     :git: git@github.com:qiubei/IOS-Pods-DFU-Library.git
   NaptimeFileProtocol:
     :commit: 198fe1c677e598ed58ae9190e79833f76d3a312c
