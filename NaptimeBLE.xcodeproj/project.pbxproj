@@ -311,7 +311,6 @@
 				6C1642F81FA03B09002C1438 /* Frameworks */,
 				6C1642F91FA03B09002C1438 /* Resources */,
 				1943CB639C810D2821B708C9 /* [CP] Embed Pods Frameworks */,
-				A8F7CA762C4B5F6CAE608B3B /* [CP] Copy Pods Resources */,
 				6C9D37361FB3FA4B001A3032 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -442,21 +441,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BLETool/Pods-BLETool-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A8F7CA762C4B5F6CAE608B3B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BLETool/Pods-BLETool-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA9391335BD778D54DC12494 /* [CP] Check Pods Manifest.lock */ = {
