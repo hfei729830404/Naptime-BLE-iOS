@@ -48,46 +48,50 @@ public final class Connector: DisposeHolder {
     }
 
     public func tryConnect() -> Promise<Void> {
-        let promise = Promise<Void> { (fulfill, reject) in
+        let promise = Promise<Void> { [weak self] (fulfill, reject) in
+            print("time: \(Date())")
             _disposable = peripheral.establishConnection()
-                .flatMap {
-                    $0.discoverServices(nil)
-                }.flatMap {
-                    Observable.from($0)
-                }.`do`(onNext: { [weak self] in
-                    print("uuid: \($0.uuid.uuidString)")
-                    guard let `self` = self else { return }
-                    guard let `type` = NaptimeBLE.ServiceType(rawValue: $0.uuid.uuidString) else { return }
-                    switch `type` {
-                    case .connect:
-                        self.connectService = ConnectService(rxService: $0)
-                    case .command:
-                        self.commandService = CommandService(rxService: $0)
-                    case .battery:
-                        self.batteryService = BatteryService(rxService: $0)
-                    case .eeg:
-                        self.eegService = EEGService(rxService: $0)
-                    case .dfu:
-                        self.dfuService = DFUService(rxService: $0)
-                    case .deviceInfo:
-                        self.deviceInfoService = DeviceInfoService(rxService: $0)
-                    }
-                }).flatMap {
-                    $0.discoverCharacteristics(nil)
-                }.flatMap {
-                    Observable.from($0)
-                }.subscribe(onNext: { _ in
-                    //
-                }, onError: { error in
-                    print("\(error)")
-                    reject(error)
+                .subscribe(onNext: { p in
+                    _ = p.discoverServices(nil)
+                        .flatMap { ss -> Single<[RxBluetoothKit.Characteristic]> in
+                            ss.forEach { s in
+                                print("uuid: \(s.uuid.uuidString)")
+                                guard let `self` = self else { return }
+                                self.assignService(s)
+                            }
+                            return Single<[RxBluetoothKit.Characteristic]>.create(subscribe: { event -> Disposable in
+                                var disposes: [Disposable] = []
+                                var allCS: [RxBluetoothKit.Characteristic] = []
+                                ss.enumerated().forEach { (offset, element) in
+                                    disposes.append(
+                                        element.discoverCharacteristics(nil)
+                                            .subscribe(onSuccess: { cs in
+                                                allCS.append(contentsOf: cs)
+                                                if offset == ss.count - 1 {
+                                                    event(.success(allCS))
+                                                }
+                                            }, onError: { e in
+                                                event(.error(e))
+                                            })
+                                    )
+                                }
+                                return Disposables.create {
+                                    disposes.forEach {
+                                        $0.dispose()
+                                    }
+                                }
+                            })
+                        }.subscribe(onSuccess: { cs in
+                            print("cs: \(cs)")
+                            fulfill(())
+                        }, onError: { e in
+                            reject(e)
+                        })
+                }, onError: { e in
+                    reject(e)
                 }, onCompleted: {
-                    guard self.commandService != nil && self.batteryService != nil && self.eegService != nil && self.dfuService != nil && self.deviceInfoService != nil else {
-                        reject(BLEError.connectFail)
-                        return
-                    }
-                    fulfill(())
-                })
+                    //
+                }, onDisposed: nil)
         }
         return promise
     }
@@ -178,6 +182,24 @@ public final class Connector: DisposeHolder {
             }
         }
         return promise
+    }
+
+    private func assignService(_ service: RxBluetoothKit.Service) {
+        guard let `type` = NaptimeBLE.ServiceType(rawValue: service.uuid.uuidString) else { return }
+        switch `type` {
+        case .command:
+            self.commandService = CommandService(rxService: service)
+        case .connect:
+            self.connectService = ConnectService(rxService: service)
+        case .battery:
+            self.batteryService = BatteryService(rxService: service)
+        case .eeg:
+            self.eegService = EEGService(rxService: service)
+        case .dfu:
+            self.dfuService = DFUService(rxService: service)
+        case .deviceInfo:
+            self.deviceInfoService = DeviceInfoService(rxService: service)
+        }
     }
 }
 
