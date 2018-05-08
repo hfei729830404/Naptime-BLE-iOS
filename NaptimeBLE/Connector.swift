@@ -105,14 +105,22 @@ public final class Connector: DisposeHolder {
 
     public func handshake(userID: UInt32 = 0) -> Promise<Void> {
 
-        let promise = Promise<Void> { (fulfill, reject) in
+        let promise = Promise<Void> { [weak self] (fulfill, reject) in
+            guard let `self` = self else {
+                reject(BLEError.connectFail)
+                return
+            }
+            guard let connectService = self.connectService, let deviceInfoService = self.deviceInfoService else {
+                reject(BLEError.connectFail)
+                return
+            }
 
             let disposeListener = { [weak self] in
                 self?._stateListener?.dispose()
                 self?._handshakeListener?.dispose()
             }
             // 监听状态
-            _stateListener = self.connectService!.notify(characteristic: .state).subscribe(onNext: { bytes in
+            _stateListener = connectService.notify(characteristic: .state).subscribe(onNext: { bytes in
                 print("state: \(bytes)")
                 guard let state = HandshakeState(rawValue: bytes) else { return }
 
@@ -132,7 +140,7 @@ public final class Connector: DisposeHolder {
 
             Thread.sleep(forTimeInterval: 0.1)
             // 监听 第二步握手
-            _handshakeListener = self.connectService!.notify(characteristic: .handshake).subscribe(onNext: { data in
+            _handshakeListener = connectService.notify(characteristic: .handshake).subscribe(onNext: { data in
                 print("2------------ \(data)")
                 var secondCommand = data
                 let random = secondCommand.last!
@@ -146,7 +154,7 @@ public final class Connector: DisposeHolder {
                 secondCommand.append(newRandom)
                 print("3------------ \(secondCommand)")
                 // 发送 第三步握手
-                self.connectService?.write(data: Data(bytes: secondCommand), to: .handshake)
+                connectService.write(data: Data(bytes: secondCommand), to: .handshake)
                     .catch { error in
                     reject(error)
                 }
@@ -160,13 +168,13 @@ public final class Connector: DisposeHolder {
             // 开始握手
             Thread.sleep(forTimeInterval: 0.1)
             // 读取 mac 地址
-            self.deviceInfoService!.read(characteristic: .mac)
+            deviceInfoService.read(characteristic: .mac)
                 .then { data -> Promise<Void> in
                     self.mac = data
                     print("mac: \(data)")
                     // 发送 user id
                     let bytes = [0x00, userID >> 24, userID >> 16, userID >> 8, userID].map { $0 & 0xFF }.map { UInt8($0) }
-                    return self.connectService!.write(data: Data(bytes: bytes), to: .userID)
+                    return connectService.write(data: Data(bytes: bytes), to: .userID)
                 }
                 .then { () -> (Promise<Void>) in
                     // 发送 第一步握手
@@ -176,7 +184,7 @@ public final class Connector: DisposeHolder {
                     let second = UInt8(date.stringWith(formateString: "ss"))
                     let random = UInt8(arc4random_uniform(255))
                     print("1------------ \([0x01 ,hour! ,minute! ,second! ,random])")
-                    return self.connectService!.write(data: Data(bytes: [0x01 ,hour! ,minute! ,second! ,random]), to: .handshake)
+                    return connectService.write(data: Data(bytes: [0x01 ,hour! ,minute! ,second! ,random]), to: .handshake)
                 }.catch { error in
                     print("握手 error: \(error)")
             }
