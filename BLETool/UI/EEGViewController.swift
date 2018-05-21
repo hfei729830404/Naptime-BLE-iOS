@@ -18,6 +18,7 @@ import AVFoundation
 class EEGViewController: UITableViewController {
     var eegService: EEGService!
     var commandService: CommandService!
+    var peripheral: Peripheral!
 
     private let _player: AVAudioPlayer = {
         let url = Bundle.main.url(forResource: "1-minute-of-silence", withExtension: "mp3")!
@@ -40,12 +41,25 @@ class EEGViewController: UITableViewController {
 
         self.eegService.notify(characteristic: .contact)
             .observeOn(MainScheduler())
-            .subscribe(onNext: {
-                SVProgressHUD.showInfo(withStatus: "Connection: \($0)")
+            .subscribe(onNext: { [weak self] in
+                self?._wearLabel.text = "wear: \($0)"
             }, onError: { _ in
                 SVProgressHUD.showInfo(withStatus: "Failed to listen wearing state.")
             }).disposed(by: _disposeBag)
+
+        window.windowLevel = UIWindowLevelStatusBar + 1
+        window.makeKeyAndVisible()
+        window.backgroundColor = UIColor.lightGray
+        window.frame = CGRect(x: 0, y: window.bounds.height-80, width: window.bounds.width, height: 80)
+        _wearLabel.frame = CGRect(x: 16, y: 8, width: window.bounds.width - 32, height: 20)
+        _rssiLabel.frame = CGRect(x: 16, y: 36, width: window.bounds.width - 32, height: 20)
+        window.addSubview(_wearLabel)
+        window.addSubview(_rssiLabel)
     }
+
+    private let window = UIWindow()
+    private let _wearLabel = UILabel()
+    private let _rssiLabel = UILabel()
 
     deinit {
         _player.stop()
@@ -100,11 +114,21 @@ class EEGViewController: UITableViewController {
 
         let dataPool = DataPool()
         _eegDisposable = self.eegService.notify(characteristic: .data)
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
                 var received = $0
                 received.removeFirst(2)
                 let data = Data(bytes: received)
                 dataPool.push(data: data)
+
+                guard let `self` = self else { return }
+                self.peripheral.readRSSI()
+                    .observeOn(MainScheduler.asyncInstance)
+                    .subscribe(onSuccess: { sig in
+                        self._rssiLabel.text = "rssi: \(sig.1)"
+                        print("111")
+                    }, onError: { e in
+                        print("e: \(e)")
+                    }).disposed(by: self._disposeBag)
             }, onError: { _ in
                 SVProgressHUD.showError(withStatus: "Failed to listen brainwave data.")
             })

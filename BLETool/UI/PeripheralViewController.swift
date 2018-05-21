@@ -112,6 +112,7 @@ class PeripheralViewController: UITableViewController {
             let commandService = connector.commandService {
             vc.eegService = eegService
             vc.commandService = commandService
+            vc.peripheral = peripheral
         }
 
         if let vc = segue.destination as? DFUViewController {
