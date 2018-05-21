@@ -50,13 +50,13 @@ public protocol Notifiable: Service {
 
 public extension Readable where Self: BLEService {
     public func read(characteristic: ReadType) -> Promise<Data> {
-        let promise = Promise<Data> { (fulfill, reject) in
+        let promise = Promise<Data> { seal in
             _ = self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid })?.readValue().subscribe(onSuccess: {
                 if let data = $0.value {
-                    fulfill(data)
+                    seal.fulfill(data)
                 }
             }, onError: { error in
-                reject(error)
+                _ = seal.reject(error)
             })
         }
         return promise
@@ -64,14 +64,14 @@ public extension Readable where Self: BLEService {
 }
 
 public extension Writable where Self: BLEService {
-    public func write(data: Data, to characteristic: WriteType) -> Promise<Void> {
-        let promise = Promise<Void> { (fulfill, reject) in
+    public func write(data: Data, to characteristic: WriteType) -> Promise<()> {
+        let promise = Promise<Void> { seal in
             _ = self.rxService.characteristics?.first(where: { $0.uuid == characteristic.uuid })?
                 .writeValue(data, type: .withResponse)
                 .subscribe(onSuccess: { _ in
-                    fulfill(())
+                    seal.fulfill(())
                 }, onError: { error in
-                    reject(error)
+                    seal.reject(error)
                 })
         }
         return promise

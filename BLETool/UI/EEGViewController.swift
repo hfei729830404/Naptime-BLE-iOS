@@ -76,7 +76,7 @@ class EEGViewController: UITableViewController {
     @objc
     private func sampleButtonTouched() {
         if _isSampling {
-            commandService.write(data: Data(bytes: [0x02]), to: .send).then {
+            commandService.write(data: Data(bytes: [0x02]), to: .send).done {
                 dispatch_to_main { [unowned self] in
                     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Acquire", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
                     self.stopSample()
@@ -88,7 +88,7 @@ class EEGViewController: UITableViewController {
         } else {
             dataList.removeAll()
             tableView.reloadData()
-            commandService.write(data: Data(bytes: [0x01]), to: .send).then {
+            commandService.write(data: Data(bytes: [0x01]), to: .send).done {
                 dispatch_to_main { [unowned self] in
                     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Stop", style: .plain, target: self, action: #selector(self.sampleButtonTouched))
 

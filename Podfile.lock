@@ -3,17 +3,7 @@ PODS:
   - iOSDFULibrary (4.1.1):
     - Zip (~> 1.0)
   - NaptimeFileProtocol (0.4.0)
-  - PromiseKit (4.5.2):
-    - PromiseKit/Foundation (= 4.5.2)
-    - PromiseKit/QuartzCore (= 4.5.2)
-    - PromiseKit/UIKit (= 4.5.2)
-  - PromiseKit/CorePromise (4.5.2)
-  - PromiseKit/Foundation (4.5.2):
-    - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (4.5.2):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (4.5.2):
-    - PromiseKit/CorePromise
+  - PromiseKit/CorePromise (6.2.7)
   - RxBluetoothKit (5.0.1):
     - RxSwift (~> 4.0)
   - RxCocoa (4.1.2):
@@ -28,7 +18,7 @@ DEPENDENCIES:
   - Files (~> 2.0.0)
   - "iOSDFULibrary (from `git@github.com:qiubei/IOS-Pods-DFU-Library.git`, branch `master`)"
   - "NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)"
-  - PromiseKit (~> 4.5)
+  - PromiseKit/CorePromise (~> 6.0)
   - RxBluetoothKit (~> 5.0)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
@@ -37,7 +27,7 @@ DEPENDENCIES:
   - SwiftyTimer (~> 2.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Files
     - PromiseKit
     - RxBluetoothKit
@@ -68,7 +58,7 @@ SPEC CHECKSUMS:
   Files: 2a80d8a2fafef38a7a590ef24634a829157e7305
   iOSDFULibrary: 35e8a9e23d67759d57af9924d7a808e48c04583a
   NaptimeFileProtocol: 49248787ced0e07f11578f07bc4857b3b65bd6e0
-  PromiseKit: 743e497a5f505a470d3bbbf4ce0663c1268af0a4
+  PromiseKit: 12b9d87748b170714247d8b2677146ca57e488f2
   RxBluetoothKit: 6e2ec9f2b3fe796f2616172c6503d3a08836ab16
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
@@ -77,6 +67,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 1de2715bb83e6ed5c2ee64b0ad71029ab299dfc3
+PODFILE CHECKSUM: 15d386067bbaaafe219f12a91c5194f58ab94b06
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

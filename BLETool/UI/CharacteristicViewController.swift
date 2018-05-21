@@ -66,14 +66,14 @@ class CharacteristicViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         let characteristic = _characteristics[indexPath.row]
         if let service = self.service as? BatteryService {
-            service.read(characteristic: .battery).then {
+            service.read(characteristic: .battery).done {
                 cell?.detailTextLabel?.text = String(format: "%d%%", $0.copiedBytes[0])
             }.catch { _ in
                 SVProgressHUD.showError(withStatus: "Failed to read value!")
             }
         }
         if let service = self.service as? DeviceInfoService, let characteristic = Characteristic.DeviceInfo(rawValue: characteristic.uuid.uuidString) {
-            service.read(characteristic: characteristic).then { data -> Void in
+            service.read(characteristic: characteristic).done { data -> Void in
                 if characteristic == .mac {
                     cell?.detailTextLabel?.text = data.hexString
                 } else {

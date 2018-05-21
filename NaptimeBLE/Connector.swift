@@ -48,7 +48,7 @@ public final class Connector: DisposeHolder {
     }
 
     public func tryConnect() -> Promise<Void> {
-        let promise = Promise<Void> { [weak self] (fulfill, reject) in
+        let promise = Promise<Void> { [weak self] seal in
             print("time: \(Date())")
             _disposable = peripheral.establishConnection()
                 .subscribe(onNext: { p in
@@ -83,12 +83,12 @@ public final class Connector: DisposeHolder {
                             })
                         }.subscribe(onSuccess: { cs in
                             print("cs: \(cs)")
-                            fulfill(())
+                            seal.fulfill(())
                         }, onError: { e in
-                            reject(e)
+                            seal.reject(e)
                         })
                 }, onError: { e in
-                    reject(e)
+                    seal.reject(e)
                 }, onCompleted: {
                     //
                 }, onDisposed: nil)
@@ -103,15 +103,15 @@ public final class Connector: DisposeHolder {
     private var _stateListener: Disposable?
     private var _handshakeListener: Disposable?
 
-    public func handshake(userID: UInt32 = 0) -> Promise<Void> {
+    public func handshake(userID: UInt32 = 0) -> Promise<()> {
 
-        let promise = Promise<Void> { [weak self] (fulfill, reject) in
+        let promise = Promise<Void> { [weak self] seal in
             guard let `self` = self else {
-                reject(BLEError.connectFail)
+                seal.reject(BLEError.connectFail)
                 return
             }
             guard let connectService = self.connectService, let deviceInfoService = self.deviceInfoService else {
-                reject(BLEError.connectFail)
+                seal.reject(BLEError.connectFail)
                 return
             }
 
@@ -126,14 +126,14 @@ public final class Connector: DisposeHolder {
 
                 switch state {
                 case .success:
-                    fulfill(())
+                    seal.fulfill(())
                 case .error(let err):
-                    reject(err)
+                    seal.reject(err)
                 }
                 disposeListener()
             }, onError: { error in
                 print("state error: \(error)")
-                reject(error)
+                seal.reject(error)
                 disposeListener()
             })
             _stateListener?.disposed(by: disposeBag)
@@ -156,11 +156,11 @@ public final class Connector: DisposeHolder {
                 // 发送 第三步握手
                 connectService.write(data: Data(bytes: secondCommand), to: .handshake)
                     .catch { error in
-                    reject(error)
+                    seal.reject(error)
                 }
             }, onError: { error in
                 print("握手 error: \(error)")
-                reject(error)
+                seal.reject(error)
                 disposeListener()
             })
             _handshakeListener?.disposed(by: disposeBag)

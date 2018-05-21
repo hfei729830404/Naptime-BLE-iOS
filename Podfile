@@ -14,7 +14,7 @@ target 'BLETool' do
     pod 'RxCocoa', '~> 4.0'
     pod 'SwiftyTimer', '~> 2.0'
     pod 'Files', '~> 2.0.0'
-    pod 'PromiseKit', '~> 4.5'
+    pod 'PromiseKit/CorePromise', '~> 6.0'
     pod 'NaptimeFileProtocol', :git => "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git", :branch => "develop"
 
 end

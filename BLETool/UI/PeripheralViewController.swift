@@ -45,12 +45,13 @@ class PeripheralViewController: UITableViewController {
         SVProgressHUD.show(withStatus: "Connecting:\n \(peripheral.displayName)")
 
         connector = Connector(peripheral: peripheral)
-        connector.tryConnect()
-            .then { () -> Promise<Void> in
+        firstly {
+            connector.tryConnect()
+            }.then { () -> Promise<Void> in
                 SVProgressHUD.show(withStatus: "Handshake...")
                 return self.connector.handshake(userID: 666)
             }
-            .then { () -> Void in
+            .done {
                 SVProgressHUD.showSuccess(withStatus: "Handshake succeeded")
                 dispatch_to_main {
                     self.services = self.connector.allServices
