@@ -26,12 +26,10 @@
 		6C3FC7831FAABDB200605D8A /* DeviceInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7821FAABDB200605D8A /* DeviceInfoService.swift */; };
 		6C3FC7851FAABDBC00605D8A /* DFUService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7841FAABDBC00605D8A /* DFUService.swift */; };
 		6C3FC7871FAABDC600605D8A /* EEGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7861FAABDC600605D8A /* EEGService.swift */; };
-		6C3FC7891FAABDDB00605D8A /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7881FAABDDB00605D8A /* BatteryService.swift */; };
 		6C3FC78B1FAABDF700605D8A /* GenericAttributeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC78A1FAABDF700605D8A /* GenericAttributeService.swift */; };
 		6C3FC78F1FAABE8B00605D8A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC78E1FAABE8B00605D8A /* Common.swift */; };
 		6C3FC7921FAAF10600605D8A /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3FC7901FAAF10600605D8A /* RxSwift.framework */; };
 		6C3FC7931FAAF10600605D8A /* RxBluetoothKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3FC7911FAAF10600605D8A /* RxBluetoothKit.framework */; };
-		6C3FC7951FAB000600605D8A /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3FC7941FAB000600605D8A /* PromiseKit.framework */; };
 		6C3FC7991FAC405D00605D8A /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7981FAC405D00605D8A /* Connector.swift */; };
 		6C3FC79B1FAC418700605D8A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC79A1FAC418700605D8A /* Errors.swift */; };
 		6C4A38661FB9409A00B09EC3 /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A38651FB9409A00B09EC3 /* ServiceType.swift */; };
@@ -51,6 +49,8 @@
 		B75901891FE0FF2A00F0890E /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75901881FE0FF2A00F0890E /* DFUViewController.swift */; };
 		B79493E22020702D004166E3 /* V1.0.1-120.zip in Resources */ = {isa = PBXBuildFile; fileRef = B79493E12020702D004166E3 /* V1.0.1-120.zip */; };
 		B79493E420209D26004166E3 /* DFUPacketFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79493E320209D26004166E3 /* DFUPacketFilesViewController.swift */; };
+		B79E9BFC215B5C1A001465D2 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79E9BFB215B5C1A001465D2 /* PromiseKit.framework */; };
+		B79E9BFD215B5C64001465D2 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7881FAABDDB00605D8A /* BatteryService.swift */; };
 		B7BCFBA120186FE800495A52 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BCFBA020186FE800495A52 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,7 +107,6 @@
 		6C3FC78E1FAABE8B00605D8A /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		6C3FC7901FAAF10600605D8A /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		6C3FC7911FAAF10600605D8A /* RxBluetoothKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBluetoothKit.framework; path = Carthage/Build/iOS/RxBluetoothKit.framework; sourceTree = "<group>"; };
-		6C3FC7941FAB000600605D8A /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		6C3FC7981FAC405D00605D8A /* Connector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		6C3FC79A1FAC418700605D8A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6C4A38651FB9409A00B09EC3 /* ServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
@@ -127,6 +126,7 @@
 		B75901881FE0FF2A00F0890E /* DFUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUViewController.swift; sourceTree = "<group>"; };
 		B79493E12020702D004166E3 /* V1.0.1-120.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "V1.0.1-120.zip"; sourceTree = "<group>"; };
 		B79493E320209D26004166E3 /* DFUPacketFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUPacketFilesViewController.swift; sourceTree = "<group>"; };
+		B79E9BFB215B5C1A001465D2 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		B7BCFBA020186FE800495A52 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B79E9BFC215B5C1A001465D2 /* PromiseKit.framework in Frameworks */,
 				7AB57DFAAE31A8CEC7B2E421 /* Pods_BLETool.framework in Frameworks */,
 				6C9D37321FB3FA4B001A3032 /* NaptimeBLE.framework in Frameworks */,
 			);
@@ -144,7 +145,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C3FC7951FAB000600605D8A /* PromiseKit.framework in Frameworks */,
 				6C3FC7921FAAF10600605D8A /* RxSwift.framework in Frameworks */,
 				6C3FC7931FAAF10600605D8A /* RxBluetoothKit.framework in Frameworks */,
 			);
@@ -271,7 +271,7 @@
 		A9270B81DB032DBDF56008A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6C3FC7941FAB000600605D8A /* PromiseKit.framework */,
+				B79E9BFB215B5C1A001465D2 /* PromiseKit.framework */,
 				6C3FC7911FAAF10600605D8A /* RxBluetoothKit.framework */,
 				6C3FC7901FAAF10600605D8A /* RxSwift.framework */,
 				00D2137B8C5F9F5DC91E61D1 /* Pods_BLETool.framework */,
@@ -348,7 +348,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = EnterTech;
 				TargetAttributes = {
 					6C1642FA1FA03B09002C1438 = {
@@ -494,7 +494,6 @@
 			files = (
 				6C3FC77C1FAAB93700605D8A /* Characteristic.swift in Sources */,
 				6C3FC79B1FAC418700605D8A /* Errors.swift in Sources */,
-				6C3FC7891FAABDDB00605D8A /* BatteryService.swift in Sources */,
 				6C3FC77F1FAABD7300605D8A /* GenericAccessService.swift in Sources */,
 				6C3FC7871FAABDC600605D8A /* EEGService.swift in Sources */,
 				6C3FC78F1FAABE8B00605D8A /* Common.swift in Sources */,
@@ -504,6 +503,7 @@
 				6C3FC78B1FAABDF700605D8A /* GenericAttributeService.swift in Sources */,
 				6C71132F1FA97CB30093099D /* Service.swift in Sources */,
 				6C595D631FB6A0150097C170 /* ConnectService.swift in Sources */,
+				B79E9BFD215B5C64001465D2 /* BatteryService.swift in Sources */,
 				6CED9CE31FB5965800226793 /* HandshakeState.swift in Sources */,
 				6C3FC7831FAABDB200605D8A /* DeviceInfoService.swift in Sources */,
 				6C3FC7811FAABD9600605D8A /* CommandService.swift in Sources */,
@@ -669,6 +669,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BLETool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -694,6 +698,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BLETool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -712,7 +720,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEFINES_MODULE = YES;

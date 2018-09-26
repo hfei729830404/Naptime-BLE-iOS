@@ -103,7 +103,7 @@ public final class Connector: DisposeHolder {
     private var _stateListener: Disposable?
     private var _handshakeListener: Disposable?
 
-    public func handshake(userID: UInt32 = 0) -> Promise<()> {
+    public func handshake(userID: UInt32 = 0) -> Promise<Void> {
 
         let promise = Promise<Void> { [weak self] seal in
             guard let `self` = self else {
@@ -171,7 +171,7 @@ public final class Connector: DisposeHolder {
             deviceInfoService.read(characteristic: .mac)
                 .then { data -> Promise<Void> in
                     self.mac = data
-                    print("mac: \(data)")
+                    print("-------mac: \(data)")
                     // 发送 user id
                     let bytes = [0x00, userID >> 24, userID >> 16, userID >> 8, userID].map { $0 & 0xFF }.map { UInt8($0) }
                     return connectService.write(data: Data(bytes: bytes), to: .userID)

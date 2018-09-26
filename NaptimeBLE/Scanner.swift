@@ -34,10 +34,6 @@ public final class Scanner {
 
     public func scan() -> Observable<ScannedPeripheral> {
 
-        self.manager.observeState().subscribe { (state) in
-            print("---- \(state.element?.rawValue)")
-        }.disposed(by: self._disposeBag)
-
         return Observable<ScannedPeripheral>.create { [unowned self] (observer) -> Disposable in
 
             let disposable = self.manager.scanForPeripherals(withServices: [CBUUID(string: UUID_BLE_DEVICE)])
