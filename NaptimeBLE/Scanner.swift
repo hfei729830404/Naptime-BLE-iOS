@@ -27,10 +27,16 @@ public final class Scanner {
     private var _usingPeripheral: Peripheral?
 
     public init() {
-        manager = CentralManager(queue: .ble, options: nil)
+        manager = CentralManager(queue: .ble,
+                                 options: [CBCentralManagerOptionShowPowerAlertKey: true as AnyObject,
+                                           CBCentralManagerOptionRestoreIdentifierKey: "naptime.ble.id" as AnyObject])
     }
 
     public func scan() -> Observable<ScannedPeripheral> {
+
+        self.manager.observeState().subscribe { (state) in
+            print("---- \(state.element?.rawValue)")
+        }.disposed(by: self._disposeBag)
 
         return Observable<ScannedPeripheral>.create { [unowned self] (observer) -> Disposable in
 
@@ -52,6 +58,7 @@ public final class Scanner {
 
     public func stop() {
         _disposable?.dispose()
+        self.manager.centralManager.stopScan()
     }
 
     public func use(peripheral: Peripheral) {

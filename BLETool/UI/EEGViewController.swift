@@ -34,7 +34,7 @@ class EEGViewController: UITableViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Acquire", style: .plain, target: self, action: #selector(sampleButtonTouched))
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
 
         _player.play()
@@ -47,7 +47,7 @@ class EEGViewController: UITableViewController {
                 SVProgressHUD.showInfo(withStatus: "Failed to listen wearing state.")
             }).disposed(by: _disposeBag)
 
-        window.windowLevel = UIWindowLevelStatusBar + 1
+        window.windowLevel = UIWindow.Level.statusBar + 1
         window.makeKeyAndVisible()
         window.backgroundColor = UIColor.lightGray
         window.frame = CGRect(x: 0, y: window.bounds.height-80, width: window.bounds.width, height: 80)

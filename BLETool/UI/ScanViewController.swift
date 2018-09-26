@@ -26,7 +26,7 @@ class ScanViewController: UITableViewController {
 
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     override func viewWillDisappear(_ animated: Bool) {
