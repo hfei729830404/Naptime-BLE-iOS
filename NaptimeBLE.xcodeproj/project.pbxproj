@@ -37,7 +37,6 @@
 		6C7113201FA9755B0093099D /* NaptimeBLE.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C71131E1FA9755B0093099D /* NaptimeBLE.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C71132B1FA975C60093099D /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71132A1FA975C60093099D /* Scanner.swift */; };
 		6C71132F1FA97CB30093099D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71132E1FA97CB30093099D /* Service.swift */; };
-		6C9D37321FB3FA4B001A3032 /* NaptimeBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71131C1FA9755B0093099D /* NaptimeBLE.framework */; };
 		6C9D37331FB3FA4B001A3032 /* NaptimeBLE.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71131C1FA9755B0093099D /* NaptimeBLE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CA2B1791FA1CCAA00A012BC /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA2B1781FA1CCAA00A012BC /* PeripheralViewController.swift */; };
 		6CED9CE31FB5965800226793 /* HandshakeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CED9CE21FB5965800226793 /* HandshakeState.swift */; };
@@ -47,9 +46,10 @@
 		7AB57DFAAE31A8CEC7B2E421 /* Pods_BLETool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D2137B8C5F9F5DC91E61D1 /* Pods_BLETool.framework */; };
 		B75785592015E13B0039B2FC /* DFU1.0.0.zip in Resources */ = {isa = PBXBuildFile; fileRef = B75785582015E13B0039B2FC /* DFU1.0.0.zip */; };
 		B75901891FE0FF2A00F0890E /* DFUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75901881FE0FF2A00F0890E /* DFUViewController.swift */; };
+		B781366A215E319F0015273D /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B79E9BFB215B5C1A001465D2 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B781366C215E31A90015273D /* RxBluetoothKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3FC7911FAAF10600605D8A /* RxBluetoothKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B79493E22020702D004166E3 /* V1.0.1-120.zip in Resources */ = {isa = PBXBuildFile; fileRef = B79493E12020702D004166E3 /* V1.0.1-120.zip */; };
 		B79493E420209D26004166E3 /* DFUPacketFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79493E320209D26004166E3 /* DFUPacketFilesViewController.swift */; };
-		B79E9BFC215B5C1A001465D2 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79E9BFB215B5C1A001465D2 /* PromiseKit.framework */; };
 		B79E9BFD215B5C64001465D2 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7881FAABDDB00605D8A /* BatteryService.swift */; };
 		B7BCFBA120186FE800495A52 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BCFBA020186FE800495A52 /* Persistence.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +72,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6C9D37331FB3FA4B001A3032 /* NaptimeBLE.framework in Embed Frameworks */,
+				B781366A215E319F0015273D /* PromiseKit.framework in Embed Frameworks */,
+				B781366C215E31A90015273D /* RxBluetoothKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,9 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B79E9BFC215B5C1A001465D2 /* PromiseKit.framework in Frameworks */,
 				7AB57DFAAE31A8CEC7B2E421 /* Pods_BLETool.framework in Frameworks */,
-				6C9D37321FB3FA4B001A3032 /* NaptimeBLE.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,8 +415,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-BLETool/Pods-BLETool-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Files/Files.framework",
 				"${BUILT_PRODUCTS_DIR}/NaptimeFileProtocol/NaptimeFileProtocol.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/RxBluetoothKit/RxBluetoothKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -429,8 +427,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Files.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NaptimeFileProtocol.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBluetoothKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
