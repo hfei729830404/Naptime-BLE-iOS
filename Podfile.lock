@@ -1,24 +1,24 @@
 PODS:
-  - Files (2.0.1)
+  - Files (2.2.1)
   - iOSDFULibrary (4.1.1):
     - Zip (~> 1.0)
-  - NaptimeFileProtocol (0.4.0)
-  - RxCocoa (4.3.1):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.3.1)
-  - SnapKit (4.0.1)
+  - NaptimeFileProtocol (0.5.0)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
+  - SnapKit (4.2.0)
   - SVProgressHUD (2.2.5)
-  - SwiftyTimer (2.0.0)
+  - SwiftyTimer (2.1.0)
   - Zip (1.1.0)
 
 DEPENDENCIES:
-  - Files (~> 2.0.0)
+  - Files
   - "iOSDFULibrary (from `git@github.com:qiubei/IOS-Pods-DFU-Library.git`, branch `master`)"
   - "NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)"
-  - RxCocoa (~> 4.0)
-  - SnapKit (~> 4.0)
-  - SVProgressHUD (~> 2.2)
-  - SwiftyTimer (~> 2.0)
+  - RxCocoa
+  - SnapKit
+  - SVProgressHUD
+  - SwiftyTimer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -43,20 +43,20 @@ CHECKOUT OPTIONS:
     :commit: 339dc7ef8ed56b0b3ccd1542ec03eaa6562bbc72
     :git: "git@github.com:qiubei/IOS-Pods-DFU-Library.git"
   NaptimeFileProtocol:
-    :commit: c36fd6077b71e575dd5d877ffc7b3995a94bea96
+    :commit: 3062535ca47a20be4d0aa7032c7069acfad177be
     :git: "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git"
 
 SPEC CHECKSUMS:
-  Files: 2a80d8a2fafef38a7a590ef24634a829157e7305
+  Files: 18a88ede4f1e339a73adaca7272af15fa32ba69f
   iOSDFULibrary: 35e8a9e23d67759d57af9924d7a808e48c04583a
-  NaptimeFileProtocol: 49248787ced0e07f11578f07bc4857b3b65bd6e0
-  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
-  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
-  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  NaptimeFileProtocol: e3f713463ab1c847f5fa9b687b5b0b338ced0e1d
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
+  SwiftyTimer: 02dd6cf10cbc71cbf67cec494f6e5eb782102543
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 72a2696a0c9f267142f354f9c237b94b113b129c
+PODFILE CHECKSUM: 1c41fd2bd22d6644be6bfcb26daadd079fc941a3
 
 COCOAPODS: 1.5.3
