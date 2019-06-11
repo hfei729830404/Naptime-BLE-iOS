@@ -14,7 +14,7 @@ Naptime BLE 通信库
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'NaptimeBLE/**/*.swift'
-  s.dependency 'PromiseKit'
-  s.dependency 'RxBluetoothKit'
+  s.dependency 'PromiseKit', '6.8.4'
+  s.dependency 'RxBluetoothKit', '5.2.0'
 
 end
