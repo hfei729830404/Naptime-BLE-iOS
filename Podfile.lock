@@ -16,6 +16,7 @@ DEPENDENCIES:
   - "iOSDFULibrary (from `git@github.com:qiubei/IOS-Pods-DFU-Library.git`, branch `master`)"
   - "NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)"
   - RxCocoa
+  - RxSwift
   - SnapKit
   - SVProgressHUD
   - SwiftyTimer
@@ -57,6 +58,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 02dd6cf10cbc71cbf67cec494f6e5eb782102543
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 1c41fd2bd22d6644be6bfcb26daadd079fc941a3
+PODFILE CHECKSUM: 7e863a5926fdf7912a5e1b84a2860f711899589f
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
