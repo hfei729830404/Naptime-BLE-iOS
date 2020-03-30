@@ -3,6 +3,17 @@ PODS:
   - iOSDFULibrary (4.1.1):
     - Zip (~> 1.0)
   - NaptimeFileProtocol (0.5.0)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
+  - RxBluetoothKit (5.2.0):
+    - RxSwift (~> 4.5)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
@@ -15,21 +26,26 @@ DEPENDENCIES:
   - Files
   - "iOSDFULibrary (from `git@github.com:qiubei/IOS-Pods-DFU-Library.git`, branch `master`)"
   - "NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)"
-  - RxCocoa
-  - RxSwift
+  - PromiseKit
+  - RxBluetoothKit
+  - RxCocoa (= 4.5.0)
+  - RxSwift (= 4.5.0)
   - SnapKit
   - SVProgressHUD
   - SwiftyTimer
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Files
+    - PromiseKit
+    - RxBluetoothKit
     - RxCocoa
-    - RxSwift
     - SnapKit
     - SVProgressHUD
     - SwiftyTimer
     - Zip
+  trunk:
+    - RxSwift
 
 EXTERNAL SOURCES:
   iOSDFULibrary:
@@ -50,7 +66,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Files: 18a88ede4f1e339a73adaca7272af15fa32ba69f
   iOSDFULibrary: 35e8a9e23d67759d57af9924d7a808e48c04583a
-  NaptimeFileProtocol: e3f713463ab1c847f5fa9b687b5b0b338ced0e1d
+  NaptimeFileProtocol: 20fbfb26c7ef8d163d3c0a5dafca41ad571c8ba8
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  RxBluetoothKit: a490bd8cdf7ad592c409daf420a6314670fe5871
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
@@ -58,6 +76,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 02dd6cf10cbc71cbf67cec494f6e5eb782102543
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 7e863a5926fdf7912a5e1b84a2860f711899589f
+PODFILE CHECKSUM: 2d281a53817df9ee15b47004bb49dada6a11b2d6
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.3
