@@ -1,16 +1,16 @@
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
-source 'https://github.com/EnterTech/PodSpecs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://github.com/EnterTech/PodSpecs.git'
 
 platform :ios, '9.0'
 use_frameworks!
 
 target 'BLETool' do
 
-    pod 'iOSDFULibrary', :git => "git@github.com:qiubei/IOS-Pods-DFU-Library.git" , :branch => "master"
+    pod 'iOSDFULibrary', :git => "https://github.com/Entertech/IOS-Pods-DFU-Library.git" , :branch => "innerpeace"
     pod 'SnapKit'
     pod 'SVProgressHUD'
-    pod 'RxSwift', '4.5.0'
-    pod 'RxCocoa', '4.5.0'
+    pod 'RxSwift', '5.1.1'
+    pod 'RxCocoa', '5.1.1'
     pod 'SwiftyTimer'
     pod 'Files'
     pod 'NaptimeFileProtocol', :git => "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git", :branch => "develop"
