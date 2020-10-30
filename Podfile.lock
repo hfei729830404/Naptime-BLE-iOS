@@ -2,10 +2,24 @@ PODS:
   - Files (2.2.1)
   - iOSDFULibrary (4.1.1):
     - Zip (~> 1.0)
-  - NaptimeFileProtocol (0.5.0)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.5.0)
+  - NaptimeFileProtocol (1.0.0)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
+  - RxBluetoothKit (6.0.0):
+    - RxSwift (~> 5.1)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SnapKit (4.2.0)
   - SVProgressHUD (2.2.5)
   - SwiftyTimer (2.1.0)
@@ -13,18 +27,23 @@ PODS:
 
 DEPENDENCIES:
   - Files
-  - "iOSDFULibrary (from `git@github.com:qiubei/IOS-Pods-DFU-Library.git`, branch `master`)"
+  - iOSDFULibrary (from `https://github.com/Entertech/IOS-Pods-DFU-Library.git`, branch `innerpeace`)
   - "NaptimeFileProtocol (from `git@github.com:EnterTech/Naptime-FileProtocol-iOS.git`, branch `develop`)"
-  - RxCocoa
-  - RxSwift
+  - PromiseKit
+  - RxBluetoothKit
+  - RxCocoa (= 5.1.1)
+  - RxSwift (= 5.1.1)
   - SnapKit
   - SVProgressHUD
   - SwiftyTimer
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Files
+    - PromiseKit
+    - RxBluetoothKit
     - RxCocoa
+    - RxRelay
     - RxSwift
     - SnapKit
     - SVProgressHUD
@@ -33,8 +52,8 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   iOSDFULibrary:
-    :branch: master
-    :git: "git@github.com:qiubei/IOS-Pods-DFU-Library.git"
+    :branch: innerpeace
+    :git: https://github.com/Entertech/IOS-Pods-DFU-Library.git
   NaptimeFileProtocol:
     :branch: develop
     :git: "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git"
@@ -42,22 +61,25 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   iOSDFULibrary:
     :commit: 339dc7ef8ed56b0b3ccd1542ec03eaa6562bbc72
-    :git: "git@github.com:qiubei/IOS-Pods-DFU-Library.git"
+    :git: https://github.com/Entertech/IOS-Pods-DFU-Library.git
   NaptimeFileProtocol:
-    :commit: 3062535ca47a20be4d0aa7032c7069acfad177be
+    :commit: 41e0c03e5097cee50450e229298a599ff37a80f7
     :git: "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git"
 
 SPEC CHECKSUMS:
   Files: 18a88ede4f1e339a73adaca7272af15fa32ba69f
   iOSDFULibrary: 35e8a9e23d67759d57af9924d7a808e48c04583a
-  NaptimeFileProtocol: e3f713463ab1c847f5fa9b687b5b0b338ced0e1d
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  NaptimeFileProtocol: c0c0fada1f62c4d52f53ed66172ff413468a4e92
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  RxBluetoothKit: dad22912b15b74a40df8f60057f218d4e851746d
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyTimer: 02dd6cf10cbc71cbf67cec494f6e5eb782102543
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 7e863a5926fdf7912a5e1b84a2860f711899589f
+PODFILE CHECKSUM: 57d53b5f57462adb09213448ec50a09b94b7af2c
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.9.3

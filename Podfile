@@ -1,19 +1,26 @@
-source 'https://github.com/CocoaPods/Specs.git'
-source 'git@github.com:EnterTech/PodSpecs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://github.com/EnterTech/PodSpecs.git'
 
 platform :ios, '9.0'
 use_frameworks!
  
 target 'BLETool' do
 
-    pod 'iOSDFULibrary', :git => "git@github.com:qiubei/IOS-Pods-DFU-Library.git" , :branch => "master"
+    pod 'iOSDFULibrary', :git => "https://github.com/Entertech/IOS-Pods-DFU-Library.git" , :branch => "innerpeace"
     pod 'SnapKit'
     pod 'SVProgressHUD'
-    pod 'RxSwift'
-    pod 'RxCocoa'
+    pod 'RxSwift', '5.1.1'
+    pod 'RxCocoa', '5.1.1'
     pod 'SwiftyTimer'
     pod 'Files'
     pod 'NaptimeFileProtocol', :git => "git@github.com:EnterTech/Naptime-FileProtocol-iOS.git", :branch => "develop"
+    pod 'PromiseKit'
+    pod 'RxBluetoothKit'
+end
+
+target 'NaptimeBLE' do
+    pod 'PromiseKit'
+    pod 'RxBluetoothKit'
 end
 
 post_install do |installer|
