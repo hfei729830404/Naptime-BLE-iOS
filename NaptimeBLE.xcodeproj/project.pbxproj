@@ -49,6 +49,8 @@
 		B79493E420209D26004166E3 /* DFUPacketFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79493E320209D26004166E3 /* DFUPacketFilesViewController.swift */; };
 		B79E9BFD215B5C64001465D2 /* BatteryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3FC7881FAABDDB00605D8A /* BatteryService.swift */; };
 		B7BCFBA120186FE800495A52 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BCFBA020186FE800495A52 /* Persistence.swift */; };
+		FA112B782645360D008C39F5 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA112B762645360D008C39F5 /* PromiseKit.framework */; };
+		FA112B7A2645360D008C39F5 /* RxBluetoothKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA112B772645360D008C39F5 /* RxBluetoothKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +127,8 @@
 		B79493E12020702D004166E3 /* V1.0.1-120.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "V1.0.1-120.zip"; sourceTree = "<group>"; };
 		B79493E320209D26004166E3 /* DFUPacketFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUPacketFilesViewController.swift; sourceTree = "<group>"; };
 		B7BCFBA020186FE800495A52 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		FA112B762645360D008C39F5 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		FA112B772645360D008C39F5 /* RxBluetoothKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBluetoothKit.framework; path = Carthage/Build/iOS/RxBluetoothKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA112B7A2645360D008C39F5 /* RxBluetoothKit.framework in Frameworks */,
+				FA112B782645360D008C39F5 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +271,8 @@
 		A9270B81DB032DBDF56008A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA112B762645360D008C39F5 /* PromiseKit.framework */,
+				FA112B772645360D008C39F5 /* RxBluetoothKit.framework */,
 				00D2137B8C5F9F5DC91E61D1 /* Pods_BLETool.framework */,
 				8722E8252459251BBDE66464 /* Pods_NaptimeBLE.framework */,
 			);
@@ -321,11 +329,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C7113271FA9755B0093099D /* Build configuration list for PBXNativeTarget "NaptimeBLE" */;
 			buildPhases = (
-				078CD2BFEFB49E30DD139A07 /* [CP] Check Pods Manifest.lock */,
 				6C7113171FA9755B0093099D /* Sources */,
 				6C7113181FA9755B0093099D /* Frameworks */,
 				6C7113191FA9755B0093099D /* Headers */,
-				6C71131A1FA9755B0093099D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -391,38 +397,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6C71131A1FA9755B0093099D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		078CD2BFEFB49E30DD139A07 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NaptimeBLE-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1943CB639C810D2821B708C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -734,7 +711,6 @@
 		};
 		6C7113251FA9755B0093099D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69C2959142D9CB6032EA46A2 /* Pods-NaptimeBLE.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -770,7 +746,6 @@
 		};
 		6C7113261FA9755B0093099D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86E96FDF78F918CD5B6AC962 /* Pods-NaptimeBLE.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
