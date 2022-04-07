@@ -1,3 +1,3 @@
-github "Polidea/RxBluetoothKit" >= 5.2.0
-github "mxcl/PromiseKit" >= 6.13.1
-github "ReactiveX/RxSwift"
+github "Airthings/RxBluetoothKit" ~> 6.0.0
+github "mxcl/PromiseKit" ~> 6.13.1
+github "ReactiveX/RxSwift" ~> 6.5.0
