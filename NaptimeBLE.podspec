@@ -15,6 +15,6 @@ Naptime BLE 通信库
 
   s.source_files = 'NaptimeBLE/**/*.swift'
   s.dependency 'PromiseKit'
-  s.dependency 'RxBluetoothKit', '~> 7.0.2'
+  s.dependency 'RxBluetoothKit'
 
 end
