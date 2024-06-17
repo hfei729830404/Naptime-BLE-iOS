@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import RxBluetoothKit
+import RxBluetoothKit_Airthings
 import PromiseKit
 import CoreBluetooth
 
