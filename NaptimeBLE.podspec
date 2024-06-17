@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'NaptimeBLE'
-  s.version          = '1.1.1'
+  s.version          = '1.1.2'
   s.summary          = 'Naptime BLE 通信库'
   s.description      = <<-DESC
 Naptime BLE 通信库
